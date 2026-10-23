@@ -45,3 +45,35 @@ def db():
         conn.execute(text(f"TRUNCATE {TABLES} RESTART IDENTITY CASCADE"))
     with SessionLocal() as session:
         yield session
+
+
+@pytest.fixture
+def client():
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    with TestClient(app) as c:
+        yield c
+
+
+@pytest.fixture
+def make_user(db):
+    """Cria um usuário com senha conhecida (`senha-forte-123`)."""
+    from app.models import User
+    from app.security import hash_password
+    from tests.helpers import PASSWORD
+
+    def _make(email="ana@exemplo.com", role="analyst", is_active=True, name="Ana Teste"):
+        user = User(
+            name=name,
+            email=email,
+            role=role,
+            is_active=is_active,
+            password_hash=hash_password(PASSWORD),
+        )
+        db.add(user)
+        db.commit()
+        return user
+
+    return _make

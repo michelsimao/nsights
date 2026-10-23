@@ -18,6 +18,7 @@ from sqlalchemy.orm import Session
 from app.config import get_settings
 from app.db import SessionLocal
 from app.models import SLA_DAYS, TERMINAL_STATUSES, Case, CaseEvent, Entity, User
+from app.observability import configure_logging
 from app.validators import cnpj_with_check_digits, cpf_with_check_digits
 
 log = logging.getLogger("riskops.seed")
@@ -208,10 +209,10 @@ def run_seed(session: Session, now: datetime | None = None) -> dict[str, int]:
 
 
 def main() -> None:
-    logging.basicConfig(level=get_settings().log_level, format="%(levelname)s %(name)s %(message)s")
+    configure_logging(get_settings().log_level)
     with SessionLocal.begin() as session:
         created = run_seed(session)
-    log.info("seed concluído; criados: %s", created)
+    log.info("seed concluído; criados: %s", created, extra={"created_counts": created})
 
 
 if __name__ == "__main__":
