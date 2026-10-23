@@ -8,6 +8,12 @@ Decisões já confirmadas:
 - **Commits:** um commit ao fim de cada etapa, num branch `main` criado a partir de `43f87a4` (o checkout atual está em HEAD destacado).
 - **README:** o README do DS foi renomeado para `DESIGN_SYSTEM.md`; a raiz recebe o README da aplicação.
 - **Regra de papel:** só `admin` aprova/reprova e reatribui responsável.
+- **Seed:** cria o que falta e nunca sobrescreve: alterações feitas na demo sobrevivem a restarts. Para voltar ao estado inicial, `docker compose down -v`.
+- **Migration `0002`:** como proposta (por enquanto):
+  - `cases.due_at` e `cases.closed_at`, com preenchimento dos dados existentes.
+  - `CHECK` de coerência entre status e `closed_at`.
+  - Índices `pg_trgm` para a busca.
+- **`pg_trgm`:** aprovado.
 
 ---
 

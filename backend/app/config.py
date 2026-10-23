@@ -15,6 +15,8 @@ class Settings(BaseSettings):
     # Lista separada por vírgula: "http://localhost:5173,http://127.0.0.1:5173"
     cors_origins: str = "http://localhost:5173"
     log_level: str = "INFO"
+    # Senha dos usuários demo criados pelo seed (só na criação; o seed nunca a redefine).
+    seed_demo_password: str = "riskops123"
 
     @property
     def cors_origin_list(self) -> list[str]:

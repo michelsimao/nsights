@@ -29,6 +29,8 @@ services:
       JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-480}
       CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      SEED_DEMO: ${SEED_DEMO:-true}
+      SEED_DEMO_PASSWORD: ${SEED_DEMO_PASSWORD:-riskops123}
     ports:
       - "${BACKEND_HOST_PORT:-8000}:8000"
     depends_on:
