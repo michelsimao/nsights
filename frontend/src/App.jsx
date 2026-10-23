@@ -1,20 +1,48 @@
-// Placeholder da etapa 1: confirma que a folha do DS (tokens, fontes, reset) está carregada.
-// O bundle de componentes e o shell entram na etapa 5.
+import { BrowserRouter, Route, Routes } from 'react-router';
+import { AuthProvider } from './auth/AuthContext.jsx';
+import { RequireAuth } from './auth/RequireAuth.jsx';
+import { Layout } from './layout/Layout.jsx';
+import { Login } from './pages/Login.jsx';
+import { NotFound } from './pages/NotFound.jsx';
+import { Placeholder } from './pages/Placeholder.jsx';
+
 export default function App() {
   return (
-    <main className="min-h-screen grid place-items-center p-6" style={{ background: 'var(--surface)' }}>
-      <div
-        className="w-full max-w-md p-6"
-        style={{ background: 'var(--surface-raised)', border: '1px solid var(--border)', borderRadius: 8 }}
-      >
-        <p className="eyebrow">Nsights Risk Ops</p>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--ink)', marginTop: '.25rem' }}>
-          Console de casos de risco
-        </h1>
-        <p style={{ color: 'var(--muted)', marginTop: '.5rem' }}>
-          Infraestrutura no ar. Versão <span className="mono">0.1.0</span>.
-        </p>
-      </div>
-    </main>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            element={
+              <RequireAuth>
+                <Layout />
+              </RequireAuth>
+            }
+          >
+            <Route
+              index
+              element={<Placeholder title="Resumo" description="Casos por status, nível de risco e responsável." />}
+            />
+            <Route
+              path="casos"
+              element={<Placeholder title="Casos" description="Fila de casos com busca, filtros e paginação." />}
+            />
+            <Route
+              path="casos/novo"
+              element={<Placeholder title="Novo caso" description="Abertura de um caso para uma entidade cadastrada." />}
+            />
+            <Route
+              path="casos/:ref"
+              element={<Placeholder title="Caso" description="Detalhe, timeline, notas e mudança de status." />}
+            />
+            <Route
+              path="entidades"
+              element={<Placeholder title="Entidades" description="Pessoas físicas e jurídicas sob análise." />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }

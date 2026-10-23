@@ -9,7 +9,8 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const dsRoot = path.resolve(here, '..');
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  // O bundle do DS é um IIFE pré-compilado: fica fora do Fast Refresh.
+  plugins: [react({ exclude: /_ds_bundle\.js$/ }), tailwindcss()],
   resolve: {
     alias: { '@ds': dsRoot },
     dedupe: ['react', 'react-dom'],
