@@ -1,6 +1,6 @@
 # Etapa 3: autenticação, autorização e base transversal (relatório)
 
-- **Commit:** `PENDENTE`, no branch `main`
+- **Commit:** `f4f7219`, no branch `main`
 - **Data:** 2026-10-23
 - **Status:** concluída. Todos os critérios de aceite foram atendidos.
 
@@ -153,7 +153,7 @@ docker compose exec backend uv run ruff check .
 
 ### 10. Revisar o código
 ```bash
-git show --stat HEAD~1
+git show --stat f4f7219
 ```
 Os arquivos principais são:
 - `backend/app/errors.py`
