@@ -2,3 +2,41 @@
    Utilitários servem só para layout; cor e tipografia vêm dos tokens do DS. */
 @import "tailwindcss/theme" layer(theme);
 @import "tailwindcss/utilities" layer(utilities);
+
+/* Complementos do app ao DS, só com tokens. */
+
+/* O Modal do DS nasce com a largura do detalhe de processo (72rem); diálogos de ação são estreitos. */
+.process-dialog:has(.app-dialog-body) { max-width: 34rem; }
+.app-dialog-body { display: grid; gap: 1rem; padding-top: 1rem; }
+
+/* O DS estiliza input e textarea dentro de Field, mas não select. */
+.field-group select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: .4rem;
+  color: var(--text);
+  font: inherit;
+  min-height: 2.75rem;
+  padding: .6rem .8rem;
+}
+.field-group textarea { min-height: 6rem; resize: vertical; }
+.field-group :is(input, select, textarea)[aria-invalid="true"] { border-color: var(--danger); }
+.field-group :is(input, select, textarea):focus-visible { border-color: var(--accent); outline: 2px solid var(--focus-ring); outline-offset: 1px; }
+
+
+/* Com até cinco filtros a Toolbar não cabe numa linha em telas médias: deixa quebrar. */
+.platform-toolbar { flex-wrap: wrap; }
+.platform-toolbar .workspace-search { flex: 1 1 16rem; }
+
+/* A BarList do DS foi desenhada para siglas de UF; rótulos de status pedem coluna mais larga. */
+.branch-ufbar { grid-template-columns: 6.5rem 1fr 2rem; }
+
+/* DataPanel sem margem própria quando empilhado num grid com gap. */
+.app-stack > .platform-data-panel { margin-top: 0; }
+
+/* Sem isto, um .sr-only (position: absolute) dentro da tabela escapa do recorte do
+   TableScroll e gera rolagem horizontal na página inteira em telas estreitas. */
+.table-scroll { position: relative; }
+
+/* Composer de nota sob a timeline do caso. */
+.app-note-form { border-top: 1px solid var(--border); display: grid; gap: .75rem; padding: 1rem; }
