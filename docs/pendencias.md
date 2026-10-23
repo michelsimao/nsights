@@ -9,10 +9,13 @@ Itens deixados para resolver no fim, depois da Etapa 7. Nenhum bloqueia uma etap
 - **Prazos do seed** (Etapa 4): 17 dos 18 casos ativos já nascem vencidos, o que deixa o painel de demo pouco variado. Ajustar o seed só vale após `docker compose down -v`, porque ele nunca sobrescreve.
 - **Analista age em qualquer caso** (Etapa 4), não só nos atribuídos a ele. O plano não restringe.
 
-## Para registrar no README (Etapa 7)
+- **CI nunca rodou no GitHub** (Etapa 7): o repo não tem remoto. O workflow passou no `actionlint` e os passos foram reproduzidos em containers limpos, mas a primeira execução real depende de publicar o repositório (decisão sua: onde e quando).
+- **`NOTES.md` é um rascunho na sua voz** (Etapa 7): escrito a partir do que está registrado nos relatórios e nesta sessão. Revise, principalmente o que descreve a sua revisão, antes de entregar.
 
-- Sem limite de tentativas de login (rate limit) (Etapa 3).
-- Token JWT em `localStorage`: trade-off frente a cookie httpOnly (Etapa 5).
+## Registradas no README (resolvidas na Etapa 7)
+
+- Sem limite de tentativas de login (rate limit) (Etapa 3): seção 9.
+- Token JWT em `localStorage`: trade-off frente a cookie httpOnly (Etapa 5): seção 8.
 
 ## Conhecidas, sem ação prevista
 

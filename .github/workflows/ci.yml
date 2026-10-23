@@ -1,0 +1,69 @@
+# Lint e testes do backend (contra um Postgres real) e build do frontend.
+# Não depende de .env nem de segredos: as credenciais abaixo são só do banco efêmero do job.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (ruff + pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: riskops
+          POSTGRES_PASSWORD: riskops
+          POSTGRES_DB: riskops_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U riskops -d riskops_test"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://riskops:riskops@localhost:5432/riskops_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.2"
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
+      - name: Instalar dependências
+        run: uv sync --frozen
+      - name: Ruff (lint)
+        run: uv run ruff check .
+      - name: Ruff (formatação)
+        run: uv run ruff format --check .
+      - name: Pytest
+        run: uv run pytest -q
+
+  frontend:
+    name: Frontend (build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Instalar dependências
+        run: npm ci
+      - name: Build
+        run: npm run build
