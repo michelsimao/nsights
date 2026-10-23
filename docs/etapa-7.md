@@ -1,6 +1,6 @@
 # Etapa 7: documentação, CI e acabamento (relatório)
 
-- **Commit:** `PENDENTE`, no branch `main`
+- **Commit:** `792e757`, no branch `main`
 - **Data:** 2026-10-23
 - **Status:** concluída. Os critérios de aceite foram atendidos, com uma ressalva: o CI ainda não rodou no GitHub, porque o repositório não tem remoto. Os passos dele foram reproduzidos localmente, em containers limpos.
 
@@ -95,5 +95,5 @@ O `pytest` local usa o banco do compose em `localhost:5433`.
 
 ### 4. Revisar o código
 ```bash
-git show --stat <hash>
+git show --stat 792e757
 ```
