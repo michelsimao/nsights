@@ -72,3 +72,73 @@ Um clone limpo sobe os três serviços com `docker compose up --build`, sem prec
 ## Próxima etapa
 
 Etapa 2: modelos, migrations (`0001` inicial e `0002` de evolução) e seed idempotente executado no entrypoint do backend.
+
+## Como validar
+
+Rode os comandos na raiz do repo.
+
+### 1. Subir do zero
+```bash
+docker compose down -v          # para tudo e apaga o volume do banco
+docker compose up --build -d
+docker compose ps               # os 3 serviços devem aparecer como (healthy)
+```
+O `down -v` apaga os dados do banco. Na Etapa 1 isso não importa, porque ainda não há dados.
+
+### 2. Backend
+```bash
+curl -i localhost:8000/health   # espera 200 e {"status":"ok","database":"ok"}
+```
+No navegador:
+- http://localhost:8000/docs (Swagger)
+- http://localhost:8000/redoc
+- http://localhost:8000/openapi.json
+
+Por enquanto só aparece a rota `/health`.
+
+### 3. Frontend
+- http://localhost:5173 deve mostrar um cartão branco "Console de casos de risco" sobre o fundo lilás claro, com o rótulo roxo em caixa alta e a fonte Geist.
+- http://localhost:5173/qualquer/rota deve mostrar a mesma página, e não um erro 404 do nginx.
+
+### 4. Health check com o banco fora
+```bash
+docker compose stop db
+curl -i localhost:8000/health   # espera 503 e "database":"unavailable"
+docker compose start db
+```
+
+### 5. Persistência do volume
+```bash
+docker compose exec db psql -U riskops -c "create table t(x int); insert into t values (1);"
+docker compose down && docker compose up -d
+docker compose exec db psql -U riskops -c "select * from t; drop table t;"   # deve retornar 1
+```
+
+### 6. Testes e lint
+```bash
+docker compose exec backend uv run pytest -q
+docker compose exec backend uv run ruff check .
+docker compose exec db psql -U riskops -tAc "select datname from pg_database"   # deve listar riskops e riskops_test
+```
+
+### 7. Clone limpo
+É a validação mais fiel ao que o avaliador vai fazer. As portas são outras para não colidir com a stack já em execução:
+```bash
+git clone /home/michel/nsights /tmp/riskops-clone && cd /tmp/riskops-clone
+POSTGRES_HOST_PORT=5434 BACKEND_HOST_PORT=8001 FRONTEND_HOST_PORT=5174 \
+  docker compose -p riskops-clean up --build -d
+curl localhost:8001/health
+docker compose -p riskops-clean down -v && cd - && rm -rf /tmp/riskops-clone
+```
+
+### 8. Revisar o código
+```bash
+git show --stat 37593f5
+```
+Os arquivos principais são:
+- `docker-compose.yml`
+- `backend/app/main.py`
+- `frontend/vite.config.js`
+- `frontend/nginx.conf`
+- `.dockerignore`
+- `.env.example`
