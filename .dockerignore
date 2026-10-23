@@ -1,0 +1,10 @@
+# Contexto de build do frontend é a raiz do repo. Lista de permissão:
+# só entra o que o Dockerfile do front copia.
+*
+!styles.css
+!_ds_bundle.css
+!_ds_bundle.js
+!tokens/
+!frontend/
+frontend/node_modules
+frontend/dist

@@ -1,0 +1,4 @@
+/* Tailwind sem preflight: o styles.css do DS já traz o Preflight do Tailwind v4.
+   Utilitários servem só para layout; cor e tipografia vêm dos tokens do DS. */
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
