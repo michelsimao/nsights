@@ -1,6 +1,6 @@
 # Etapa 6: telas de negócio (relatório)
 
-- **Commit:** `PENDENTE`, no branch `main`
+- **Commit:** `02b29b5`, no branch `main`
 - **Data:** 2026-10-23
 - **Status:** concluída. Todos os critérios de aceite foram atendidos.
 
@@ -147,7 +147,7 @@ cd frontend && npm ci && npm run build && cd ..
 
 ### 6. Revisar o código
 ```bash
-git show --stat <hash>
+git show --stat 02b29b5
 ```
 Os arquivos principais são:
 - `frontend/src/pages/Cases.jsx`
