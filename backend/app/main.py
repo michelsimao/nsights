@@ -7,7 +7,7 @@ from app.config import get_settings
 from app.db import engine
 from app.errors import register_error_handlers
 from app.observability import REQUEST_ID_HEADER, RequestIdMiddleware, configure_logging
-from app.routers import auth
+from app.routers import auth, cases, entities, summary, users
 
 settings = get_settings()
 configure_logging(settings.log_level)
@@ -25,6 +25,14 @@ app = FastAPI(
     version="0.1.0",
     openapi_tags=[
         {"name": "auth", "description": "Login e sessão."},
+        {
+            "name": "cases",
+            "description": "Casos de risco/KYC: listagem, detalhe com timeline, abertura, "
+            "edição, transições de status, reatribuição e notas.",
+        },
+        {"name": "entities", "description": "Pessoas físicas (CPF) e jurídicas (CNPJ) analisadas."},
+        {"name": "summary", "description": "Contagens para o painel."},
+        {"name": "users", "description": "Usuários, para atribuição de responsável."},
         {"name": "infra", "description": "Saúde e operação do serviço."},
     ],
 )
@@ -44,7 +52,8 @@ app.add_middleware(
     expose_headers=[REQUEST_ID_HEADER],
 )
 
-app.include_router(auth.router)
+for module in (auth, cases, entities, summary, users):
+    app.include_router(module.router)
 
 
 class HealthOut(BaseModel):

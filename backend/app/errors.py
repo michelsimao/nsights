@@ -113,6 +113,47 @@ async def _http_error(_: Request, exc: StarletteHTTPException) -> JSONResponse:
     return error_response(exc.status_code, code, message, details, exc.headers)
 
 
+def field_error(field: str, message: str, location: str = "body") -> AppError:
+    """422 de regra de negócio no formato da validação do FastAPI (o front mapeia por campo)."""
+    return AppError(
+        422,
+        "validation_error",
+        "Dados inválidos.",
+        [{"field": field, "location": location, "message": message, "type": "value_error"}],
+    )
+
+
+# Mensagens em pt-BR para os erros mais comuns do Pydantic (o front exibe no campo).
+_PYDANTIC_MESSAGES = {
+    "missing": "Campo obrigatório.",
+    "extra_forbidden": "Campo não permitido aqui.",
+    "literal_error": "Valor inválido. Opções: {expected}.",
+    "greater_than_equal": "Deve ser maior ou igual a {ge}.",
+    "less_than_equal": "Deve ser menor ou igual a {le}.",
+    "string_too_short": "Deve ter pelo menos {min_length} caractere(s).",
+    "string_too_long": "Deve ter no máximo {max_length} caracteres.",
+    "string_pattern_mismatch": "Formato inválido.",
+    "int_parsing": "Deve ser um número inteiro.",
+    "int_type": "Deve ser um número inteiro.",
+    "bool_parsing": "Deve ser verdadeiro ou falso.",
+    "timezone_aware": "Informe a data com fuso horário.",
+    "datetime_from_date_parsing": "Data e hora inválidas.",
+    "datetime_parsing": "Data e hora inválidas.",
+    "json_invalid": "JSON inválido.",
+}
+
+
+def _message(err: dict[str, Any]) -> str:
+    template = _PYDANTIC_MESSAGES.get(err.get("type", ""))
+    if template:
+        try:
+            return template.format(**err.get("ctx", {}))
+        except (KeyError, IndexError):
+            pass
+    # Pydantic prefixa erros de validators com "Value error, ".
+    return str(err.get("msg", "")).removeprefix("Value error, ")
+
+
 def _field_errors(exc: RequestValidationError) -> list[dict[str, Any]]:
     out = []
     for err in exc.errors():
@@ -122,7 +163,7 @@ def _field_errors(exc: RequestValidationError) -> list[dict[str, Any]]:
             {
                 "field": ".".join(str(p) for p in loc) or None,
                 "location": location,
-                "message": err.get("msg", ""),
+                "message": _message(err),
                 "type": err.get("type", ""),
             }
         )

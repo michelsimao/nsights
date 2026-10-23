@@ -126,3 +126,27 @@ def test_segredo_de_dev_recusado_fora_de_development():
         Settings(app_env="production", jwt_secret="curto-mas-secreto")
     assert "curto-mas-secreto" not in str(exc.value)  # o erro não imprime segredos
     Settings(app_env="production", jwt_secret="x" * 40)
+
+
+def test_mensagens_de_validacao_em_portugues(client, analyst_h):
+    res = client.get("/api/cases?page=0&sort=x", headers=analyst_h)
+    messages = {d["field"]: d["message"] for d in res.json()["error"]["details"]}
+    assert messages["page"] == "Deve ser maior ou igual a 1."
+    assert messages["sort"].startswith("Valor inválido. Opções: 'created_at'")
+    res = client.post("/api/auth/login", data={"username": "a"})
+    assert res.json()["error"]["details"][0]["message"] == "Campo obrigatório."
+
+
+def test_openapi_documenta_dominio(client):
+    spec = client.get("/openapi.json").json()
+    assert {t["name"] for t in spec["tags"]} >= {"auth", "cases", "entities", "summary", "users"}
+    for path, methods in spec["paths"].items():
+        for method, op in methods.items():
+            assert op.get("summary") and op.get("description"), f"{method} {path}"
+            assert op.get("tags"), f"{method} {path}"
+    schemas = spec["components"]["schemas"]
+    for name in ["CaseCreate", "CaseUpdate", "StatusChange", "EntityCreate", "NoteCreate"]:
+        assert schemas[name].get("examples"), name
+    # erros documentados com o envelope
+    status_op = spec["paths"]["/api/cases/{ref}/status"]["post"]
+    assert {"401", "403", "404", "409", "422"} <= set(status_op["responses"])

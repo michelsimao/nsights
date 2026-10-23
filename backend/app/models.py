@@ -139,7 +139,9 @@ class Case(TimestampMixin, Base):
     assignee: Mapped[User | None] = relationship(foreign_keys=[assignee_id])
     created_by: Mapped[User | None] = relationship(foreign_keys=[created_by_id])
     events: Mapped[list["CaseEvent"]] = relationship(
-        back_populates="case", order_by="CaseEvent.created_at", passive_deletes=True
+        back_populates="case",
+        order_by="[CaseEvent.created_at, CaseEvent.id]",
+        passive_deletes=True,
     )
 
 

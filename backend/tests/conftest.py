@@ -77,3 +77,27 @@ def make_user(db):
         return user
 
     return _make
+
+
+@pytest.fixture
+def admin(make_user):
+    return make_user(email="admin@exemplo.com", role="admin", name="Ada Admin")
+
+
+@pytest.fixture
+def analyst(make_user):
+    return make_user(email="analista@exemplo.com", role="analyst", name="Ana Analista")
+
+
+@pytest.fixture
+def admin_h(client, admin):
+    from tests.helpers import auth_header
+
+    return auth_header(client, admin.email)
+
+
+@pytest.fixture
+def analyst_h(client, analyst):
+    from tests.helpers import auth_header
+
+    return auth_header(client, analyst.email)
