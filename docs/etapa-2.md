@@ -1,6 +1,6 @@
 # Etapa 2: banco, modelos, migrations e seed (relatório)
 
-- **Commit:** ver `git log --grep "Etapa 2"`, no branch `main`
+- **Commit:** `992f9f8`, no branch `main`
 - **Data:** 2026-10-23
 - **Status:** concluída. Todos os critérios de aceite foram atendidos.
 
@@ -158,7 +158,7 @@ docker compose exec backend uv run ruff check .
 
 ### 10. Revisar o código
 ```bash
-git show --stat HEAD
+git show --stat 992f9f8
 ```
 Os arquivos principais são:
 - `backend/app/models.py`
