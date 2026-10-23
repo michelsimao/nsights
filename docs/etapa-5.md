@@ -1,6 +1,6 @@
 # Etapa 5: integração do DS e shell do frontend (relatório)
 
-- **Commit:** `PENDENTE`, no branch `main`
+- **Commit:** `de8c94c`, no branch `main`
 - **Data:** 2026-10-23
 - **Status:** concluída. Todos os critérios de aceite foram atendidos.
 
@@ -136,7 +136,7 @@ cd frontend && npm ci && npm run build && cd ..   # termina com "built in ..."
 
 ### 8. Revisar o código
 ```bash
-git show --stat <hash>
+git show --stat de8c94c
 ```
 Os arquivos principais são:
 - `frontend/src/ds/index.js`
