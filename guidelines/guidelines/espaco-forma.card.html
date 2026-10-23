@@ -1,0 +1,119 @@
+<!-- @dsCard group="Fundação" viewport="960x1660" name="Espaço e forma" subtitle="47 raios literais, alturas de controle 2–3.25rem e o shell 4rem/13.5rem" -->
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: var(--surface); color: var(--text); font-family: var(--font-geist), "Avenir Next", "Segoe UI", sans-serif; margin: 0; padding: 1.6rem 1.8rem 2.2rem; }
+  .g-section { background: var(--surface-raised); border: 1px solid var(--border); border-radius: .75rem; margin-top: 1rem; padding: 1.1rem 1.25rem; }
+  .g-section h2 { font-size: .82rem; font-weight: 650; letter-spacing: -.01em; margin: 0 0 .2rem; }
+  .g-section > p { color: var(--muted); font-size: .72rem; line-height: 1.55; margin: .2rem 0 .9rem; }
+  .g-src { color: var(--muted); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .58rem; }
+  .g-radii { display: grid; gap: .8rem; grid-template-columns: repeat(4, 1fr); }
+  .g-radius { display: grid; gap: .3rem; }
+  .g-radius i { background: var(--surface-subtle); border: 1px solid var(--border-strong); display: block; height: 3rem; }
+  .g-radius b { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .62rem; font-variant-numeric: tabular-nums; font-weight: 700; }
+  .g-radius small { color: var(--muted); font-size: .6rem; line-height: 1.4; }
+  .g-h { align-items: center; border-top: 1px solid var(--border); display: grid; gap: 1rem; grid-template-columns: 10.5rem minmax(0,1fr); padding: .5rem 0; }
+  .g-h:first-of-type { border-top: 0; }
+  .g-h .g-meta { color: var(--muted); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .6rem; font-variant-numeric: tabular-nums; line-height: 1.5; }
+  .g-h .g-meta b { color: var(--text); display: block; font-weight: 700; }
+  .g-finding { background: var(--accent-soft); border-radius: .5rem; color: var(--accent-strong); font-size: .7rem; line-height: 1.55; margin-top: .9rem; padding: .6rem .75rem; }
+  .g-finding strong { text-transform: uppercase; font-size: .6rem; letter-spacing: .08em; }
+  .g-shell { border: 1px solid var(--border-strong); border-radius: .55rem; display: grid; font-size: .6rem; grid-template-columns: 4rem minmax(0,1fr); height: 11rem; overflow: hidden; }
+  .g-shell.expanded { grid-template-columns: 13.5rem minmax(0,1fr); }
+  .g-shell aside { background: var(--dark); color: #c6bdcb; display: grid; align-content: start; gap: .4rem; padding: .8rem .5rem; }
+  .g-shell aside i { background: #241d2a; border-radius: .5rem; display: block; height: 1.6rem; }
+  .g-shell main { background: var(--surface); display: grid; grid-template-rows: 2.4rem 1fr; }
+  .g-shell header { background: rgba(255,255,255,.9); border-bottom: 1px solid var(--border); }
+  .g-dim { color: var(--muted); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .58rem; font-variant-numeric: tabular-nums; }
+</style></head><body>
+
+<p class="eyebrow">Fundação · Espaço e forma</p>
+<h1 style="font-size:2rem;letter-spacing:-.04em;margin:.25rem 0 .3rem">Raio, altura e grade</h1>
+<p style="color:var(--muted);font-size:.78rem;line-height:1.55;margin:0;max-width:46rem">
+  Nada aqui é token: são <b>413 declarações de border-radius com 47 valores distintos</b> e
+  <b>152 min-height</b> literais. Abaixo, os raios e alturas que carregam o sistema — com o papel
+  de cada um — e a grade do shell que enquadra tudo.</p>
+
+<section class="g-section">
+  <h2>Raios em uso</h2>
+  <p>O centro de gravidade fica entre .4 e .75rem. O mais usado é <b>.5rem</b> (52×); pílulas fecham
+     em 2rem/999px; pontos e avatares em 50%. Cada caixa abaixo está pintada com o raio real.</p>
+  <div class="g-radii">
+    <div class="g-radius"><i style="border-radius:.34rem"></i><b>.34rem ·6×</b><small>ação compacta da página: platform-page-action, risk-stamp, risk-cell<br><span class="g-src">globals.css:1126, 1312, 1352</span></small></div>
+    <div class="g-radius"><i style="border-radius:.35rem"></i><b>.35rem ·16×</b><small>tooltip da sidebar, new-analysis-link<br><span class="g-src">globals.css:86, 100</span></small></div>
+    <div class="g-radius"><i style="border-radius:.4rem"></i><b>.4rem ·31×</b><small>button-primary/secondary, input de formulário<br><span class="g-src">globals.css:135, 144</span></small></div>
+    <div class="g-radius"><i style="border-radius:.42rem"></i><b>.42rem ·7×</b><small>input dos filtros da checklist<br><span class="g-src">globals.css:486</span></small></div>
+    <div class="g-radius"><i style="border-radius:.45rem"></i><b>.45rem ·29×</b><small>o select global, sidebar-toggle, skip-link<br><span class="g-src">globals.css:50, 60, 111</span></small></div>
+    <div class="g-radius"><i style="border-radius:.48rem"></i><b>.48rem ·4×</b><small>platform-toolbar, monograma de entidade<br><span class="g-src">globals.css:1134, 1029</span></small></div>
+    <div class="g-radius"><i style="border-radius:.5rem"></i><b>.5rem ·52×</b><small>o raio mais comum: navigation-link, segmented button, botões de busca<br><span class="g-src">globals.css:95, 175, 207</span></small></div>
+    <div class="g-radius"><i style="border-radius:.55rem"></i><b>.55rem ·27×</b><small>avatar do topbar, entity-check-row, platform-data-panel<br><span class="g-src">globals.css:74, 305, 1135</span></small></div>
+    <div class="g-radius"><i style="border-radius:.65rem"></i><b>.65rem ·20×</b><small>cards de métrica do resultado, preflight-grid<br><span class="g-src">globals.css:271, 295, 484</span></small></div>
+    <div class="g-radius"><i style="border-radius:.7rem"></i><b>.7rem ·19×</b><small>source-card, selection-bar, segmented (contêiner)<br><span class="g-src">globals.css:173, 244, 294</span></small></div>
+    <div class="g-radius"><i style="border-radius:.75rem"></i><b>.75rem ·30×</b><small>result-panel, preflight-entities, skeleton<br><span class="g-src">globals.css:300, 485, 1045</span></small></div>
+    <div class="g-radius"><i style="border-radius:.8rem"></i><b>.8rem ·3×</b><small>wizard-footer<br><span class="g-src">globals.css:295</span></small></div>
+    <div class="g-radius"><i style="border-radius:.85rem"></i><b>.85rem ·3×</b><small>scope-card<br><span class="g-src">globals.css:251</span></small></div>
+    <div class="g-radius"><i style="border-radius:1rem"></i><b>1rem ·7×</b><small>wizard-section, o maior raio de cartão<br><span class="g-src">globals.css:168</span></small></div>
+    <div class="g-radius"><i style="border-radius:2rem;height:1.6rem"></i><b>2rem ·21×</b><small>pílulas: status-pill, status-badge, contadores<br><span class="g-src">globals.css:223, 293, 488</span></small></div>
+    <div class="g-radius"><i style="border-radius:999px;height:.6rem"></i><b>999px ·26×</b><small>barras e chips totalmente redondos: analysis-meter-fill, graph-legend b<br><span class="g-src">globals.css:517, 759</span></small></div>
+    <div class="g-radius"><i style="border-radius:50%;height:3rem;width:3rem"></i><b>50% ·32×</b><small>pontos de status, ícone de upload, avatares<br><span class="g-src">globals.css:199, 488</span></small></div>
+  </div>
+  <div class="g-finding"><strong>Achado</strong> — além destes, existem mais 30 valores (0, .08, .1,
+    .15, .2, .25, .3, .6, .9rem, 2px, 3px, cantos compostos como ".85rem .85rem .25rem .85rem"…).
+    A diferença entre .4/.42/.45/.48/.5 é invisível a olho e sugere consolidação em 3–4 degraus
+    tokenizados.</div>
+</section>
+
+<section class="g-section">
+  <h2>Alturas de controle</h2>
+  <p>min-height dos controles interativos, do link de tabela à toolbar. No mobile (≤760px) tudo que
+     é tocável sobe para 2.75rem <span class="g-src">(globals.css:1144)</span>.</p>
+  <div class="g-h"><div class="g-meta"><b>2rem</b>botão inline de movimento processual<br>globals.css:498</div>
+    <button style="background:#fff;border:1px solid var(--border);border-radius:.45rem;color:var(--accent-strong);font-size:.7rem;min-height:2rem;padding:.45rem .6rem">Ver movimentação completa</button></div>
+  <div class="g-h"><div class="g-meta"><b>2.35rem</b>ação de download do resultado; botão de ação da página<br>globals.css:470, 1126</div>
+    <button style="align-items:center;background:#fff;border:1px solid var(--border);border-radius:.5rem;display:inline-flex;font-size:.72rem;font-weight:700;gap:.45rem;min-height:2.35rem;padding:.55rem .85rem">Baixar relatório</button></div>
+  <div class="g-h"><div class="g-meta"><b>2.4rem</b>input e botão das ferramentas de movimentação<br>globals.css:498</div>
+    <input style="background:#fff;border:1px solid var(--border);border-radius:.45rem;font:inherit;font-size:.7rem;min-height:2.4rem;padding:.45rem .6rem;width:14rem" placeholder="Filtrar movimentações"></div>
+  <div class="g-h"><div class="g-meta"><b>2.45rem</b>input de filtro da checklist<br>globals.css:486</div>
+    <input style="background:#fff;border:1px solid var(--border);border-radius:.42rem;font:inherit;font-size:.72rem;min-height:2.45rem;padding:.5rem .65rem;width:14rem" placeholder="Buscar verificação"></div>
+  <div class="g-h"><div class="g-meta"><b>2.55rem</b>abas da plataforma; rodapé do painel de dados<br>globals.css:1131, 1139</div>
+    <span style="border-bottom:1px solid var(--border);display:inline-flex;gap:1.2rem"><button style="background:none;border:0;border-bottom:2px solid var(--accent);color:var(--text);font-size:.7rem;font-weight:620;min-height:2.55rem;padding:0">Visão geral</button><button style="background:none;border:0;color:var(--muted);font-size:.7rem;font-weight:620;min-height:2.55rem;padding:0">Processos</button></span></div>
+  <div class="g-h"><div class="g-meta"><b>2.75rem · o padrão</b>button-primary/secondary, inputs de formulário, navigation-link; alvo mínimo mobile<br>globals.css:95, 135, 144, 1144</div>
+    <button class="button-secondary" style="background:#fff">Cancelar operação</button></div>
+  <div class="g-h"><div class="g-meta"><b>3.25rem</b>platform-toolbar, a régua de filtros<br>globals.css:1134</div>
+    <span style="align-items:center;background:#fff;border:1px solid var(--border);border-radius:.48rem;display:inline-flex;gap:.55rem;min-height:3.25rem;padding:.35rem .6rem;width:100%;max-width:26rem"><span style="color:var(--muted);font-size:.68rem">Filtros da listagem</span></span></div>
+</section>
+
+<section class="g-section">
+  <h2>A grade do shell</h2>
+  <p>Duas colunas: a sidebar escura tem <b>4rem fechada</b> e <b>13.5rem aberta</b>; a transição do
+     grid é .18s cubic-bezier(.2,.8,.2,1). O toggle flutua em calc(largura + .85rem), top 1rem.
+     O topbar cola no topo com 4.5rem de altura. Abaixo de 850px o grid vira uma coluna.</p>
+  <div style="display:grid;gap:1rem;grid-template-columns:1fr 1.6fr">
+    <div>
+      <div class="g-shell"><aside><i></i><i></i><i></i></aside><main><header></header><div></div></main></div>
+      <p class="g-dim" style="margin:.4rem 0 0">fechada · grid-template-columns: 4rem minmax(0,1fr)</p>
+    </div>
+    <div>
+      <div class="g-shell expanded"><aside><i></i><i></i><i></i></aside><main><header></header><div></div></main></div>
+      <p class="g-dim" style="margin:.4rem 0 0">aberta · 13.5rem minmax(0,1fr) — via :has(.sidebar[data-expanded])</p>
+    </div>
+  </div>
+  <p class="g-src" style="margin:.6rem 0 0">globals.css:63–64 (platform-shell), 67 (topbar 4.5rem), 76 (sidebar, padding 1rem .5rem .75rem), 111–112 (sidebar-toggle), 1115 (breakpoint 850px)</p>
+</section>
+
+<section class="g-section">
+  <h2>O respiro do operational-page</h2>
+  <p>O contêiner de trabalho não tem max-width — ocupa a tela inteira — e respira pelo padding:
+     <b>2.1rem</b> em cima, <b>clamp(1.25rem, 2.4vw, 2.75rem)</b> nas laterais (cresce com a janela)
+     e <b>3rem</b> embaixo. No mobile (≤760px) cai para 1.4rem 1rem 2.75rem. A exceção é a página de
+     créditos, com max-width 74rem.</p>
+  <div style="background:var(--surface);border:1px dashed var(--border-strong);border-radius:.55rem;padding:2.1rem 2.75rem 3rem;position:relative">
+    <span class="g-dim" style="left:50%;position:absolute;top:.35rem;transform:translateX(-50%)">2.1rem</span>
+    <span class="g-dim" style="left:.3rem;position:absolute;top:50%;transform:translateY(-50%)">clamp</span>
+    <span class="g-dim" style="position:absolute;right:.3rem;top:50%;transform:translateY(-50%)">clamp</span>
+    <span class="g-dim" style="bottom:.9rem;left:50%;position:absolute;transform:translateX(-50%)">3rem</span>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:.75rem;min-height:5rem;display:grid;place-items:center"><span style="color:var(--muted);font-size:.7rem">conteúdo (max-width: none)</span></div>
+  </div>
+  <p class="g-src" style="margin:.6rem 0 0">globals.css:1121 (operational-page), 1144 (mobile), 120 (credits-page 74rem)</p>
+</section>
+
+</body></html>

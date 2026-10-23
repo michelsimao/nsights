@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Design System — Nsights Risk Ops</title>
+<link rel="icon" type="image/png" href="brand/icon.png">
+<link rel="apple-touch-icon" href="brand/icon.png">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="tokens-estado.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font-geist),system-ui,sans-serif}
+a{color:var(--accent-strong);text-decoration:none}
+a:hover{color:var(--accent)}
+.layout{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;background:var(--dark);color:#f8f4fa;display:flex;flex-direction:column;gap:14px;padding:22px 14px 18px;overflow:hidden}
+.brand{display:flex;align-items:center;gap:.55rem;padding:0 .4rem;min-width:0}
+.brand .compact{height:1.75rem;width:auto;display:block;flex:0 0 auto}
+.brand .qual{border-left:1px solid #4a3e52;color:#bbb0c2;font-size:.62rem;font-weight:650;line-height:1;padding-left:.55rem;white-space:nowrap}
+.search{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--control-radius);color:#f8f4fa;font-family:inherit;font-size:.74rem;padding:var(--control-pad-y) var(--control-pad-x);min-height:var(--control-h-sm)}
+.search::placeholder{color:rgba(255,255,255,.38)}
+.search:focus{outline:none;border-color:rgba(168,109,235,.55);background:rgba(255,255,255,.09)}
+.nav{display:flex;flex-direction:column;gap:1px;overflow-y:auto;margin:0 -4px;padding:0 4px;flex:1;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.18) transparent}
+.grp{display:flex;align-items:center;gap:.4rem;width:100%;background:none;border:0;color:#8f8796;font-family:inherit;font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.9rem .5rem .35rem;cursor:pointer;text-align:left}
+.grp:hover{color:#c9c2ce}
+.grp .cnt{font-family:var(--font-geist-mono),monospace;font-weight:500;letter-spacing:0;color:rgba(255,255,255,.28)}
+.grp .car{margin-left:auto;font-size:.7rem;line-height:1;color:rgba(255,255,255,.3);transition:transform .15s}
+.grp[aria-expanded="false"] .car{transform:rotate(-90deg)}
+.item{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:.1rem;padding:.36rem .55rem;border-radius:var(--control-radius);color:#a9a1b0;font-size:.76rem;line-height:1.35;border:1px solid transparent;cursor:pointer;min-height:var(--control-h-sm)}
+.item:hover{background:rgba(255,255,255,.05);color:#f8f4fa}
+.item.active{background:rgba(168,109,235,.15);border-color:rgba(168,109,235,.34);color:#fff}
+.item small{display:block;color:rgba(255,255,255,.35);font-size:.62rem;line-height:1.35;margin-top:.1rem}
+.item.active small{color:rgba(255,255,255,.5)}
+.foot{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;padding:.7rem .5rem 0;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.34);font-size:.6rem}
+.foot code{font-family:var(--font-geist-mono),monospace;color:#a86deb}
+.main{display:flex;flex-direction:column;min-width:0}
+.bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:.8rem;padding:.85rem 1.4rem;background:var(--surface-raised);border-bottom:1px solid var(--border);min-height:4rem}
+.bar .mark{height:1.5rem;width:auto;display:block;flex:0 0 auto}
+.bar .who{display:grid;gap:.1rem;min-width:0}
+.bar .eyebrow{color:var(--muted);font-size:.58rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.bar h1{margin:0;font-size:1rem;font-weight:620;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .tools{margin-left:auto;display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.chip{font-family:var(--font-geist-mono),monospace;font-size:.65rem;color:var(--muted);background:var(--surface-subtle);border:1px solid var(--border);border-radius:.3rem;padding:.25rem .45rem;white-space:nowrap}
+.seg{display:flex;border:1px solid var(--border);border-radius:var(--control-radius);overflow:hidden}
+.seg button{border:0;background:var(--surface-raised);color:var(--muted);font-family:inherit;white-space:nowrap;font-size:.68rem;font-weight:600;padding:0 var(--control-pad-x);min-height:var(--control-h-sm);cursor:pointer}
+.seg button+button{border-left:1px solid var(--border)}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-strong)}
+.open{display:inline-flex;align-items:center;gap:var(--control-gap);font-size:.68rem;font-weight:600;color:var(--accent-strong);border:1px solid var(--border);border-radius:var(--control-radius);padding:0 var(--control-pad-x);min-height:var(--control-h-sm)}
+.open:hover{border-color:var(--accent);background:var(--accent-soft)}
+.stage{flex:1;min-width:0;overflow:auto;padding:1.1rem 1.4rem 2.4rem}
+.holder{background:var(--surface-raised);border:1px solid var(--border);border-radius:.6rem;overflow:hidden;max-width:100%}
+iframe{display:block;border:0;width:100%;background:#fff}
+.hide{display:none!important}
+/* capa */
+.cover{display:flex;flex-direction:column;gap:14px;max-width:1080px}
+.hero{background:var(--dark);color:#f8f4fa;border-radius:.8rem;padding:44px 40px 38px;display:grid;gap:.9rem}
+.hero .eyebrow{color:#a86deb;font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.hero h2{margin:0;display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap}
+.hero h2 img{height:clamp(2.2rem,4.4vw,3.2rem);width:auto;display:block}
+.hero h2 em{font-style:normal;font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:500;letter-spacing:-.03em;color:#a86deb;border-left:1px solid #4a3e52;padding-left:1.1rem;line-height:1;white-space:nowrap}
+.hero p{margin:0;color:#bdb5c3;font-size:.92rem;line-height:1.6;max-width:62ch;text-wrap:pretty}
+.hero .meta{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:.5rem;font-family:var(--font-geist-mono),monospace;font-size:.66rem;color:rgba(255,255,255,.42)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:.7rem;overflow:hidden}
+.stat{background:var(--surface-raised);padding:1rem 1.1rem;display:grid;gap:.15rem}
+.stat span{color:var(--muted);font-size:.56rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.stat strong{font-family:var(--font-geist-mono),monospace;font-size:1.7rem;font-weight:520;letter-spacing:-.05em}
+.stat small{color:var(--muted);font-size:.62rem}
+.card{background:var(--surface-raised);border:1px solid var(--border);border-radius:.7rem;padding:20px;display:grid;gap:12px}
+.card h3{margin:0;font-size:.82rem;font-weight:680;letter-spacing:-.005em}
+.card p{margin:0;color:var(--muted);font-size:.76rem;line-height:1.6;max-width:78ch;text-wrap:pretty}
+.two{display:grid;grid-template-columns:1.15fr 1fr;gap:14px;align-items:start}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:8px}
+.sw{border:1px solid var(--border);border-radius:.4rem;overflow:hidden}
+.sw i{display:block;height:2.6rem}
+.sw b{display:block;font-family:var(--font-geist-mono),monospace;font-size:.6rem;font-weight:500;padding:.3rem .4rem 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sw u{display:block;font-family:var(--font-geist-mono),monospace;font-size:.58rem;color:var(--muted);text-decoration:none;padding:0 .4rem .35rem}
+.spec{display:grid;gap:.55rem}
+.spec div{letter-spacing:-.025em;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spec .w1{font-weight:200;font-size:1.55rem;color:var(--muted)}
+.spec .w2{font-weight:450;font-size:1.55rem}
+.spec .w3{font-weight:700;font-size:1.55rem}
+.spec .wm{font-family:var(--font-geist-mono),monospace;font-size:.9rem;letter-spacing:-.01em;color:var(--muted)}
+.icons-row{display:flex;flex-wrap:wrap;gap:.9rem;color:var(--text)}
+.icons-row span{display:grid;place-items:center}
+.starts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.start{display:grid;gap:.15rem;border:1px solid var(--border);border-radius:var(--control-radius);padding:var(--control-pad-y) var(--control-pad-x);cursor:pointer;background:var(--surface-raised);min-height:var(--control-h)}
+.start:hover{border-color:var(--accent);background:var(--accent-soft)}
+.start b{font-size:.74rem;font-weight:650}
+.start span{color:var(--muted);font-size:.65rem;line-height:1.4}
+@media(max-width:1100px){.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.side{position:static;height:auto;overflow:visible}.nav{max-height:320px}}
+</style></head>
+<body>
+<div class="layout">
+<aside class="side">
+<div class="brand"><img class="compact" src="brand/icon.png" alt="n-sights"><span class="qual">Risk Ops · Design System</span></div>
+<input class="search" id="q" type="search" placeholder="Buscar componente…" autocomplete="off">
+<nav class="nav" id="nav"></nav>
+<div class="foot"><span>120 componentes</span><code>RiskOpsUI</code></div>
+</aside>
+<main class="main">
+<header class="bar">
+<img class="mark" src="brand/icon.png" alt="">
+<div class="who"><div class="eyebrow" id="eyebrow">Design System</div><h1 id="title">Capa</h1></div>
+<div class="tools" id="tools">
+<span class="chip" id="vp"></span>
+<span class="chip" id="tk" title="tokens-estado.css é injetado nas fichas de componente; as fichas de fundação ficam intactas, medindo o código como está">camada de tokens</span>
+<div class="seg" id="seg"><button data-fit="1" aria-pressed="true">Ajustar</button><button data-fit="0" aria-pressed="false">Largura real</button></div>
+<a class="open" id="openLink" target="_blank" rel="noopener">Abrir isolado ↗</a>
+</div>
+</header>
+<div class="stage" id="stage">
+<section class="cover" id="cover">
+<div class="hero">
+<div class="eyebrow">Design System · sincronizado do código</div>
+<h2><img src="brand/logo-white.avif" alt="n-sights"><em>Risk Ops</em></h2>
+<p>As peças reais do produto: 120 componentes React, 54 tokens de cor e as fichas de fundação que documentam cor, tipografia, espaço, motion, ícones e marca. Tudo o que está aqui saiu do repositório — mudou no código, muda aqui.</p>
+<div class="meta"><span>namespace: RiskOpsUI</span><span>Geist · Geist Mono</span><span>132 fichas</span></div>
+</div>
+<div class="stats">
+<div class="stat"><span>Componentes</span><strong>120</strong><small>React, um card por componente</small></div>
+<div class="stat"><span>Tokens</span><strong>54</strong><small>cinco famílias de estado</small></div>
+<div class="stat"><span>Fundação</span><strong>10</strong><small>fichas de diretriz</small></div>
+<div class="stat"><span>Propostas</span><strong>2</strong><small>ainda não no app</small></div>
+</div>
+<div class="two">
+<div class="card"><h3>Tokens de cor</h3><p>Os valores de <code>:root</code> em vigor — as cinco famílias de estado, os neutros de matiz roxo-acinzentado e a tinta de chão saturado. <a href="Cor - Nsights Risk Ops.html">Guia de cor →</a></p><div class="swatches" id="swatches"></div></div>
+<div class="card"><h3>Tipografia</h3><p>Geist variável de 100 a 900 para interface e prosa; Geist Mono para números, hex e identificadores.</p>
+<div class="spec"><div class="w1">Risco calibrado</div><div class="w2">Risco calibrado</div><div class="w3">Risco calibrado</div><div class="wm">0.86 · #7024c7 · AA 4.8:1</div></div></div>
+</div>
+<div class="card"><h3>Ícones</h3><p>Biblioteca Lucide — 132 glífios em sete categorias, caixa mínima 16 e traço 1.5 em todos. <a href="Icones - Nsights Risk Ops.html">Guia de ícones →</a></p><div class="icons-row" id="iconsRow"></div></div>
+<div class="card"><h3>Por onde começar</h3><p>As fichas de fundação carregam as regras da casa; os componentes mostram cada peça viva, com todas as suas variações.</p><div class="starts" id="starts"></div></div>
+</section>
+<div class="holder hide" id="holder"><iframe id="frame" title="Card do design system"></iframe></div></div>
+</main>
+</div>
+<script src="icons/lucide.js"></script>
+<script id="cards-data" type="application/json">[{"path":"guidelines/guidelines/cores-estado.card.html","group":"Fundação","viewport":"900x1650","name":"Rampas de estado","subtitle":"os pares bg/fg hard-coded dos badges — literais no CSS, não tokens"},{"path":"guidelines/guidelines/cores-papeis.card.html","group":"Fundação","viewport":"900x1550","name":"Papéis semânticos","subtitle":"accent, success, warning e danger aplicados — contraste medido por par"},{"path":"guidelines/guidelines/cores-tokens.card.html","group":"Fundação","viewport":"900x1450","name":"Tokens de cor","subtitle":"os 17 tokens de :root — matiz roxo-acinzentado, nunca cinza puro"},{"path":"guidelines/guidelines/emails.card.html","group":"Fundação","viewport":"1280x2650","name":"E-mails transacionais","subtitle":"os 4 e-mails reais do app e a regra da casa: tabela 600px, estilo inline, hex literal"},{"path":"guidelines/guidelines/espaco-forma.card.html","group":"Fundação","viewport":"960x1660","name":"Espaço e forma","subtitle":"47 raios literais, alturas de controle 2–3.25rem e o shell 4rem/13.5rem"},{"path":"guidelines/guidelines/icones.card.html","group":"Fundação","viewport":"1240x2400","name":"Ícones","subtitle":"os 75 glifos nomeados do registro do Icon — traço, caixa e a regra da casa"},{"path":"guidelines/guidelines/marca.card.html","group":"Fundação","viewport":"1240x2150","name":"Marca e proteção","subtitle":"wordmark tipográfico 'n-sights' e monograma N — área de proteção, mínimos e contraste medidos"},{"path":"guidelines/guidelines/superficies-escuras.card.html","group":"Fundação","viewport":"1240x1900","name":"Superfícies escuras","subtitle":"o dark que já existe: sidebar, wizard-footer e monogramas — ilhas deliberadas num produto claro"},{"path":"guidelines/guidelines/superficies-motion.card.html","group":"Fundação","viewport":"960x1720","name":"Superfícies e motion","subtitle":"flat com borda 1px, meia dúzia de sombras reais e transições de .12 a .2s"},{"path":"guidelines/guidelines/tipografia.card.html","group":"Fundação","viewport":"960x2750","name":"Tipografia","subtitle":"Geist variável 100–900; 73 tamanhos literais, line-heights por papel, tracking e medida de prosa — tudo medido no CSS"},{"path":"components/Assistente/AiAsk/AiAsk.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiCite/AiCite.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiCiteMarks/AiCiteMarks.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiConfidence/AiConfidence.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiHedge/AiHedge.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiIdentity/AiIdentity.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiOpening/AiOpening.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiQuota/AiQuota.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiQuotaBreakdown/AiQuotaBreakdown.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiSpark/AiSpark.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiStream/AiStream.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiThread/AiThread.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiTrace/AiTrace.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiTurn/AiTurn.html","group":"Assistente","viewport":"900x700"},{"path":"components/Assistente/AiVote/AiVote.html","group":"Assistente","viewport":"900x700"},{"path":"components/Feedback/Alert/Alert.html","group":"Feedback","viewport":"900x700"},{"path":"components/Navegação/AppShell/AppShell.html","group":"Navegação","viewport":"1280x800"},{"path":"components/Identidade/Avatar/Avatar.html","group":"Identidade","viewport":"900x700"},{"path":"components/Identidade/AvatarStack/AvatarStack.html","group":"Identidade","viewport":"900x700"},{"path":"components/Feedback/Badge/Badge.html","group":"Feedback","viewport":"900x700"},{"path":"components/Gráficos/BarChart/BarChart.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Gráficos/BarList/BarList.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Navegação/Breadcrumb/Breadcrumb.html","group":"Navegação","viewport":"900x700"},{"path":"components/Ações/Button/Button.html","group":"Ações","viewport":"900x700"},{"path":"components/Gráficos/ChartLegend/ChartLegend.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Gráficos/ChartPlot/ChartPlot.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Gráficos/ChartShell/ChartShell.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Formulário/Checkbox/Checkbox.html","group":"Formulário","viewport":"900x700"},{"path":"components/Formulário/CheckCard/CheckCard.html","group":"Formulário","viewport":"900x700"},{"path":"components/Feedback/Chip/Chip.html","group":"Feedback","viewport":"900x700"},{"path":"components/Ações/CommandPalette/CommandPalette.html","group":"Ações","viewport":"920x660"},{"path":"components/Dados/CoveragePill/CoveragePill.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/CoveragePills/CoveragePills.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/DataList/DataList.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/DataPanel/DataPanel.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/DataTable/DataTable.html","group":"Dados","viewport":"900x700"},{"path":"components/Formulário/DatePicker/DatePicker.html","group":"Formulário","viewport":"380x430"},{"path":"components/Feedback/Dot/Dot.html","group":"Feedback","viewport":"900x700"},{"path":"components/Feedback/DotsLoader/DotsLoader.html","group":"Feedback","viewport":"900x700"},{"path":"components/Ações/Dropdown/Dropdown.html","group":"Ações","viewport":"900x700"},{"path":"components/Feedback/EmptyState/EmptyState.html","group":"Feedback","viewport":"900x700"},{"path":"components/Navegação/Eyebrow/Eyebrow.html","group":"Navegação","viewport":"900x700"},{"path":"components/Dados/Fact/Fact.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/Facts/Facts.html","group":"Dados","viewport":"900x700"},{"path":"components/Formulário/Field/Field.html","group":"Formulário","viewport":"900x700"},{"path":"components/Formulário/FileUpload/FileUpload.html","group":"Formulário","viewport":"900x700"},{"path":"components/Formulário/FilterBar/FilterBar.html","group":"Formulário","viewport":"900x700"},{"path":"components/Gráficos/GaugeChart/GaugeChart.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Gráficos/GraphTooltip/GraphTooltip.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Identidade/Icon/Icon.html","group":"Identidade","viewport":"900x700"},{"path":"components/Feedback/InlineEmpty/InlineEmpty.html","group":"Feedback","viewport":"900x700"},{"path":"components/Dados/KpiCard/KpiCard.html","group":"Dados","viewport":"900x700"},{"path":"components/Gráficos/LineChart/LineChart.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Feedback/LiveDot/LiveDot.html","group":"Feedback","viewport":"900x700"},{"path":"components/Dados/Meter/Meter.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/MetricCard/MetricCard.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/MetricGrid/MetricGrid.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/MetricTile/MetricTile.html","group":"Dados","viewport":"900x700"},{"path":"components/Navegação/MobileNavigation/MobileNavigation.html","group":"Navegação","viewport":"420x640"},{"path":"components/Feedback/Modal/Modal.html","group":"Feedback","viewport":"760x520"},{"path":"components/Dados/Mono/Mono.html","group":"Dados","viewport":"900x700"},{"path":"components/Formulário/MultiSelect/MultiSelect.html","group":"Formulário","viewport":"900x700"},{"path":"components/Navegação/OperationalPage/OperationalPage.html","group":"Navegação","viewport":"900x700"},{"path":"components/Navegação/PageHeader/PageHeader.html","group":"Navegação","viewport":"900x700"},{"path":"components/Dados/Pagination/Pagination.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/PaginationLoadMore/PaginationLoadMore.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/PaginationPrevNext/PaginationPrevNext.html","group":"Dados","viewport":"900x700"},{"path":"components/Navegação/Panel/Panel.html","group":"Navegação","viewport":"900x700"},{"path":"components/Gráficos/PieChart/PieChart.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Ações/Popover/Popover.html","group":"Ações","viewport":"900x700"},{"path":"components/Feedback/ProgressBar/ProgressBar.html","group":"Feedback","viewport":"900x700"},{"path":"components/Gráficos/RadarChart/RadarChart.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Formulário/Radio/Radio.html","group":"Formulário","viewport":"900x700"},{"path":"components/Formulário/RadioGroup/RadioGroup.html","group":"Formulário","viewport":"900x700"},{"path":"components/Formulário/RangeSlider/RangeSlider.html","group":"Formulário","viewport":"900x700"},{"path":"components/Dados/ResultRow/ResultRow.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/ResultRows/ResultRows.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/RiskScale/RiskScale.html","group":"Dados","viewport":"900x700"},{"path":"components/Dados/RiskVerdict/RiskVerdict.html","group":"Dados","viewport":"900x700"},{"path":"components/Telas/ScreenAnalyses/ScreenAnalyses.html","group":"Telas","viewport":"1366x900"},{"path":"components/Telas/ScreenConsultations/ScreenConsultations.html","group":"Telas","viewport":"1366x900"},{"path":"components/Telas/ScreenDashboard/ScreenDashboard.html","group":"Telas","viewport":"1366x900"},{"path":"components/Telas/ScreenLogin/ScreenLogin.html","group":"Telas","viewport":"1366x1040"},{"path":"components/Telas/ScreenNewAnalysis/ScreenNewAnalysis.html","group":"Telas","viewport":"1366x900"},{"path":"components/Telas/ScreenResult/ScreenResult.html","group":"Telas","viewport":"1366x900"},{"path":"components/Telas/ScreenSettings/ScreenSettings.html","group":"Telas","viewport":"1366x900"},{"path":"components/Telas/ScreenStates/ScreenStates.html","group":"Telas","viewport":"1366x1120"},{"path":"components/Navegação/SectionHeading/SectionHeading.html","group":"Navegação","viewport":"900x700"},{"path":"components/Formulário/Segmented/Segmented.html","group":"Formulário","viewport":"900x700"},{"path":"components/Formulário/SelectableCard/SelectableCard.html","group":"Formulário","viewport":"900x700"},{"path":"components/Ações/SelectAllButton/SelectAllButton.html","group":"Ações","viewport":"900x700"},{"path":"components/Navegação/Sidebar/Sidebar.html","group":"Navegação","viewport":"480x760"},{"path":"components/Feedback/Skeleton/Skeleton.html","group":"Feedback","viewport":"900x700"},{"path":"components/Formulário/SourceCard/SourceCard.html","group":"Formulário","viewport":"900x700"},{"path":"components/Formulário/SourceCardGrid/SourceCardGrid.html","group":"Formulário","viewport":"900x700"},{"path":"components/Gráficos/Sparkline/Sparkline.html","group":"Gráficos","viewport":"900x700"},{"path":"components/Feedback/Spinner/Spinner.html","group":"Feedback","viewport":"900x700"},{"path":"components/Dados/StageList/StageList.html","group":"Dados","viewport":"900x700"},{"path":"components/Feedback/StatusBadge/StatusBadge.html","group":"Feedback","viewport":"900x700"},{"path":"components/Feedback/StatusPill/StatusPill.html","group":"Feedback","viewport":"900x700"},{"path":"components/Formulário/Switch/Switch.html","group":"Formulário","viewport":"900x700"},{"path":"components/Dados/Table/Table.html","group":"Dados","viewport":"900x700"},{"path":"components/Ações/TableLink/TableLink.html","group":"Ações","viewport":"900x700"},{"path":"components/Dados/TableScroll/TableScroll.html","group":"Dados","viewport":"900x700"},{"path":"components/Navegação/Tabs/Tabs.html","group":"Navegação","viewport":"900x700"},{"path":"components/Navegação/TabsBar/TabsBar.html","group":"Navegação","viewport":"900x700"},{"path":"components/Feedback/Toast/Toast.html","group":"Feedback","viewport":"560x360"},{"path":"components/Feedback/ToastStack/ToastStack.html","group":"Feedback","viewport":"560x320"},{"path":"components/Formulário/Toolbar/Toolbar.html","group":"Formulário","viewport":"900x700"},{"path":"components/Feedback/Tooltip/Tooltip.html","group":"Feedback","viewport":"900x700"},{"path":"components/Navegação/Topbar/Topbar.html","group":"Navegação","viewport":"900x700"},{"path":"components/Dados/VerdictBadge/VerdictBadge.html","group":"Dados","viewport":"900x700"},{"path":"components/Fluxo de análise/WizardCard/WizardCard.html","group":"Fluxo de análise","viewport":"900x700"},{"path":"components/Fluxo de análise/WizardFooter/WizardFooter.html","group":"Fluxo de análise","viewport":"900x700"},{"path":"components/Fluxo de análise/WizardHeader/WizardHeader.html","group":"Fluxo de análise","viewport":"900x700"},{"path":"components/Fluxo de análise/WizardProgress/WizardProgress.html","group":"Fluxo de análise","viewport":"900x700"},{"path":"components/Fluxo de análise/WizardSection/WizardSection.html","group":"Fluxo de análise","viewport":"900x700"},{"path":"components/Ações/WorkspaceBack/WorkspaceBack.html","group":"Ações","viewport":"900x700"},{"path":"components/Formulário/WorkspaceFilter/WorkspaceFilter.html","group":"Formulário","viewport":"900x700"},{"path":"components/Formulário/WorkspaceSearch/WorkspaceSearch.html","group":"Formulário","viewport":"900x700"},{"path":"guidelines/guidelines/cores-variacoes.card.html","group":"Propostas","viewport":"980x1560","name":"Variações de cor","subtitle":"6 famílias × 7 degraus, derivadas por OKLCH das cabeças reais — proposta medida, o app tem só as cabeças"},{"path":"guidelines/guidelines/proposta-dark-mode.card.html","group":"Propostas","viewport":"1240x2400","name":"Proposta · dark mode","subtitle":"três peles candidatas a tema escuro total, ao vivo e com todo contraste medido"}]</script>
+<script>
+var DATA=JSON.parse(document.getElementById('cards-data').textContent);
+var CATS=[
+ ['IA e assistente',['AiOpening','AiAsk','AiTurn','AiThread','AiStream','AiSpark','AiIdentity','AiCite','AiCiteMarks','AiConfidence','AiHedge','AiTrace','AiVote','AiQuota','AiQuotaBreakdown']],
+ ['Telas completas',['ScreenLogin','ScreenDashboard','ScreenNewAnalysis','ScreenAnalyses','ScreenResult','ScreenConsultations','ScreenSettings','ScreenStates']],
+ ['Estrutura e navegação',['AppShell','OperationalPage','Sidebar','Topbar','MobileNavigation','PageHeader','SectionHeading','Panel','DataPanel','Toolbar','Tabs','TabsBar','Breadcrumb','Pagination','PaginationPrevNext','PaginationLoadMore','WorkspaceBack','WorkspaceSearch','WorkspaceFilter','CommandPalette']],
+ ['Sobreposições',['Modal','Popover','Dropdown','Tooltip','Toast','ToastStack','Alert']],
+ ['Formulários',['Field','Checkbox','CheckCard','Radio','RadioGroup','Switch','Segmented','MultiSelect','DatePicker','RangeSlider','FileUpload','FilterBar','SelectableCard','SelectAllButton']],
+ ['Dados e tabelas',['DataTable','Table','TableLink','TableScroll','DataList','ResultRow','ResultRows','SourceCard','SourceCardGrid','Fact','Facts','StageList']],
+ ['Gráficos',['BarChart','LineChart','PieChart','RadarChart','GaugeChart','BarList','Sparkline','ChartShell','ChartPlot','ChartLegend','GraphTooltip']],
+ ['Métricas e progresso',['KpiCard','MetricCard','MetricTile','MetricGrid','Meter','ProgressBar','CoveragePill','CoveragePills']],
+ ['Risco e status',['RiskScale','RiskVerdict','VerdictBadge','StatusBadge','StatusPill','Badge','Chip','Dot','LiveDot']],
+ ['Estados e carga',['EmptyState','InlineEmpty','Skeleton','Spinner','DotsLoader']],
+ ['Wizard',['WizardHeader','WizardProgress','WizardSection','WizardCard','WizardFooter']],
+ ['Primitivos',['Button','Icon','Avatar','AvatarStack','Eyebrow','Mono']]
+];
+var TOKENS=[['--surface','#f2f0f3'],['--surface-subtle','#f8f6f9'],['--surface-raised','#ffffff'],['--surface-sunken','#eeeaf0'],['--surface-accent-tint','#faf6ff'],['--border','#ded9e2'],['--border-strong','#cfc7d5'],['--border-accent','#d9c4f2'],['--text','#1d1722'],['--muted-strong','#4e4654'],['--muted','#6f6675'],['--muted-weak','#8a8290'],['--accent','#7024c7'],['--accent-strong','#5a159f'],['--accent-soft','#eee4f8'],['--accent-muted','#d3c2ec'],['--on-accent','#ffffff'],['--on-dark','#ffffff'],['--state-ok-bg','#e9f5f0'],['--state-ok-fg','#176b4d'],['--state-ok-solid','#1f9a70'],['--state-warn-bg','#fff5e6'],['--state-warn-fg','#80540c'],['--state-warn-solid','#b0620d'],['--state-danger-bg','#fde9ee'],['--state-danger-fg','#8f1833'],['--state-danger-solid','#b91c3c'],['--state-danger-strong','#8f0f2c'],['--state-info-bg','#f4eefc'],['--state-info-fg','#5a159f'],['--state-neutral-bg','#eeeef2'],['--state-neutral-fg','#4e4654'],['--state-neutral-solid','#8d8491'],['--coral','#c85c75'],['--chart-accent-soft','#a274d8'],['--chart-neutral','#8d8491'],['--chart-neutral-soft','#b3aec0'],['--dark','#17131b'],['--dark-raised','#241d2a'],['--dark-accent','#a86deb']];
+var byPath={},byName={},sections=[],used={};
+DATA.forEach(function(c){byPath[c.path]=c;c.label=c.name||c.path.split('/').pop().replace('.html','');
+ /* Indexa tambem pelo NOME do componente: as fichas vivem em
+    components/<grupo>/<Nome>/, e o grupo mudou. Procurar por caminho fixo
+    deixava toda secao vazia assim que a pasta era renomeada. */
+ var m=c.path.match(/^components\/[^/]+\/([^/]+)\//);if(m)byName[m[1]]=c});
+function pick(names){var out=[];names.forEach(function(n){var c=byName[n];if(c&&!used[c.path]){used[c.path]=1;out.push(c)}});return out}
+sections.push({label:'Fundação',items:DATA.filter(function(c){return c.group==='Fundação'})});
+CATS.forEach(function(c){sections.push({label:c[0],items:pick(c[1])})});
+var rest=DATA.filter(function(c){return c.path.indexOf('components/')===0&&!used[c.path]});
+if(rest.length)sections.push({label:'Outros componentes',items:rest});
+sections.push({label:'Propostas',items:DATA.filter(function(c){return c.group==='Propostas'})});
+
+var nav=document.getElementById('nav');
+var home=document.createElement('a');home.className='item active';home.id='home';home.href='#capa';home.textContent='Capa';nav.appendChild(home);
+var guia=document.createElement('a');guia.className='item';guia.href='Cor - Nsights Risk Ops.html';guia.innerHTML='<span>Guia de cor</span><small>regras de uso e o :root em vigor</small>';nav.appendChild(guia);
+var gico=document.createElement('a');gico.className='item';gico.href='Icones - Nsights Risk Ops.html';gico.innerHTML='<span>Guia de ícones</span><small>Lucide, caixa 16, traço 1.5</small>';nav.appendChild(gico);
+sections.forEach(function(s,si){
+ if(!s.items.length)return;
+ var btn=document.createElement('button');btn.className='grp';btn.setAttribute('aria-expanded',si===0?'true':'false');
+ btn.innerHTML='<span>'+s.label+'</span><span class="cnt">'+s.items.length+'</span><span class="car">▾</span>';
+ var box=document.createElement('div');box.style.display=si===0?'flex':'none';box.style.flexDirection='column';box.style.gap='1px';
+ btn.onclick=function(){var open=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',open?'false':'true');box.style.display=open?'none':'flex'};
+ s.items.forEach(function(c){
+  var a=document.createElement('a');a.className='item';a.href='#'+encodeURIComponent(c.path);a.dataset.path=c.path;
+  a.innerHTML='<span>'+c.label+'</span>'+(c.subtitle?'<small>'+c.subtitle+'</small>':'');
+  box.appendChild(a);c.el=a;c.box=box;c.btn=btn;c.section=s.label;
+ });
+ nav.appendChild(btn);nav.appendChild(box);s.btn=btn;s.box=box;
+});
+
+var frame=document.getElementById('frame'),holder=document.getElementById('holder'),cover=document.getElementById('cover'),
+    title=document.getElementById('title'),eyebrow=document.getElementById('eyebrow'),vp=document.getElementById('vp'),
+    openLink=document.getElementById('openLink'),seg=document.getElementById('seg'),tools=document.getElementById('tools'),
+    stage=document.getElementById('stage'),fit=true,current=null;
+
+function sizeFrame(){
+ if(!current)return;
+ var isComp=current.path.indexOf('components/')===0;
+ document.getElementById('tk').style.display=isComp?'':'none';
+ var d=(current.viewport||'900x700').split('x'),w=parseInt(d[0],10)||900,h=parseInt(d[1],10)||700;
+ holder.style.width=fit?'100%':w+'px';
+ frame.style.width=fit?'100%':w+'px';
+ frame.style.height=Math.max(h,420)+'px';
+ vp.textContent=w+'×'+h;
+}
+seg.onclick=function(e){var b=e.target.closest('button');if(!b)return;fit=b.dataset.fit==='1';
+ [].forEach.call(seg.children,function(x){x.setAttribute('aria-pressed',String(x===b))});sizeFrame()};
+
+var TOKENS_CSS=new URL('tokens-estado.css',location.href).href+'?v='+Date.now();
+var BRAND_CSS=new URL('brand/brand.css',location.href).href+'?v='+Date.now();
+var FIXES_JS=new URL('ds-card-fixes.js',location.href).href+'?v='+Date.now();
+frame.addEventListener('load',function(){
+ try{var src=frame.getAttribute('src')||'';
+  if(src.indexOf('components/')!==0)return;
+  var d=frame.contentDocument;if(!d||!d.head||d.getElementById('__tokens'))return;
+  var l=d.createElement('link');l.id='__tokens';l.rel='stylesheet';l.href=TOKENS_CSS;d.head.appendChild(l);
+  var b=d.createElement('link');b.id='__brand';b.rel='stylesheet';b.href=BRAND_CSS;d.head.appendChild(b);
+  var s=d.createElement('script');s.id='__fixes';s.src=FIXES_JS;d.head.appendChild(s)}catch(e){}
+});
+
+function show(path){
+ [].forEach.call(nav.querySelectorAll('.item'),function(a){a.classList.remove('active')});
+ if(!path||path==='capa'||!byPath[path]){
+  current=null;cover.classList.remove('hide');holder.classList.add('hide');tools.style.visibility='hidden';
+  title.textContent='Capa';eyebrow.textContent='Design System';home.classList.add('active');stage.scrollTop=0;return;
+ }
+ var c=byPath[path];current=c;
+ cover.classList.add('hide');holder.classList.remove('hide');tools.style.visibility='visible';
+ title.textContent=c.label;eyebrow.textContent=c.section||c.group;
+ openLink.href=c.path;
+ c.el.classList.add('active');
+ if(c.btn.getAttribute('aria-expanded')==='false'){c.btn.setAttribute('aria-expanded','true');c.box.style.display='flex'}
+ sizeFrame();
+ if(frame.getAttribute('src')!==c.path)frame.setAttribute('src',c.path);
+ stage.scrollTop=0;
+ var top=c.el.getBoundingClientRect().top,nb=nav.getBoundingClientRect();
+ if(top<nb.top||top>nb.bottom-30)nav.scrollTop+=top-nb.top-120;
+}
+function route(){var h=decodeURIComponent(location.hash.slice(1));show(h)}
+window.addEventListener('hashchange',route);
+
+document.getElementById('q').addEventListener('input',function(e){
+ var t=e.target.value.trim().toLowerCase();
+ sections.forEach(function(s){
+  if(!s.items.length)return;var n=0;
+  s.items.forEach(function(c){var hit=!t||c.label.toLowerCase().indexOf(t)>-1||(c.subtitle||'').toLowerCase().indexOf(t)>-1;
+   c.el.style.display=hit?'block':'none';if(hit)n++});
+  s.btn.style.display=n?'flex':'none';s.btn.querySelector('.cnt').textContent=n;
+  if(t){s.box.style.display=n?'flex':'none';s.btn.setAttribute('aria-expanded','true')}
+ });
+});
+
+var sw=document.getElementById('swatches');
+var cs=getComputedStyle(document.documentElement);
+TOKENS.forEach(function(t){var v=(cs.getPropertyValue(t[0])||'').trim()||t[1];
+ var d=document.createElement('div');d.className='sw';
+ d.innerHTML='<i style="background:'+v+'"></i><b>'+t[0]+'</b><u>'+v+'</u>';sw.appendChild(d)});
+var starts=document.getElementById('starts');
+var iconsRow=document.getElementById('iconsRow');
+if(window.NsIcons&&iconsRow){
+ ['shield-alert','gavel','network','scan-search','chart-line','sparkles','badge-check','triangle-alert','funnel','coins','landmark','file-search'].forEach(function(n){
+  var s=document.createElement('span');s.innerHTML=NsIcons.svg(n,20);iconsRow.appendChild(s)});
+}DATA.filter(function(c){return c.group==='Fundação'}).slice(0,6).forEach(function(c){
+ var a=document.createElement('a');a.className='start';a.href='#'+encodeURIComponent(c.path);
+ a.innerHTML='<b>'+c.label+'</b><span>'+(c.subtitle||'')+'</span>';starts.appendChild(a)});
+route();
+</script>
+</body></html>

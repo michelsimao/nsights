@@ -1,0 +1,232 @@
+<!-- @dsCard group="Propostas" viewport="980x1560" name="Variações de cor" subtitle="6 famílias × 7 degraus, derivadas por OKLCH das cabeças reais — proposta medida, o app tem só as cabeças" -->
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: var(--surface-raised); margin: 0; padding: 2rem 2.25rem 2.5rem; }
+  .lede { color: var(--muted); font-size: .78rem; line-height: 1.6; margin: .5rem 0 0; max-width: 62ch; }
+  .aviso { background: #fff5e6; border-radius: .5rem; color: #7a570d; font-size: .72rem; line-height: 1.55; margin-top: 1rem; padding: .65rem .8rem; max-width: 66ch; }
+  h1 { font-size: 1.4rem; font-weight: 650; letter-spacing: -.03em; margin: 0; }
+  .fam { margin-top: 1.6rem; }
+  .fam h2 { align-items: baseline; display: flex; font-size: .85rem; font-weight: 650; gap: .6rem; margin: 0 0 .5rem; }
+  .fam h2 code { color: var(--muted); font-family: var(--font-geist-mono), monospace; font-size: .7rem; font-weight: 500; }
+  .fam h2 span { color: var(--muted); font-size: .62rem; font-weight: 450; }
+  .strip { display: grid; gap: 1px; grid-template-columns: repeat(7, 1fr); background: var(--border); border: 1px solid var(--border); border-radius: .55rem; overflow: hidden; }
+  figure { background: #fff; margin: 0; }
+  figure i { display: block; height: 3.4rem; }
+  figure.head i { box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 3.5px var(--text); }
+  figcaption { display: grid; gap: .1rem; padding: .45rem .5rem .55rem; }
+  figcaption b { font-size: .6rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  figure.head figcaption b::after { content: " · o token"; color: var(--accent-strong); }
+  figcaption code { font-family: var(--font-geist-mono), monospace; font-size: .62rem; font-variant-numeric: tabular-nums; }
+  figcaption small { color: var(--muted); font-size: .56rem; font-variant-numeric: tabular-nums; }
+  .uso { color: var(--muted); font-size: .7rem; line-height: 1.6; margin-top: 1.4rem; max-width: 70ch; }
+  .uso strong { color: var(--text); }
+</style>
+<p class="eyebrow">Proposta · Cor</p>
+<h1>Variações de cor — 6 famílias, 7 degraus, tudo medido</h1>
+<p class="lede">O produto hoje tem <strong>só as cabeças</strong> (os 17 tokens) e literais pontuais nos badges. Estas rampas são <strong>derivadas</strong>: OKLCH ancorado no L/C/H real de cada cabeça — o degrau central é o próprio token, byte a byte — com o contraste de cada degrau medido pela régua do repositório (tools/contrast.mjs · tools/ramps.mjs).</p>
+<p class="aviso"><strong>Status: proposta.</strong> Nada disto está no globals.css do app. Adotar significa promover os degraus a tokens (ex.: --accent-2…--accent-8) e migrar os literais dos badges para eles.</p>
+
+  <section class="fam">
+    <h2>Roxo <code>#7024c7</code><span>cabeça = --accent</span></h2>
+    <div class="strip">
+      <figure>
+        <i style="background:#f4f1fd"></i>
+        <figcaption><b>claríssimo</b><code>#f4f1fd</code><small>vs branco 1,11:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#e2d7fd"></i>
+        <figcaption><b>claro</b><code>#e2d7fd</code><small>vs branco 1,37:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#c1a5ff"></i>
+        <figcaption><b>suave</b><code>#c1a5ff</code><small>vs branco 2,08:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure class="head">
+        <i style="background:#7024c7"></i>
+        <figcaption><b>cabeça</b><code>#7024c7</code><small>vs branco 7,59:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#6a29ba"></i>
+        <figcaption><b>forte</b><code>#6a29ba</code><small>vs branco 7,96:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#4c128b"></i>
+        <figcaption><b>escuro</b><code>#4c128b</code><small>vs branco 11,89:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#31065e"></i>
+        <figcaption><b>escuríssimo</b><code>#31065e</code><small>vs branco 15,93:1</small><small>branco AA</small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="fam">
+    <h2>Coral <code>#c85c75</code><span>cabeça = --coral</span></h2>
+    <div class="strip">
+      <figure>
+        <i style="background:#feeff1"></i>
+        <figcaption><b>claríssimo</b><code>#feeff1</code><small>vs branco 1,12:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#fad2d8"></i>
+        <figcaption><b>claro</b><code>#fad2d8</code><small>vs branco 1,37:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#e8a1ad"></i>
+        <figcaption><b>suave</b><code>#e8a1ad</code><small>vs branco 2,07:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure class="head">
+        <i style="background:#c85c75"></i>
+        <figcaption><b>cabeça</b><code>#c85c75</code><small>vs branco 4,00:1</small><small>só decorativo</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#90324b"></i>
+        <figcaption><b>forte</b><code>#90324b</code><small>vs branco 7,65:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#691d33"></i>
+        <figcaption><b>escuro</b><code>#691d33</code><small>vs branco 11,51:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#460f1f"></i>
+        <figcaption><b>escuríssimo</b><code>#460f1f</code><small>vs branco 15,57:1</small><small>branco AA</small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="fam">
+    <h2>Verde <code>#197054</code><span>cabeça = --success</span></h2>
+    <div class="strip">
+      <figure>
+        <i style="background:#ecf6f1"></i>
+        <figcaption><b>claríssimo</b><code>#ecf6f1</code><small>vs branco 1,10:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#cde5da"></i>
+        <figcaption><b>claro</b><code>#cde5da</code><small>vs branco 1,33:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#95c4af"></i>
+        <figcaption><b>suave</b><code>#95c4af</code><small>vs branco 1,95:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure class="head">
+        <i style="background:#197054"></i>
+        <figcaption><b>cabeça</b><code>#197054</code><small>vs branco 6,02:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#1a674d"></i>
+        <figcaption><b>forte</b><code>#1a674d</code><small>vs branco 6,79:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#054935"></i>
+        <figcaption><b>escuro</b><code>#054935</code><small>vs branco 10,44:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#012f20"></i>
+        <figcaption><b>escuríssimo</b><code>#012f20</code><small>vs branco 14,70:1</small><small>branco AA</small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="fam">
+    <h2>Ambar <code>#946310</code><span>cabeça = --warning</span></h2>
+    <div class="strip">
+      <figure>
+        <i style="background:#faf2e9"></i>
+        <figcaption><b>claríssimo</b><code>#faf2e9</code><small>vs branco 1,11:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#eddbc5"></i>
+        <figcaption><b>claro</b><code>#eddbc5</code><small>vs branco 1,35:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#d2b187"></i>
+        <figcaption><b>suave</b><code>#d2b187</code><small>vs branco 2,02:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure class="head">
+        <i style="background:#946310"></i>
+        <figcaption><b>cabeça</b><code>#946310</code><small>vs branco 5,18:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#794e00"></i>
+        <figcaption><b>forte</b><code>#794e00</code><small>vs branco 7,23:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#563500"></i>
+        <figcaption><b>escuro</b><code>#563500</code><small>vs branco 11,02:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#392000"></i>
+        <figcaption><b>escuríssimo</b><code>#392000</code><small>vs branco 15,21:1</small><small>branco AA</small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="fam">
+    <h2>Vinho <code>#9c2943</code><span>cabeça = --danger</span></h2>
+    <div class="strip">
+      <figure>
+        <i style="background:#ffeff0"></i>
+        <figcaption><b>claríssimo</b><code>#ffeff0</code><small>vs branco 1,11:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#fcd2d5"></i>
+        <figcaption><b>claro</b><code>#fcd2d5</code><small>vs branco 1,37:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#ec9fa7"></i>
+        <figcaption><b>suave</b><code>#ec9fa7</code><small>vs branco 2,08:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure class="head">
+        <i style="background:#9c2943"></i>
+        <figcaption><b>cabeça</b><code>#9c2943</code><small>vs branco 7,47:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#952d43"></i>
+        <figcaption><b>forte</b><code>#952d43</code><small>vs branco 7,68:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#6d192c"></i>
+        <figcaption><b>escuro</b><code>#6d192c</code><small>vs branco 11,50:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#490c1a"></i>
+        <figcaption><b>escuríssimo</b><code>#490c1a</code><small>vs branco 15,55:1</small><small>branco AA</small></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="fam">
+    <h2>Neutro <code>#6f6675</code><span>cabeça = --muted (matiz roxo-acinzentado da casa)</span></h2>
+    <div class="strip">
+      <figure>
+        <i style="background:#f4f3f5"></i>
+        <figcaption><b>claríssimo</b><code>#f4f3f5</code><small>vs branco 1,11:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#e0dce2"></i>
+        <figcaption><b>claro</b><code>#e0dce2</code><small>vs branco 1,35:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#bbb5bf"></i>
+        <figcaption><b>suave</b><code>#bbb5bf</code><small>vs branco 2,00:1</small><small>texto AA</small></figcaption>
+      </figure>
+      <figure class="head">
+        <i style="background:#6f6675"></i>
+        <figcaption><b>cabeça</b><code>#6f6675</code><small>vs branco 5,48:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#5c5462"></i>
+        <figcaption><b>forte</b><code>#5c5462</code><small>vs branco 7,24:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#413a45"></i>
+        <figcaption><b>escuro</b><code>#413a45</code><small>vs branco 10,96:1</small><small>branco AA</small></figcaption>
+      </figure>
+      <figure>
+        <i style="background:#29242c"></i>
+        <figcaption><b>escuríssimo</b><code>#29242c</code><small>vs branco 15,18:1</small><small>branco AA</small></figcaption>
+      </figure>
+    </div>
+  </section>
+<p class="uso"><strong>Como ler as faixas.</strong> <strong>claríssimo/claro</strong> são fundo de tint (badges, avisos, hover) — nunca texto; <strong>suave</strong> é borda e realce; a <strong>cabeça</strong> é o token de hoje; <strong>forte/escuro</strong> passam AA como texto sobre claro; <strong>escuríssimo</strong> serve de superfície escura com branco AA. A anotação de cada degrau diz qual texto passa AA sobre ele.</p>

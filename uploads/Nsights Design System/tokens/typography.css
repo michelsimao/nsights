@@ -1,0 +1,13 @@
+/* Nsights UI typography classes — all use --ns-font-sans (Manrope). */
+
+.ns-display { font-family: var(--ns-font-sans); font-weight: 300; font-size: 2.25rem; line-height: 1.2; letter-spacing: -0.02em; color: var(--ns-text-heading); }
+.ns-h1 { font-family: var(--ns-font-sans); font-weight: 600; font-size: 1.5rem; line-height: 1.3; letter-spacing: -0.01em; color: var(--ns-text-heading); }
+.ns-h2 { font-family: var(--ns-font-sans); font-weight: 600; font-size: 1.125rem; line-height: 1.4; color: var(--ns-text-heading); }
+.ns-h3 { font-family: var(--ns-font-sans); font-weight: 500; font-size: 0.875rem; line-height: 1.4; color: var(--ns-text-body); }
+.ns-body { font-family: var(--ns-font-sans); font-weight: 400; font-size: 0.875rem; line-height: 1.6; color: var(--ns-text-body); }
+.ns-label { font-family: var(--ns-font-sans); font-weight: 500; font-size: 0.75rem; line-height: 1.4; letter-spacing: 0.02em; color: var(--ns-text-muted); }
+.ns-label-caps { font-family: var(--ns-font-sans); font-weight: 600; font-size: 0.625rem; line-height: 1.4; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ns-text-muted); }
+.ns-data-xl { font-family: var(--ns-font-sans); font-weight: 700; font-size: 2.5rem; line-height: 1.0; letter-spacing: -0.03em; color: var(--ns-text-heading); }
+.ns-data-lg { font-family: var(--ns-font-sans); font-weight: 700; font-size: 1.75rem; line-height: 1.1; letter-spacing: -0.02em; color: var(--ns-text-heading); }
+.ns-data-md { font-family: var(--ns-font-sans); font-weight: 600; font-size: 1.25rem; line-height: 1.2; letter-spacing: -0.01em; color: var(--ns-text-heading); }
+.ns-caption { font-family: var(--ns-font-sans); font-weight: 400; font-size: 0.6875rem; line-height: 1.4; color: var(--ns-text-muted); }

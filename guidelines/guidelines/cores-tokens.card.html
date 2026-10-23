@@ -1,0 +1,89 @@
+<!-- @dsCard group="Fundação" viewport="900x1450" name="Tokens de cor" subtitle="os 17 tokens de :root — matiz roxo-acinzentado, nunca cinza puro" -->
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: var(--surface); color: var(--text); font-family: var(--font-geist), "Avenir Next", "Segoe UI", sans-serif; margin: 0; padding: 1.5rem 1.75rem 2.25rem; }
+  h1 { font-size: 1.15rem; letter-spacing: -.01em; margin: 0 0 .25rem; }
+  .lede { color: var(--muted); font-size: .78rem; line-height: 1.5; margin: 0 0 1.25rem; max-width: 46rem; }
+  h2 { font-size: .72rem; font-weight: 800; letter-spacing: .06em; margin: 1.75rem 0 .6rem; text-transform: uppercase; }
+  table { border-collapse: collapse; width: 100%; }
+  th { color: var(--muted); font-size: .58rem; font-weight: 800; letter-spacing: .06em; padding: .3rem .55rem; text-align: left; text-transform: uppercase; }
+  td { border-top: 1px solid var(--border); font-size: .72rem; padding: .5rem .55rem; vertical-align: middle; }
+  .sw { border: 1px solid var(--border); border-radius: .35rem; display: inline-block; height: 1.5rem; width: 3.2rem; vertical-align: middle; }
+  code, .hex { font-family: var(--font-geist-mono), monospace; font-size: .68rem; font-variant-numeric: tabular-nums; }
+  .src { color: var(--muted); font-size: .62rem; white-space: nowrap; }
+  .neutral-strip { display: flex; gap: 0; margin: .4rem 0 .6rem; }
+  .neutral-strip > div { flex: 1 1 0; }
+  .neutral-strip .chip { border: 1px solid var(--border-strong); border-right-width: 0; height: 3.4rem; }
+  .neutral-strip > div:last-child .chip { border-right-width: 1px; }
+  .neutral-strip .lbl { font-size: .64rem; font-weight: 700; margin-top: .35rem; }
+  .neutral-strip .hex { color: var(--muted); font-size: .6rem; }
+  .note { background: var(--surface-raised); border: 1px solid var(--border); border-radius: .6rem; font-size: .74rem; line-height: 1.55; margin-top: 1rem; padding: .8rem .95rem; }
+  .note strong { font-weight: 800; }
+</style></head><body>
+
+<h1>Tokens de cor — :root completo</h1>
+<p class="lede">Tudo o que <code>app/globals.css</code> declara em <code>:root</code> (linhas 4–23): <strong>17 tokens</strong>,
+nem um a mais. Não existe escala numerada (50/100/…/900) — o sistema nomeia por papel e resolve o resto
+com literais no CSS dos componentes (documentados no cartão “Rampas de estado”). Os mesmos 17 valores
+estão copiados sem alteração em <code>ds-bundle/tokens/tokens.css</code>, que é o que os designs recebem.</p>
+
+<h2>Neutros reais — a régua toda</h2>
+<div class="neutral-strip">
+  <div><div class="chip" style="background:var(--surface-raised)"></div><div class="lbl">--surface-raised</div><div class="hex">#ffffff</div></div>
+  <div><div class="chip" style="background:var(--surface-subtle)"></div><div class="lbl">--surface-subtle</div><div class="hex">#f8f6f9</div></div>
+  <div><div class="chip" style="background:var(--surface)"></div><div class="lbl">--surface</div><div class="hex">#f2f0f3</div></div>
+  <div><div class="chip" style="background:var(--border)"></div><div class="lbl">--border</div><div class="hex">#ded9e2</div></div>
+  <div><div class="chip" style="background:var(--border-strong)"></div><div class="lbl">--border-strong</div><div class="hex">#cfc7d5</div></div>
+</div>
+<p class="lede" style="margin-bottom:0">Cinco degraus de superfície/traço — é essa a régua inteira de neutros claros.
+Todos carregam um <strong>viés roxo-acinzentado</strong> (o canal R e o B acima do G: #f2<b>f0</b>f3, #de<b>d9</b>e2, #cf<b>c7</b>d5);
+nenhum é cinza puro. Um neutro #eeeeee destoaria do sistema.</p>
+
+<h2>Os 17 tokens</h2>
+<table>
+  <thead><tr><th>Amostra</th><th>Token</th><th>Hex</th><th>Papel</th><th>Onde nasce</th></tr></thead>
+  <tbody>
+    <tr><td><span class="sw" style="background:var(--surface)"></span></td><td><code>--surface</code></td><td class="hex">#f2f0f3</td><td>Fundo da página (<code>html</code> e <code>body</code>)</td><td class="src">globals.css:6</td></tr>
+    <tr><td><span class="sw" style="background:var(--surface-subtle)"></span></td><td><code>--surface-subtle</code></td><td class="hex">#f8f6f9</td><td>Fundos intermediários: linhas de evidência, hover, badge neutro</td><td class="src">globals.css:7</td></tr>
+    <tr><td><span class="sw" style="background:var(--surface-raised)"></span></td><td><code>--surface-raised</code></td><td class="hex">#ffffff</td><td>Cartões e painéis elevados (result-panel, métricas)</td><td class="src">globals.css:8</td></tr>
+    <tr><td><span class="sw" style="background:var(--border)"></span></td><td><code>--border</code></td><td class="hex">#ded9e2</td><td>Traço padrão de cartões, tabelas e inputs</td><td class="src">globals.css:9</td></tr>
+    <tr><td><span class="sw" style="background:var(--border-strong)"></span></td><td><code>--border-strong</code></td><td class="hex">#cfc7d5</td><td>Traço de ênfase: hover de cartão, radio, barras de escopo</td><td class="src">globals.css:10</td></tr>
+    <tr><td><span class="sw" style="background:var(--text)"></span></td><td><code>--text</code></td><td class="hex">#1d1722</td><td>Texto padrão do app</td><td class="src">globals.css:11</td></tr>
+    <tr><td><span class="sw" style="background:var(--ink)"></span></td><td><code>--ink</code></td><td class="hex">var(--text)</td><td>Alias de <code>--text</code> (mesmo valor); usado 53× no CSS de mídia/relatórios</td><td class="src">globals.css:12</td></tr>
+    <tr><td><span class="sw" style="background:var(--muted)"></span></td><td><code>--muted</code></td><td class="hex">#6f6675</td><td>Texto secundário: legendas, th de tabela, small</td><td class="src">globals.css:13</td></tr>
+    <tr><td><span class="sw" style="background:var(--accent)"></span></td><td><code>--accent</code></td><td class="hex">#7024c7</td><td>Marca/ação: links, chevron de select, foco</td><td class="src">globals.css:14</td></tr>
+    <tr><td><span class="sw" style="background:var(--accent-strong)"></span></td><td><code>--accent-strong</code></td><td class="hex">#5a159f</td><td>Accent para texto pequeno e hover de botão</td><td class="src">globals.css:15</td></tr>
+    <tr><td><span class="sw" style="background:var(--accent-soft)"></span></td><td><code>--accent-soft</code></td><td class="hex">#eee4f8</td><td>Tint de fundo do accent: segmented selecionado, estados “em andamento”</td><td class="src">globals.css:16</td></tr>
+    <tr><td><span class="sw" style="background:var(--coral)"></span></td><td><code>--coral</code></td><td class="hex">#c85c75</td><td>Só no gradiente do wizard-progress (2 usos, linhas 162/167)</td><td class="src">globals.css:17</td></tr>
+    <tr><td><span class="sw" style="background:var(--dark)"></span></td><td><code>--dark</code></td><td class="hex">#19141e</td><td>Superfície escura: sidebar, monograma, wizard-footer, botões escuros</td><td class="src">globals.css:18</td></tr>
+    <tr><td><span class="sw" style="background:var(--dark-raised)"></span></td><td><code>--dark-raised</code></td><td class="hex">#241d2a</td><td>Declarado e <strong>nunca usado</strong> em globals.css (0 referências)</td><td class="src">globals.css:19</td></tr>
+    <tr><td><span class="sw" style="background:var(--success)"></span></td><td><code>--success</code></td><td class="hex">#197054</td><td>Texto de estado positivo (status-pill ativa/done, coverage done)</td><td class="src">globals.css:20</td></tr>
+    <tr><td><span class="sw" style="background:var(--warning)"></span></td><td><code>--warning</code></td><td class="hex">#946310</td><td>Texto de alerta (status-pill alerta, completed_with_gaps)</td><td class="src">globals.css:21</td></tr>
+    <tr><td><span class="sw" style="background:var(--danger)"></span></td><td><code>--danger</code></td><td class="hex">#9c2943</td><td>Texto de estado crítico (status-pill inativa/failed)</td><td class="src">globals.css:22</td></tr>
+  </tbody>
+</table>
+
+<h2>Contraste dos neutros de texto (medido)</h2>
+<table>
+  <thead><tr><th>Par</th><th>Razão</th><th>Veredito</th></tr></thead>
+  <tbody>
+    <tr><td><code>--text</code> #1d1722 sobre <code>--surface</code> #f2f0f3</td><td class="hex">15.47:1</td><td>AA texto</td></tr>
+    <tr><td><code>--text</code> #1d1722 sobre <code>--surface-raised</code> #ffffff</td><td class="hex">17.53:1</td><td>AA texto</td></tr>
+    <tr><td><code>--muted</code> #6f6675 sobre <code>--surface</code> #f2f0f3</td><td class="hex">4.83:1</td><td>AA texto</td></tr>
+    <tr><td><code>--muted</code> #6f6675 sobre <code>--surface-raised</code> #ffffff</td><td class="hex">5.48:1</td><td>AA texto</td></tr>
+    <tr><td>#ffffff sobre <code>--dark</code> #19141e (sidebar)</td><td class="hex">18.10:1</td><td>AA texto</td></tr>
+    <tr><td>#c6bdcb (texto da sidebar, literal) sobre <code>--dark</code> #19141e</td><td class="hex">9.95:1</td><td>AA texto</td></tr>
+    <tr><td><code>--coral</code> #c85c75 sobre <code>--surface</code> #f2f0f3</td><td class="hex">3.53:1</td><td>AA só grande/UI — não usar como texto pequeno</td></tr>
+  </tbody>
+</table>
+<p class="lede" style="margin:.5rem 0 0">Medições com <code>tools/contrast.mjs</code> (WCAG 2.x). O texto da sidebar
+(#c6bdcb) é um literal do CSS, não um token — primeiro sinal de um padrão que o cartão de rampas de estado documenta por inteiro.</p>
+
+<div class="note"><strong>Achados registrados.</strong>
+(1) O sistema real tem 17 tokens e nenhuma escala de degraus; qualquer “escala de 7 tons” em material de design seria invenção.
+(2) <code>--ink</code> é alias puro de <code>--text</code> — dois nomes para o mesmo valor.
+(3) <code>--dark-raised</code> existe em :root mas nenhuma regra o consome.
+(4) <code>--coral</code> só aparece no gradiente do wizard; não é um papel semântico.
+(5) Além dos tokens, globals.css carrega <strong>264 hex literais distintos</strong> — a lacuna está registrada, não escondida.</div>
+
+</body></html>

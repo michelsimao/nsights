@@ -1,0 +1,9 @@
+{
+  "namespace": "RiskOpsUI",
+  "source": "@nsights/risk-ops-ui@0.1.0",
+  "shape": "package",
+  "provider": null,
+  "componentCount": 120,
+  "skippedStoryIds": [],
+  "runtimeFontPrefixes": []
+}

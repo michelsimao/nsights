@@ -1,0 +1,77 @@
+<!-- @dsCard group="Fundação" viewport="1280x2650" name="E-mails transacionais" subtitle="os 4 e-mails reais do app e a regra da casa: tabela 600px, estilo inline, hex literal" -->
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Risk Ops — E-mails transacionais</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+body{margin:0;background:var(--surface);color:var(--text)}
+.doc{max-width:1220px;margin:0 auto;padding:44px 32px 80px;display:flex;flex-direction:column;gap:14px}
+h1{font-size:2rem;margin:0;letter-spacing:-.01em}
+.lede{color:var(--muted);font-size:.95rem;line-height:1.55;max-width:74ch;margin:6px 0 0}
+h2{font-size:1.2rem;margin:30px 0 0}
+p{color:var(--muted);font-size:.82rem;line-height:1.55;margin:0;max-width:84ch}
+.lbl{color:var(--muted);font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+code{font-family:var(--font-geist-mono),ui-monospace,monospace;font-size:.72rem}
+.rules{background:var(--surface-raised);border:1px solid var(--border);border-radius:.7rem;padding:20px;display:grid;gap:10px}
+.rules p{max-width:none}
+.mail-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(580px,1fr))}
+.mail{display:flex;flex-direction:column;gap:8px}
+.mail iframe{background:#f2f0f3;border:1px solid var(--border);border-radius:.7rem;height:760px;width:100%}
+.mail b{font-size:.8rem}
+.mail small{color:var(--muted);font-size:.7rem}
+table{border-collapse:collapse;width:100%;font-size:.74rem}
+th{border-bottom:1px solid var(--border);color:var(--muted);font-size:.6rem;font-weight:700;letter-spacing:.06em;padding:0 10px 6px 0;text-align:left;text-transform:uppercase}
+td{border-bottom:1px solid var(--border);padding:7px 10px 7px 0;vertical-align:middle}
+td.m{font-family:var(--font-geist-mono),ui-monospace,monospace;font-size:.66rem;color:var(--muted)}
+.n{font-variant-numeric:tabular-nums;font-weight:650}
+.ok{color:var(--success)}
+.no{color:var(--danger)}
+.chip{border:1px solid var(--border);border-radius:.3rem;display:inline-block;height:18px;vertical-align:middle;width:26px}
+.finding{background:var(--accent-soft);border-radius:.55rem;color:var(--text);font-size:.78rem;line-height:1.5;padding:.7rem .85rem}
+.box{background:var(--surface-raised);border:1px solid var(--border);border-radius:.7rem;padding:20px;display:flex;flex-direction:column;gap:12px}
+</style></head>
+<body>
+<div class="doc">
+
+<div class="lbl">Fundação · e-mail</div>
+<h1>E-mails transacionais</h1>
+<p class="lede">Os quatro e-mails que o app envia, copiados de <code>email-previews/</code> do produto e embutidos aqui sem retoque. E-mail é outro meio: cliente de e-mail não resolve <code>var()</code>, não carrega folha externa confiável e cada um renderiza CSS a seu modo — por isso a regra da casa é diferente da do app, mas a <b>paleta é a mesma</b>.</p>
+
+<div class="rules">
+  <div class="lbl">A regra de e-mail da casa</div>
+  <p><b>Tabela de 600px.</b> Todo e-mail é <code>&lt;table role="presentation" width="600"&gt;</code> centrada sobre o chão <code>#f2f0f3</code> — layout por tabela, nunca flex/grid, porque é o que sobrevive a Outlook.</p>
+  <p><b>Estilo inline, hex literal.</b> Cada elemento carrega seu <code>style=""</code> completo e as cores são hex escritos por extenso — <code>var(--accent)</code> não existe no e-mail. O <code>&lt;style&gt;</code> do head só cobre reset e a fonte.</p>
+  <p><b>Paleta idêntica à do produto.</b> Chão <code>#f2f0f3</code> (--surface), cartão <code>#ffffff</code> sobre borda <code>#ded9e2</code> (--border), texto <code>#1d1722</code> (--text), apoio <code>#6f6675</code> (--muted), CTA <code>#7024c7</code> (--accent) com texto branco, link <code>#5a159f</code> (--accent-strong), sucesso <code>#197054</code> (--success).</p>
+  <p><b>Só claro.</b> <code>meta name="color-scheme" content="light only"</code> — o e-mail não tenta seguir o tema do cliente.</p>
+  <p><b>Fonte: Inter</b>, via Google Fonts, com pilha de sistema como fallback — o e-mail não usa a Geist do produto (fonte carregada não chega à maioria dos clientes; a pilha de fallback é o desenho real).</p>
+</div>
+
+<h2>Os quatro, ao vivo</h2>
+<div class="mail-grid">
+  <div class="mail"><b>Convite</b><small><code>emails/convite.html</code> — acesso criado por um administrador; CTA «aceitar convite» com token.</small><iframe src="./emails/convite.html" title="E-mail de convite" loading="lazy"></iframe></div>
+  <div class="mail"><b>Redefinição de senha</b><small><code>emails/redefinicao-senha.html</code> — fluxo de recuperação; mesmo esqueleto do convite.</small><iframe src="./emails/redefinicao-senha.html" title="E-mail de redefinição de senha" loading="lazy"></iframe></div>
+  <div class="mail"><b>Relatório concluído — PF</b><small><code>emails/relatorio-concluido-pf.html</code> — análise de pessoa física pronta; pílula de status <code>#197054</code> sobre <code>#e4f3ec</code>.</small><iframe src="./emails/relatorio-concluido-pf.html" title="E-mail de relatório concluído (pessoa física)" loading="lazy"></iframe></div>
+  <div class="mail"><b>Relatório concluído — PJ</b><small><code>emails/relatorio-concluido-pj.html</code> — o gêmeo para pessoa jurídica; mesma paleta e esqueleto.</small><iframe src="./emails/relatorio-concluido-pj.html" title="E-mail de relatório concluído (pessoa jurídica)" loading="lazy"></iframe></div>
+</div>
+
+<h2>Contraste medido nos e-mails</h2>
+<div class="box">
+<table>
+  <thead><tr><th></th><th>Texto</th><th>Fundo</th><th>Razão</th><th>Papel</th></tr></thead>
+  <tbody>
+    <tr><td><span class="chip" style="background:#ffffff"></span></td><td class="m">#1d1722</td><td class="m">#ffffff</td><td class="n ok">17,53:1</td><td>corpo sobre o cartão branco</td></tr>
+    <tr><td><span class="chip" style="background:#ffffff"></span></td><td class="m">#6f6675</td><td class="m">#ffffff</td><td class="n ok">5,48:1</td><td>texto de apoio</td></tr>
+    <tr><td><span class="chip" style="background:#17131b"></span></td><td class="m">#ffffff</td><td class="m">#17131b</td><td class="n ok">18,33:1</td><td>marca no cabeçalho escuro</td></tr>
+    <tr><td><span class="chip" style="background:#7024c7"></span></td><td class="m">#ffffff</td><td class="m">#7024c7</td><td class="n ok">7,59:1</td><td>CTA — texto branco (não o <code>#04131a</code> defeituoso do app)</td></tr>
+    <tr><td><span class="chip" style="background:#ffffff"></span></td><td class="m">#5a159f</td><td class="m">#ffffff</td><td class="n ok">10,28:1</td><td>link de fallback do CTA</td></tr>
+    <tr><td><span class="chip" style="background:#e4f3ec"></span></td><td class="m">#197054</td><td class="m">#e4f3ec</td><td class="n ok">5,26:1</td><td>pílula «concluído» dos relatórios</td></tr>
+    <tr><td><span class="chip" style="background:#ffffff"></span></td><td class="m">#948c9b</td><td class="m">#ffffff</td><td class="n no">3,24:1</td><td>disclaimer de 12px no cartão — abaixo de AA texto</td></tr>
+    <tr><td><span class="chip" style="background:#f2f0f3"></span></td><td class="m">#a79fae</td><td class="m">#f2f0f3</td><td class="n no">2,26:1</td><td>rodapé de 11px sobre o chão — FALHA</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="finding"><b>Achado 1.</b> O cabeçalho escuro do e-mail é <code>#17131b</code> — vizinho do <code>--dark #19141e</code> do produto, mas <b>não é o mesmo hex</b>. Como e-mail não lê token, a duplicação é inevitável; a divergência de valor não é. Vale alinhar o literal ao token na próxima edição dos templates.</div>
+<div class="finding"><b>Achado 2.</b> Os dois cinzas de miudeza são fracos: o disclaimer <code>#948c9b</code> mede 3,24:1 e o rodapé <code>#a79fae</code> mede 2,26:1 — ambos abaixo do AA para o corpo pequeno em que aparecem. O próprio <code>#6f6675</code> (--muted, 5,48:1 sobre branco) resolveria os dois sem cor nova.</div>
+<div class="finding"><b>Achado 3.</b> No CTA, o e-mail acerta o que o app erra: texto branco sobre <code>#7024c7</code> (7,59:1), enquanto o <code>.button-primary</code> do app usa <code>#04131a</code> (2,48:1 — o defeito conhecido, globals.css:136). Quando o botão do app for corrigido, e-mail e produto ficam idênticos.</div>
+
+</div>
+</body></html>

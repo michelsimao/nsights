@@ -1,0 +1,26 @@
+/* Marca real nas fichas de componente.
+   O bundle substitui a marca por texto porque o design system não embarca
+   binários; com os assets em brand/, o wordmark e o monograma voltam a ser
+   as imagens oficiais. Aplicado por injeção — nenhuma ficha é alterada.
+   Caminhos relativos a este arquivo (brand/). */
+
+/* Monograma — sidebar recolhida, caixa 2 × 2.25rem */
+.ns-brand-monogram{background-color:transparent!important;background-image:url("icon.png");background-position:center;background-repeat:no-repeat;background-size:contain;border-radius:0;color:transparent!important;font-size:0!important;height:2rem;width:2.25rem}
+
+/* Wordmark sobre chão escuro — sidebar expandida, login */
+.ns-brand-wordmark{background-image:url("logo-white.avif");background-position:left center;background-repeat:no-repeat;background-size:contain;color:transparent!important;display:inline-block;font-size:0!important;height:1.15rem;width:6.6rem}
+
+/* Wordmark sobre chão claro — painel do menu mobile */
+.ns-mobile-wordmark{background-image:url("logo-dark.png");background-position:left center;background-repeat:no-repeat;background-size:contain;color:transparent!important;display:inline-block;font-size:0!important;height:1.05rem;width:6rem}
+
+/* Wordmark do login: no card ele é um <strong> com estilo inline
+   (ScreenLogin.tsx), então precisa vencer o inline. */
+.auth-brand-topline>strong{background-image:url("logo-white.avif");background-position:left center;background-repeat:no-repeat;background-size:contain;color:transparent!important;display:inline-block;font-size:0!important;height:2.1rem;width:10.6rem}
+
+/* O app alterna compacto/expandido por [hidden] */
+.ns-brand-monogram[hidden],.ns-brand-wordmark[hidden]{display:none}
+
+/* Quando a ficha já usa <img> (classes do app), só a caixa */
+.brand img{height:auto;object-fit:contain}
+.brand-compact{max-height:2rem;max-width:2.25rem}
+.brand-wordmark{max-width:7.25rem}

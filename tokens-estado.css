@@ -1,0 +1,270 @@
+/* ============================================================
+   Nsights Risk Ops — camada de tokens de estado (proposta)
+   Gerada a partir dos 236 literais hex de 6 dígitos de _ds_bundle.css
+   (154 valores distintos → 47 tokens). Canônico = melhor contraste
+   medido entre os divergentes de cada papel.
+
+   Este arquivo NÃO é fonte sincronizada: ele existe para provar o
+   re-tema. O destino do bloco :root é app/globals.css, no repo.
+   ============================================================ */
+
+:root{
+  /* superfícies */
+  --surface:#f2f0f3;
+  --surface-subtle:#f8f6f9;
+  --surface-raised:#ffffff;
+  --surface-sunken:#eeeaf0;
+  --surface-accent-tint:#faf6ff;
+  /* bordas */
+  --border:#ded9e2;
+  --border-strong:#cfc7d5;
+  --border-accent:#d9c4f2;
+  --border-accent-strong:#b89ad4;
+  /* texto */
+  --text:#1d1722;
+  --ink:var(--text);
+  --muted-strong:#4e4654;
+  --muted:#6f6675;
+  --muted-weak:#8a8290;
+  /* marca */
+  --accent:#7024c7;
+  --accent-strong:#5a159f;
+  --accent-soft:#eee4f8;
+  --accent-muted:#d3c2ec;
+  --focus-ring:#8c3ed0;
+  --focus-halo:#eee1fa;
+  /* tinta sobre chão saturado ou escuro */
+  --on-accent:#ffffff;
+  --on-dark:#ffffff;
+  /* geometria de controle — um botão, uma medida, em todas as telas */
+  --control-h:2.75rem;
+  --control-h-lg:3.25rem;
+  --control-h-sm:2rem;
+  --control-radius:.45rem;
+  --control-gap:.45rem;
+  --control-pad-y:.65rem;
+  --control-pad-x:1rem;
+  /* estado — ok */
+  --state-ok-bg:#e9f5f0;
+  --state-ok-fg:#176b4d;
+  --state-ok-solid:#1f9a70;
+  --state-ok-border:#c4e2d4;
+  /* estado — atenção */
+  --state-warn-bg:#fff5e6;
+  --state-warn-fg:#80540c;
+  --state-warn-solid:#b0620d;
+  --state-warn-border:#efd9ad;
+  /* estado — crítico */
+  --state-danger-bg:#fde9ee;
+  --state-danger-fg:#8f1833;
+  --state-danger-solid:#b91c3c;
+  --state-danger-strong:#8f0f2c;
+  --state-danger-border:#f3ccd6;
+  --state-danger-on-dark:#e0879a;
+  /* estado — info e neutro */
+  --state-info-bg:#f4eefc;
+  --state-info-fg:#5a159f;
+  --state-info-solid:#7024c7;
+  --state-info-border:#ddcdf2;
+  --state-neutral-bg:#eeeef2;
+  --state-neutral-fg:#4e4654;
+  --state-neutral-solid:#8d8491;
+  --state-neutral-border:#dcd7e0;
+  /* gráficos */
+  --coral:#c85c75;
+  --chart-accent-soft:#a274d8;
+  --chart-neutral:#8d8491;
+  --chart-neutral-soft:#b3aec0;
+  /* superfícies escuras */
+  --dark:#17131b;
+  --dark-raised:#241d2a;
+  --dark-border:#31283a;
+  --dark-border-strong:#4a3e52;
+  --dark-text:#f8f4fa;
+  --dark-muted:#a9a1b0;
+  --dark-accent:#a86deb;
+  /* compatibilidade com os nomes antigos */
+  --success:var(--state-ok-fg);
+  --warning:var(--state-warn-fg);
+  --danger:var(--state-danger-fg);
+}
+
+/* ---- tema escuro: só tokens mudam, nenhuma regra de componente ---- */
+[data-theme="dark"]{
+  color-scheme:dark;
+  --surface:#17131b;
+  --surface-subtle:#1e1824;
+  --surface-raised:#241d2a;
+  --surface-sunken:#120f16;
+  --surface-accent-tint:#251b34;
+  --border:#31283a;
+  --border-strong:#4a3e52;
+  --border-accent:#4b3466;
+  --border-accent-strong:#6b4a94;
+  --text:#f8f4fa;
+  --muted-strong:#cfc7d5;
+  --muted:#a9a1b0;
+  --muted-weak:#8a8290;
+  --accent:#a86deb;
+  --accent-strong:#c8a8dc;
+  --accent-soft:#2c2140;
+  --accent-muted:#3d2b57;
+  --focus-ring:#c08bf0;
+  --focus-halo:#3a2857;
+  --on-accent:#1d1722;
+  --on-dark:#ffffff;
+  --state-ok-bg:#233236;
+  --state-ok-fg:#55b292;
+  --state-ok-solid:#1f9a70;
+  --state-ok-border:#2f4a44;
+  --state-warn-bg:#3c2925;
+  --state-warn-fg:#c9945a;
+  --state-warn-solid:#b0620d;
+  --state-warn-border:#4e3728;
+  --state-danger-bg:#3d1d2d;
+  --state-danger-fg:#d88092;
+  --state-danger-solid:#b91c3c;
+  --state-danger-strong:#8f0f2c;
+  --state-danger-border:#54293a;
+  --state-info-bg:#311e45;
+  --state-info-fg:#c8a8dc;
+  --state-info-solid:#a86deb;
+  --state-info-border:#4a3266;
+  --state-neutral-bg:#352e3b;
+  --state-neutral-fg:#a6a0ab;
+  --state-neutral-solid:#8d8491;
+  --state-neutral-border:#443d4a;
+  --chart-neutral:#8d8491;
+  --chart-neutral-soft:#6b6475;
+}
+
+/* ============================================================
+   Regras de componente re-apontadas para tokens.
+   Cada linha abaixo substitui um par hex literal do bundle —
+   mesma seletividade, valores idênticos no tema claro.
+   ============================================================ */
+
+/* pills e badges de estado */
+.status-pill.status-ativa,.status-pill.status-done{background:var(--state-ok-bg);color:var(--state-ok-fg)}
+.status-pill.status-alerta{background:var(--state-warn-bg);color:var(--state-warn-fg)}
+.status-pill.status-inativa,.status-pill.status-failed{background:var(--state-danger-bg);color:var(--state-danger-fg)}
+.status-pill.status-cancelled{background:var(--state-neutral-bg);color:var(--state-neutral-fg)}
+.status-regular{background:var(--state-ok-bg);color:var(--state-ok-fg)}
+.status-regular>span{background:var(--state-ok-solid)}
+.status-attention{background:var(--state-warn-bg);color:var(--state-warn-fg)}
+.status-attention>span{background:var(--state-warn-solid)}
+.status-critical{background:var(--state-danger-bg);color:var(--state-danger-fg)}
+.status-critical>span{background:var(--state-danger-solid)}
+.status-gap,.status-empty{background:var(--state-neutral-bg);border-color:var(--state-neutral-border);color:var(--state-neutral-fg)}
+.result-badge-ok{background:var(--state-ok-bg);color:var(--state-ok-fg)}
+.result-badge-attention{background:var(--state-warn-bg);color:var(--state-warn-fg)}
+.result-badge-critical{background:var(--state-danger-bg);color:var(--state-danger-fg)}
+.result-badge-gap{background:var(--state-neutral-bg);color:var(--state-neutral-fg)}
+.verdict-badge.low{background:var(--state-ok-bg);color:var(--state-ok-fg)}
+.verdict-badge.medium{background:var(--state-warn-bg);color:var(--state-warn-fg)}
+.verdict-badge.high,.verdict-badge.vetoed{background:var(--state-danger-bg);color:var(--state-danger-fg)}
+.verdict-badge.inconclusive{background:var(--state-info-bg);color:var(--state-info-fg)}
+.coverage-pill.done{background:var(--state-ok-bg);color:var(--state-ok-fg)}
+.coverage-pill.running{background:var(--accent-soft);color:var(--accent-strong)}
+.coverage-pill.queued{background:var(--state-neutral-bg);color:var(--state-neutral-fg)}
+.profile-trend-up{background:var(--state-ok-bg);color:var(--state-ok-fg)}
+.profile-trend-down{background:var(--state-danger-bg);color:var(--state-danger-fg)}
+.result-fact.is-positive>strong{color:var(--state-ok-fg)}
+.result-fact.is-negative>strong{color:var(--state-danger-fg)}
+.valid-hint{color:var(--state-ok-fg)}
+.alert{background:var(--state-warn-bg);border:1px solid var(--state-warn-border);color:var(--state-warn-fg)!important}
+.ns-alert-info{background:var(--state-info-bg);border-color:var(--state-info-border);color:var(--state-info-fg)!important}
+.ns-alert-success{background:var(--state-ok-bg);border-color:var(--state-ok-border);color:var(--state-ok-fg)!important}
+.ns-alert-danger{background:var(--state-danger-bg);border-color:var(--state-danger-border);color:var(--state-danger-fg)!important}
+
+/* veredito e escala de risco */
+.risk-verdict{background:var(--surface-raised);border-color:var(--border);border-left-color:var(--accent)}
+.risk-verdict.is-veto{border-left-color:var(--state-danger-strong)}
+.risk-verdict.is-high{border-left-color:var(--state-danger-solid)}
+.risk-verdict.is-unknown{border-left-color:var(--chart-neutral)}
+.risk-stamp{background:var(--state-danger-strong)}
+.risk-verdict.is-high .risk-stamp{background:var(--state-danger-solid)}
+.risk-verdict.is-unknown .risk-stamp{background:var(--state-neutral-fg)}
+.risk-verdict.is-run .risk-stamp{background:var(--accent)}
+.risk-scale{background:var(--surface-subtle);border-color:var(--border)}
+.risk-sw.aten{background:var(--state-warn-fg)}
+.risk-sw.agrav{background:var(--state-warn-solid)}
+.risk-sw.grave{background:var(--state-danger-solid)}
+.risk-sw.veto{background:var(--state-danger-strong)}
+.risk-sw.clear{background:var(--state-ok-bg);border-color:var(--state-ok-border)}
+.risk-sw.unknown{border-color:var(--border-strong)}
+.risk-sw.stale{background:var(--surface-raised);border-color:var(--border-strong)}
+.risk-sw.stale::before{border-right-color:var(--accent)}
+
+/* pontos, trilhas e legendas */
+.dot-critical{background:var(--state-danger-solid)}
+.dot-attention{background:var(--state-warn-solid)}
+.dot-regular{background:var(--state-ok-solid)}
+.dot-gap{background:var(--state-neutral-solid)}
+.dot-empty{background:var(--surface-sunken)}
+.dot-partners{background:var(--chart-accent-soft)}
+.branches-dot-active{background:var(--accent)}
+.branches-dot-inactive{background:var(--chart-neutral)}
+.branch-ufbar-track i{background:var(--accent)}
+.branch-ufbar-track i.is-inactive{background:var(--chart-neutral)}
+.drill-crumb i{color:var(--chart-neutral-soft)}
+
+/* superfícies, bordas e texto neutro */
+.settings-info-grid>div,.settings-table-row{border-color:var(--surface-sunken)}
+.platform-data-panel-footer,.settings-navigation-link:hover{border-color:var(--border)}
+.settings-navigation-link[aria-current="page"]{border-color:var(--border-accent)}
+.settings-navigation-description,.navigation-link,.auth-trust-line,.auth-access-panel::before{color:var(--muted)}
+.auth-form label{color:var(--muted-strong)}
+.entry .lede{color:var(--muted-strong)}
+.auth-form input{border-color:var(--border-strong)}
+.auth-form input:hover{border-color:var(--border-strong)}
+.auth-form input::placeholder,.composer textarea::placeholder,.sel-search input::placeholder,.granular-filters input[type="search"]::placeholder{color:var(--muted)}
+.file-drop{border-color:var(--border-strong)}
+.file-drop.has-file,.source-card.selected,.attach.sources,.run-progress,.process-dialog ol{border-color:var(--border-accent)}
+.result-tabs,.risk-scale,.platform-empty-state-mark,.profile-chart-grid{border-color:var(--border)}
+.wizard-card,.preflight-progress,.platform-data-panel-heading,.sensitive-table thead th,.granular-table thead th{background:var(--surface-subtle)}
+.file-drop:hover,.file-drop.dragover,.scope-card.selected,.credits-summary,.process-dialog-rail,.platform-empty-state-mark{background:var(--surface-accent-tint)}
+.sensitive-table td,.granular-table td{border-color:var(--surface)}
+.pricing-market-track{background:var(--accent-muted)}
+
+/* botões — uma geometria para todas as telas.
+   O bundle declara seis superfícies de botão com raio, altura e peso diferentes;
+   aqui todas passam a ler os mesmos tokens de controle. .button-primary era a
+   única sem gap: o ícone colava no rótulo. */
+.button-primary,.button-secondary,.button-link,.primary-link,.auth-form button,.wizard-footer button,.wizard-card>button,.platform-page-action .button-primary,.platform-page-action .primary-link{align-items:center;border-radius:var(--control-radius);display:inline-flex;gap:var(--control-gap);justify-content:center;min-height:var(--control-h);padding:var(--control-pad-y) var(--control-pad-x)}
+.auth-form button{min-height:var(--control-h-lg)}
+.button-primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.button-primary:hover{background:var(--accent-strong);border-color:var(--accent-strong);color:var(--on-accent);filter:none}
+.button-secondary{background:transparent;border-color:var(--border-strong);color:var(--text)}
+.button-secondary:hover{background:var(--accent-soft);border-color:var(--border-accent);color:var(--accent-strong);filter:none}
+.button-primary:focus-visible,.button-secondary:focus-visible,.button-link:focus-visible,.auth-form button:focus-visible,.wizard-card>button:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+.button-icon{height:.95rem;width:.95rem}
+
+/* Ícones — contrato da casa: caixa mínima 16, traço 1.5, cap e junta redondos.
+   O bundle desenha os 63 glífios do registro com traço entre 1 e 1.7 e caixa 16 ou 24;
+   aqui o traço é normalizado e a caixa recebe piso. */
+svg.ns-icon,svg.navigation-icon,svg.button-icon,svg.result-tab-icon{stroke-linecap:round;stroke-linejoin:round}
+svg.ns-icon[viewBox="0 0 24 24"],svg.navigation-icon,svg.button-icon{stroke-width:1.5}
+svg.ns-icon{min-height:16px;min-width:16px}
+
+/* superfícies escuras */
+.sidebar,.wizard-footer{background:var(--dark)}
+.auth-form button,.button-link,.platform-page-action .button-primary{background:var(--dark-raised);border-color:var(--dark-raised);color:var(--on-dark)}
+.auth-form button:hover,.button-link:hover,.platform-page-action .button-primary:hover{background:var(--accent-strong);border-color:var(--accent-strong);color:var(--on-dark)}
+.sidebar .navigation-account,.navigation-link[aria-current="page"]{border-color:var(--dark-border)}
+.new-analysis-link{border-color:var(--dark-border)}
+.new-analysis-link:hover{border-color:var(--dark-border-strong)}
+.agent-mark{background:var(--dark-raised);color:var(--dark-accent)}
+.wizard-card>button{background:var(--dark);color:var(--on-dark)}
+
+/* Verificação em duas etapas — um dígito por campo (6 caixas).
+   O bundle entrega um único input #mfa-code; o navegador o reconstrói e estas
+   regras dão a geometria. Herda os tokens de controle: mesma altura, mesmo raio,
+   mesmo foco dos outros campos. */
+.otp-group{display:flex;gap:var(--control-gap)}
+.otp-group input{-moz-appearance:textfield;appearance:textfield;background:var(--surface-raised);border:1px solid var(--border-strong);border-radius:var(--control-radius);color:var(--text);flex:1 1 0;font-family:var(--font-geist-mono),ui-monospace,monospace;font-size:1.35rem;font-variant-numeric:tabular-nums;font-weight:600;min-height:var(--control-h-lg);min-width:0;padding:0;text-align:center;transition:border-color .12s,box-shadow .12s}
+.otp-group input::-webkit-inner-spin-button,.otp-group input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.otp-group input:hover{border-color:var(--border-accent)}
+.otp-group input:focus-visible{border-color:var(--focus-ring);box-shadow:0 0 0 3px var(--focus-halo);outline:none}
+.otp-group input[data-filled]{border-color:var(--border-accent)}
+.otp-group[data-invalid] input{border-color:var(--state-danger-border)}

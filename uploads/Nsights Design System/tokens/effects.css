@@ -1,0 +1,27 @@
+/* Nsights effects — animations + base resets. */
+
+body {
+  margin: 0;
+  background: var(--ns-bg-base);
+  color: var(--ns-text-body);
+  font-family: var(--ns-font-sans);
+  transition: var(--ns-transition-theme);
+}
+
+@keyframes ns-gradient-slow { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes ns-gradient-x { 0%,100% { background-size: 200% 200%; background-position: left center; } 50% { background-size: 200% 200%; background-position: right center; } }
+@keyframes ns-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+@keyframes ns-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes ns-glow { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.04); } }
+@keyframes ns-fade-in-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ns-blur-in { from { opacity: 0; filter: blur(12px); transform: scale(0.85); } to { opacity: 1; filter: blur(0); transform: scale(1); } }
+@keyframes ns-spin-slow { to { transform: rotate(360deg); } }
+
+.ns-anim-gradient-slow { animation: ns-gradient-slow 10s ease infinite; }
+.ns-anim-gradient-x { animation: ns-gradient-x 15s ease infinite; }
+.ns-anim-shimmer { animation: ns-shimmer 2s linear infinite; }
+.ns-anim-float { animation: ns-float 6s ease-in-out infinite; }
+.ns-anim-glow { animation: ns-glow 2s ease-in-out infinite; }
+.ns-anim-fade-in-up { animation: ns-fade-in-up 0.65s var(--ns-ease) both; }
+.ns-anim-blur-in { animation: ns-blur-in 1s var(--ns-ease) both; }
+.ns-anim-spin-slow { animation: ns-spin-slow 8s linear infinite; }

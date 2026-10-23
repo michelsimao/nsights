@@ -1,0 +1,19 @@
+<!-- @dsCard group="Charts" viewport="700x190" name="Warm & Categorical" subtitle="Derived stops — warm mono + 8-color categorical" -->
+<!DOCTYPE html>
+<html class="dark"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+body { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.scale { display: flex; gap: 3px; height: 30px; }
+.scale div { flex: 1; border-radius: 4px; }
+.lbl { font-size: 10px; font-family: var(--ns-font-mono); color: var(--ns-text-muted); margin: -4px 0 0; }
+</style></head>
+<body>
+<div class="scale">
+  <div style="background:var(--ns-chart-warm-1)"></div><div style="background:var(--ns-chart-warm-2)"></div><div style="background:var(--ns-chart-warm-3)"></div><div style="background:var(--ns-chart-warm-4)"></div><div style="background:var(--ns-chart-warm-5)"></div><div style="background:var(--ns-chart-warm-6)"></div><div style="background:var(--ns-chart-warm-7)"></div><div style="background:var(--ns-chart-warm-8)"></div><div style="background:var(--ns-chart-warm-9)"></div><div style="background:var(--ns-chart-warm-10)"></div>
+</div>
+<p class="lbl">--ns-chart-warm-{1..10} · warm monochrome</p>
+<div class="scale">
+  <div style="background:var(--ns-chart-cat-1)"></div><div style="background:var(--ns-chart-cat-2)"></div><div style="background:var(--ns-chart-cat-3)"></div><div style="background:var(--ns-chart-cat-4)"></div><div style="background:var(--ns-chart-cat-5)"></div><div style="background:var(--ns-chart-cat-6)"></div><div style="background:var(--ns-chart-cat-7)"></div><div style="background:var(--ns-chart-cat-8)"></div>
+</div>
+<p class="lbl">--ns-chart-cat-{1..8} · categorical</p>
+</body></html>

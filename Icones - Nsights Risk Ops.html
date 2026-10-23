@@ -1,0 +1,493 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Ícones — Nsights Risk Ops</title>
+<link rel="icon" type="image/png" href="brand/icon.png">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="tokens-estado.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font-geist),system-ui,sans-serif}
+a{color:var(--accent-strong);text-decoration:none}a:hover{color:var(--accent)}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr)}
+.side{position:sticky;top:0;height:100vh;background:var(--dark);color:#f8f4fa;display:flex;flex-direction:column;gap:16px;padding:26px 16px 20px;overflow-y:auto}
+.side .brand{display:flex;align-items:center;gap:.55rem;min-width:0}
+.side .brand .compact{height:1.75rem;width:auto;display:block;flex:0 0 auto}
+.side .brand .qual{border-left:1px solid #4a3e52;color:#bbb0c2;font-size:.62rem;font-weight:650;line-height:1;padding-left:.55rem;white-space:nowrap}
+.lbl{font-size:.6rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:var(--control-gap);padding:.45rem .55rem;border-radius:var(--control-radius);color:#a9a1b0;font-size:.78rem;line-height:1.3;border:1px solid transparent;min-height:var(--control-h-sm)}
+.nav a:hover{background:rgba(255,255,255,.05);color:#f8f4fa}
+.nav a.active{background:rgba(168,109,235,.15);border-color:rgba(168,109,235,.34);color:#fff}
+.nav a .n{font-family:var(--font-geist-mono),monospace;font-size:.62rem;color:rgba(255,255,255,.32);margin-left:auto}
+.side .foot{margin-top:auto;color:rgba(255,255,255,.34);font-size:.62rem;border-top:1px solid rgba(255,255,255,.1);padding-top:.8rem;display:grid;gap:.3rem}
+.side .foot code{font-family:var(--font-geist-mono),monospace;color:#a86deb;font-size:.62rem}
+.doc{max-width:1040px;margin:0 auto;padding:40px 32px 96px;display:flex;flex-direction:column;gap:14px;min-width:0}
+h1{font-size:2rem;margin:0;letter-spacing:-.025em}
+h2{font-size:1.15rem;margin:0;letter-spacing:-.015em}
+h3{font-size:.84rem;margin:0;font-weight:700}
+.lede{color:var(--muted);font-size:.94rem;line-height:1.6;max-width:74ch;margin:4px 0 0;text-wrap:pretty}
+p{color:var(--muted);font-size:.8rem;line-height:1.6;margin:0;max-width:86ch;text-wrap:pretty}
+p b,li b{color:var(--text)}
+ul,ol{margin:0;padding-left:1.15rem;color:var(--muted);font-size:.8rem;line-height:1.65;max-width:86ch}
+ul{list-style:disc}ol{list-style:decimal}.doc li{list-style:inherit}
+li+li{margin-top:.28rem}
+code{font-family:var(--font-geist-mono),monospace;font-size:.72rem;background:var(--surface-subtle);border:1px solid var(--border);border-radius:.25rem;padding:.05rem .25rem}
+.sec{display:flex;flex-direction:column;gap:14px;min-width:0;overflow-x:clip;scroll-margin-top:20px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+.sec:last-child{border-bottom:0}
+.card{background:var(--surface-raised);border:1px solid var(--border);border-radius:.7rem;padding:20px;display:grid;gap:12px}
+.tools{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.tools input{flex:1;min-width:14rem;background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--control-radius);color:var(--text);font-family:inherit;font-size:.75rem;padding:0 var(--control-pad-x);min-height:var(--control-h-sm)}
+.tools input:focus{outline:none;border-color:var(--accent)}
+.seg{display:flex;border:1px solid var(--border);border-radius:var(--control-radius);overflow:hidden}
+.seg button{border:0;background:var(--surface-raised);color:var(--muted);font-family:inherit;white-space:nowrap;font-size:.7rem;font-weight:650;padding:0 var(--control-pad-x);min-height:var(--control-h-sm);cursor:pointer}
+.seg button+button{border-left:1px solid var(--border)}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-strong)}
+.tag{font-family:var(--font-geist-mono),monospace;font-size:.65rem;color:var(--muted);background:var(--surface-subtle);border:1px solid var(--border);border-radius:.3rem;padding:.2rem .4rem;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.g{display:grid;justify-items:center;gap:.4rem;background:var(--surface-raised);border:1px solid var(--border);border-radius:.5rem;padding:.75rem .5rem;cursor:pointer;min-height:5.2rem;align-content:center}
+.g:hover{border-color:var(--accent);background:var(--accent-soft)}
+.g .ico{display:grid;place-items:center;height:2rem;color:var(--text)}
+.g b{font-family:var(--font-geist-mono),monospace;font-size:.6rem;font-weight:500;color:var(--muted);text-align:center;line-height:1.3;overflow-wrap:anywhere}
+.g.copied{border-color:var(--state-ok-solid);background:var(--state-ok-bg)}
+.g{position:relative}
+.g.casa::after{content:"";position:absolute;top:.4rem;right:.4rem;width:.3rem;height:.3rem;border-radius:50%;background:var(--accent)}
+.letter{display:flex;align-items:baseline;gap:.7rem;margin-top:10px}
+.letter b{font-family:var(--font-geist-mono),monospace;font-size:.8rem;font-weight:600;color:var(--accent-strong)}
+.famhead{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;margin-top:6px}
+table{border-collapse:collapse;width:100%;background:var(--surface-raised);border:1px solid var(--border);border-radius:.6rem;overflow:hidden;font-size:.74rem}
+th{background:var(--surface-subtle);color:var(--muted);font-size:.56rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:.55rem .65rem;border-bottom:1px solid var(--border)}
+td{padding:.45rem .65rem;border-bottom:1px solid var(--border);vertical-align:middle;line-height:1.45}
+tr:last-child td{border-bottom:0}
+td.m{font-family:var(--font-geist-mono),monospace;white-space:nowrap;font-size:.7rem}
+td.ic{width:2.4rem}
+td.ic span{display:grid;place-items:center;color:var(--text)}
+td.old span{display:grid;place-items:center;color:var(--muted-strong)}
+td.arrow{width:1.4rem;color:var(--muted-weak);text-align:center;font-family:var(--font-geist-mono),monospace;font-size:.7rem}
+tr.dif td.spec{color:var(--state-warn-fg)}
+td.spec{font-family:var(--font-geist-mono),monospace;font-size:.62rem;color:var(--muted);white-space:nowrap}
+td.nouse{color:var(--muted-weak);font-style:italic}
+.wrap{max-height:30rem;overflow:auto;contain:inline-size;border:1px solid var(--border);border-radius:.6rem}
+.wrap table{border:0;border-radius:0}
+.sizes{display:flex;align-items:flex-end;gap:1.6rem;flex-wrap:wrap}
+.sz{display:grid;justify-items:center;gap:.4rem}
+.sz span{display:grid;place-items:center;color:var(--text)}
+.sz b{font-family:var(--font-geist-mono),monospace;font-size:.62rem;color:var(--muted);font-weight:500}
+.do{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.do>div{border:1px solid var(--border);border-radius:.55rem;padding:14px 16px;display:grid;gap:8px;background:var(--surface-raised)}
+.do .yes{border-left:3px solid var(--state-ok-solid)}
+.do .no{border-left:3px solid var(--state-danger-solid)}
+.do .row{display:flex;align-items:center;gap:.6rem;color:var(--text);font-size:.78rem}
+.do .row span{display:grid;place-items:center}
+pre{margin:0;background:var(--dark);color:#e9e2ee;border-radius:.6rem;padding:16px 18px;overflow:auto;font-family:var(--font-geist-mono),monospace;font-size:.68rem;line-height:1.6}
+pre b{color:#a86deb;font-weight:400}
+.pend{background:var(--state-warn-bg);border:1px solid var(--state-warn-border);border-radius:.55rem;padding:14px 16px;display:grid;gap:6px}
+.pend .lbl{color:var(--state-warn-fg)}
+.pend p{color:var(--state-warn-fg);opacity:.92}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{position:static;height:auto}.do{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="layout">
+<aside class="side">
+<div class="brand"><img class="compact" src="brand/icon.png" alt="n-sights"><span class="qual">Risk Ops · Ícones</span></div>
+<nav class="nav" id="nav">
+<a href="#regras" class="active"><span>Regras de uso</span></a>
+<a href="#catalogo"><span>Catálogo da casa</span><span class="n" id="nTotal"></span></a>
+<a href="#completo"><span>Catálogo Lucide</span><span class="n" id="nFull"></span></a>
+<a href="#dominio"><span>Substituição de glífios</span><span class="n" id="nDom"></span></a>
+<a href="#tamanhos"><span>Tamanhos</span></a>
+<a href="#codigo"><span>Como usar</span></a>
+<a href="#pendente"><span>Pendente</span></a>
+</nav>
+<div class="foot"><span>Lucide · ISC</span><span>Fonte: <code>icons/lucide.js</code></span></div>
+</aside>
+<div class="doc">
+
+<section class="sec" id="regras">
+<h1>Ícones</h1>
+<p class="lede">A biblioteca é Lucide, sem exceção. Todo glifo entra na interface na mesma caixa, com o mesmo traço e herdando a cor do texto — o desenho nunca é redesenhado à mão.</p>
+<div class="card">
+<h3>Quatro regras</h3>
+<ol>
+<li><b>Só Lucide.</b> Nenhum ícone desenhado à mão, de outro pacote ou colado como SVG solto. O catálogo oficial inteiro está nesta página; o subconjunto da casa é o que já vem embarcado no pacote.</li>
+<li><b>Caixa mínima 16.</b> Abaixo de 16px o traço de 1.5 fecha os vãos. Os tamanhos da casa são 16, 20, 24 e 32 — nada entre eles.</li>
+<li><b>Traço 1.5, sempre.</b> Cap e junta redondos, <code>fill: none</code>, <code>viewBox 0 0 24 24</code>. O traço não muda com o tamanho.</li>
+<li><b>Cor herdada.</b> <code>stroke: currentColor</code>. O ícone assume a cor do texto ao lado; nunca recebe cor própria fora dos tokens.</li>
+</ol>
+</div>
+<div class="do">
+<div class="yes"><span class="lbl">Faça</span>
+<div class="row"><span data-ico="shield-check" data-size="16"></span>16px · traço 1.5 · currentColor</div>
+<div class="row"><span data-ico="triangle-alert" data-size="20"></span>20px, mesmo traço</div>
+<div class="row"><span data-ico="chart-line" data-size="24"></span>24px, mesmo traço</div>
+</div>
+<div class="no"><span class="lbl">Não faça</span>
+<div class="row"><span data-ico="shield-check" data-size="16" data-bad="thin"></span>Traço 1 — apaga no claro</div>
+<div class="row"><span data-ico="triangle-alert" data-size="16" data-bad="thick"></span>Traço 2.4 — pesa e some o vão</div>
+<div class="row"><span data-ico="chart-line" data-size="12" data-bad="small"></span>12px — abaixo do mínimo</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="catalogo">
+<h2>Catálogo da casa</h2>
+<p>Os glífios embarcados no pacote, em sete categorias de uso — funcionam sem rede e são os que <code>NsIcons</code> resolve por nome. Clique para copiar.</p>
+<div class="tools">
+<input id="q" type="search" placeholder="Buscar ícone…" autocomplete="off">
+<div class="seg" id="seg"><button data-s="16" aria-pressed="true">16</button><button data-s="20" aria-pressed="false">20</button><button data-s="24" aria-pressed="false">24</button><button data-s="32" aria-pressed="false">32</button></div>
+<span class="tag" id="count"></span>
+</div>
+<div id="cats"></div>
+</section>
+
+<section class="sec" id="completo">
+<h2>Catálogo Lucide</h2>
+<p>O catálogo oficial inteiro, na versão corrente do pacote, com o contrato da casa aplicado: caixa mínima 16, traço 1.5, cap e junta redondos. A busca procura por nome <b>e por palavra-chave</b>, como no lucide.dev — "law" acha <code>gavel</code> e <code>scale</code>. O ponto roxo marca os embarcados.</p>
+<div class="tools">
+<input id="qf" type="search" placeholder="Buscar por nome ou palavra-chave (law, chart, upload…)" autocomplete="off">
+<div class="seg" id="segf"><button data-m="cat" aria-pressed="true">Categorias</button><button data-m="az" aria-pressed="false">A–Z</button></div>
+<span class="tag" id="countFull">carregando…</span>
+</div>
+<div id="full"></div>
+</section>
+
+<section class="sec" id="dominio">
+<h2>Substituição de glífios</h2>
+<p>Controle de troca, um por um: o desenho que está no código hoje à esquerda, o substituto Lucide à direita. O antigo aparece com o traço e a caixa originais do registro — é por isso que a coluna é irregular. A última coluna é derivada do próprio pacote — cada ocorrência de <code>name:</code> ou <code>icon:</code> atribuída ao componente que a declara. <b>Não encontrado no pacote</b> significa candidato a remoção, não a substituição.</p>
+<div class="tools">
+<input id="qd" type="search" placeholder="Filtrar por nome ou componente…" autocomplete="off">
+<div class="seg" id="segd"><button data-f="todos" aria-pressed="true">Todos</button><button data-f="traco" aria-pressed="false">Traço fora de 1.5</button><button data-f="semuso" aria-pressed="false">Sem uso achado</button></div>
+<span class="tag" id="countDom"></span>
+</div>
+<div class="wrap"><table><thead><tr><th colspan="2">Hoje no código</th><th colspan="2">Substituto Lucide</th><th>Onde aparece</th></tr></thead><tbody id="domBody"></tbody></table></div>
+</section>
+
+<section class="sec" id="tamanhos">
+<h2>Tamanhos</h2>
+<p>O traço é constante; só a caixa muda. Por isso 16 é o piso: é onde 1.5 ainda deixa vão entre as linhas.</p>
+<div class="card"><div class="sizes" id="sizes"></div></div>
+<table><thead><tr><th class="m">Tamanho</th><th>Use em</th></tr></thead><tbody>
+<tr><td class="m">16</td><td>Dentro de texto, badge, pill, célula de tabela, botão pequeno.</td></tr>
+<tr><td class="m">20</td><td>Botão padrão, item de navegação, campo de formulário.</td></tr>
+<tr><td class="m">24</td><td>Cabeçalho de painel, ação de barra, estado vazio pequeno.</td></tr>
+<tr><td class="m">32</td><td>Estado vazio, marca de seção, ilustração mínima.</td></tr>
+</tbody></table>
+</section>
+
+<section class="sec" id="codigo">
+<h2>Como usar</h2>
+<p>A biblioteca é um arquivo só. <code>NsIcons.svg(nome, tamanho)</code> devolve o markup pronto, já com o contrato aplicado — o tamanho é elevado a 16 se vier menor.</p>
+<div class="card"><pre>&lt;script src="icons/lucide.js"&gt;&lt;/script&gt;
+
+<b>// nome Lucide ou nome de domínio, os dois resolvem</b>
+el.innerHTML = NsIcons.svg('shield-alert', 20);
+el.innerHTML = NsIcons.svg('risco', 20);
+
+<b>// nó pronto para inserir</b>
+botao.prepend(NsIcons.node('plus', 16));
+
+<b>// o contrato, legível em código</b>
+NsIcons.MIN_SIZE  <b>// 16</b>
+NsIcons.STROKE    <b>// 1.5</b>
+NsIcons.SIZES     <b>// [16, 20, 24, 32]</b>
+NsIcons.names     <b>// os 132 nomes do catálogo</b></pre></div>
+<p>No app, a dependência é o pacote oficial: <code>pnpm add lucide-react</code>. O componente <code>Icon</code> mantém a assinatura atual — <code>&lt;Icon name="risco" size={20} /&gt;</code> — e passa a resolver o nome de domínio para o componente Lucide correspondente, com <code>strokeWidth={1.5}</code> e <code>size</code> nunca abaixo de 16. Esta página usa as mesmas fontes do <code>lucide.dev</code>: traçados do pacote, palavras-chave de <code>lucide-static/tags.json</code> e categorias de <code>lucide.dev/api/categories</code>.</p>
+</section>
+
+<section class="sec" id="pendente">
+<h2>Pendente</h2>
+<div class="pend">
+<span class="lbl">Aguardando aplicação no repo</span>
+<p>São 88 glífios desenhados à mão, em três lugares diferentes: 75 no <code>ICONS</code> de <code>src/components/Icon.tsx</code>, 9 no <code>iconPaths</code> do componente de navegação (<code>components/platform/navigation.tsx</code>, consumido por <code>NavigationIcon</code> na Sidebar e no MobileNavigation) e 4 no <code>NAV_ICONS</code> da navegação de Configurações (consumido por <code>SettingsNav</code>). Trocar só o <code>Icon.tsx</code> deixa 13 glífios à mão nas telas de Sidebar e Configurações. Os traços variam entre 1, 1.2, 1.35, 1.5, 1.6 e 1.7, em caixa 16 ou 24. Até a troca, o navegador do design system normaliza o traço nas fichas de componente por CSS, mas os desenhos continuam sendo os antigos. Substituir os três registros por <code>icons/lucide.js</code> e rodar <code>/design-sync</code> fecha o item.</p>
+</div>
+</section>
+
+</div>
+</div>
+<script src="icons/lucide.js"></script>
+<script src="icons/legado.js"></script>
+<script src="icons/categorias.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+var size=16;
+function paintFixed(){
+ document.querySelectorAll('[data-ico]').forEach(function(el){
+  var n=el.dataset.ico,s=+el.dataset.size||16,bad=el.dataset.bad;
+  el.innerHTML=NsIcons.svg(n,bad==='small'?16:s,bad?'ns-icon-demo':'ns-icon');
+  var svg=el.firstChild;if(!svg)return;
+  if(bad==='thin')svg.style.strokeWidth='1';
+  if(bad==='thick')svg.style.strokeWidth='2.4';
+  if(bad==='small'){svg.setAttribute('width','12');svg.setAttribute('height','12');
+   svg.style.width='12px';svg.style.height='12px';svg.style.minWidth='0';svg.style.minHeight='0'}
+ });
+}
+var cats=document.getElementById('cats'),count=document.getElementById('count');
+function paintCats(filter){
+ var f=(filter||'').trim().toLowerCase(),shown=0,html='';
+ NsIcons.CATS.forEach(function(c){
+  var names=c[1].filter(function(n){
+   if(!f)return true;
+   var dom=Object.keys(NsIcons.MAP).filter(function(k){return NsIcons.MAP[k]===n}).join(' ');
+   return (n+' '+dom).indexOf(f)>-1;
+  });
+  if(!names.length)return;
+  shown+=names.length;
+  html+='<div class="famhead"><span class="lbl">'+c[0]+'</span><span class="tag">'+names.length+'</span></div><div class="grid">';
+  names.forEach(function(n){
+   html+='<button class="g" data-name="'+n+'" title="'+n+'"><span class="ico">'+NsIcons.svg(n,size)+'</span><b>'+n+'</b></button>';
+  });
+  html+='</div>';
+ });
+ cats.innerHTML=html;
+ count.textContent=shown+' de '+NsIcons.names.length;
+}
+cats.addEventListener('click',function(e){
+ var b=e.target.closest('.g');if(!b)return;
+ navigator.clipboard.writeText(b.dataset.name).then(function(){
+  b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},900);
+ },function(){});
+});
+document.getElementById('seg').addEventListener('click',function(e){
+ var b=e.target.closest('button');if(!b)return;
+ size=+b.dataset.s;
+ [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});
+ paintCats(document.getElementById('q').value);
+});
+document.getElementById('q').addEventListener('input',function(e){paintCats(e.target.value)});
+
+var SITE={NAVIGATION:'Sidebar',NAVIGATION2:'Sidebar',NAVIGATION3:'Sidebar',GRUPOS:'MobileNavigation',GRUPOS2:'MobileNavigation',GRUPOS3:'MobileNavigation',DESTINOS:'SettingsNav',defaultAccountItems:'Sidebar (conta)',LogoutButton:'MobileNavigation (sair)'};
+var SETLBL={registro:'Icon',navegacao:'NavigationIcon',configuracoes:'SettingsNav'};
+function usoDe(n){
+ var raw=(window.NsUso&&NsUso[n])||'';
+ if(!raw)return '';
+ var seen={},out=[];
+ raw.split(', ').forEach(function(s){var v=SITE[s]||s;if(!seen[v]){seen[v]=1;out.push(v)}});
+ return out.join(', ');
+}
+function legadoSvg(k,box){
+ var g=window.NsLegado&&NsLegado[k];if(!g)return '';
+ var v=+g.view||24,s=box||22;
+ var kids=g.d.map(function(d){return '<path d="'+d+'"></path>'}).join('');
+ kids+=(g.extra||[]).map(function(e){
+  var at=[],re=/([a-zA-Z]+):\s*"([^"]*)"/g,m;
+  while((m=re.exec(e[1])))at.push(m[1].replace(/[A-Z]/g,function(c){return '-'+c.toLowerCase()})+'="'+m[2]+'"');
+  return '<'+e[0]+' '+at.join(' ')+'></'+e[0]+'>';
+ }).join('');
+ return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 '+v+' '+v+'" fill="none" stroke="currentColor" stroke-width="'+g.stroke+
+  '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+kids+'</svg>';
+}
+var domBody=document.getElementById('domBody');
+var domRows=Object.keys(window.NsLegado||{}).map(function(key){
+ var g=NsLegado[key];
+ return {key:key,set:g.set,dom:g.name,lu:NsIcons.MAP[g.name]||null,stroke:g.stroke,view:g.view,uso:usoDe(g.name)};
+});
+function paintDom(){
+ var f=(document.getElementById('qd').value||'').trim().toLowerCase();
+ var mode=document.querySelector('#segd button[aria-pressed="true"]').dataset.f;
+ var rows=domRows.filter(function(r){
+  if(f&&(r.dom+' '+(r.lu||'')+' '+r.uso+' '+SETLBL[r.set]).toLowerCase().indexOf(f)<0)return false;
+  if(mode==='traco'&&r.stroke==='1.5')return false;
+  if(mode==='semuso'&&r.uso)return false;
+  return true;
+ });
+ domBody.innerHTML=rows.map(function(r){
+  var dif=r.stroke!=='1.5'||r.view!=='24';
+  return '<tr class="'+(dif?'dif':'')+'">'+
+   '<td class="old">'+legadoSvg(r.key,22)+'</td>'+
+   '<td><div class="m">'+r.dom+'</div><div class="spec">traço '+r.stroke+' · caixa '+r.view+' · '+SETLBL[r.set]+'</div></td>'+
+   '<td class="arrow">→</td>'+
+   '<td><div style="display:flex;align-items:center;gap:.5rem"><span style="display:grid;place-items:center">'+
+    (r.lu?NsIcons.svg(r.lu,20):'')+'</span><span><span class="m">'+(r.lu||'—')+
+    '</span><div class="spec" style="color:var(--state-ok-fg)">'+(r.lu?'traço 1.5 · caixa 24':'sem destino')+'</div></span></div></td>'+
+   '<td'+(r.uso?'':' class="nouse"')+'>'+(r.uso||'não encontrado no pacote')+'</td></tr>';
+ }).join('');
+ document.getElementById('countDom').textContent=rows.length+' de '+domRows.length;
+}
+document.getElementById('qd').addEventListener('input',paintDom);
+document.getElementById('segd').addEventListener('click',function(e){
+ var b=e.target.closest('button');if(!b)return;
+ [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});
+ paintDom();
+});
+document.getElementById('nDom').textContent=domRows.length;
+paintDom();
+var sizes=document.getElementById('sizes');
+NsIcons.SIZES.forEach(function(s){
+ var d=document.createElement('div');d.className='sz';
+ d.innerHTML='<span>'+NsIcons.svg('shield-check',s)+'</span><b>'+s+'px</b>';sizes.appendChild(d);
+});
+document.getElementById('nTotal').textContent=NsIcons.names.length;
+
+/* Catálogo oficial completo: traçados do pacote lucide, palavras-chave de
+   lucide-static/tags.json e categorias de lucide.dev/api/categories — as mesmas
+   fontes que a busca do site usa. */
+var NS=(window.lucide&&lucide.icons)||null;
+var fullEl=document.getElementById('full'),countFull=document.getElementById('countFull');
+var ALL=[],TAGS={},CATOF={},modoF='cat';
+function kebab(p){return p.replace(/([a-z0-9])([A-Z])/g,'$1-$2').replace(/([A-Z]+)([A-Z][a-z])/g,'$1-$2').replace(/([a-zA-Z])([0-9])/g,'$1-$2').toLowerCase()}
+function svgFromNode(node,s){
+ var X='http://www.w3.org/2000/svg';
+ var svg=document.createElementNS(X,'svg');
+ svg.setAttribute('class','ns-icon');svg.setAttribute('width',s);svg.setAttribute('height',s);
+ svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('fill','none');
+ svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','1.5');
+ svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');
+ svg.setAttribute('aria-hidden','true');
+ (node||[]).forEach(function(ch){
+  var el=document.createElementNS(X,ch[0]);var at=ch[1]||{};
+  for(var k in at)el.setAttribute(k,at[k]);
+  svg.appendChild(el);
+ });
+ return svg;
+}
+if(!NS){
+ countFull.textContent='sem conexão — catálogo da casa segue disponível';
+ fullEl.innerHTML='<div class="card"><p>O catálogo oficial vem do pacote <code>lucide</code> em tempo de carga. Sem rede, os '+NsIcons.names.length+' glífios embarcados continuam funcionando.</p></div>';
+}else{
+ var casa={};NsIcons.names.forEach(function(n){casa[n]=1});
+ ALL=Object.keys(NS).map(function(p){return {p:p,k:kebab(p)}}).sort(function(a,b){return a.k<b.k?-1:1});
+ ALL=ALL.filter(function(it,i){return i===0||it.k!==ALL[i-1].k});
+ document.getElementById('nFull').textContent=ALL.length;
+ countFull.textContent=ALL.length+' ícones · '+NsIcons.names.length+' embarcados';
+ var gen=0,raf=null,pintado=false;
+ function matches(it,f){
+  if(!f)return true;
+  if(it.k.indexOf(f)>-1)return true;
+  var t=TAGS[it.k];if(t)for(var i=0;i<t.length;i++)if(t[i].indexOf(f)>-1)return true;
+  var c=CATOF[it.k];if(c)for(var j=0;j<c.length;j++)if((window.NsCats&&NsCats[c[j]]||c[j]).toLowerCase().indexOf(f)>-1)return true;
+  return false;
+ }
+ function renderFull(filter){
+  var my=++gen;if(raf)cancelAnimationFrame(raf);
+  var f=(filter||'').trim().toLowerCase();
+  var list=ALL.filter(function(it){return matches(it,f)});
+  countFull.textContent=list.length+' de '+ALL.length+' · '+NsIcons.names.length+' embarcados';
+  fullEl.textContent='';
+  var groups=[];
+  if(modoF==='cat'){
+   var byCat={};
+   list.forEach(function(it){
+    var cs=CATOF[it.k]&&CATOF[it.k].length?CATOF[it.k]:['__sem'];
+    cs.forEach(function(c){(byCat[c]=byCat[c]||[]).push(it)});
+   });
+   groups=Object.keys(byCat).sort(function(a,b){
+    if(a==='__sem')return 1;if(b==='__sem')return -1;
+    var ta=(window.NsCats&&NsCats[a])||a,tb=(window.NsCats&&NsCats[b])||b;
+    return ta<tb?-1:1;
+   }).map(function(c){
+    var t=c==='__sem'?'Sem categoria':((window.NsCats&&NsCats[c])||c);
+    return {t:t,items:byCat[c]};
+   });
+  }else{
+   var byL={};
+   list.forEach(function(it){var L=it.k[0].toUpperCase();(byL[L]=byL[L]||[]).push(it)});
+   groups=Object.keys(byL).sort().map(function(L){return {t:L,items:byL[L]}});
+  }
+  var gi=0,ii=0;
+  function chunk(){
+   if(my!==gen)return;
+   var feitos=0;
+   while(gi<groups.length&&feitos<220){
+    var g=groups[gi];
+    if(ii===0){
+     var head=document.createElement('div');head.className='letter';
+     head.innerHTML='<b>'+g.t+'</b><span class="tag">'+g.items.length+'</span>';
+     fullEl.appendChild(head);
+     var grid=document.createElement('div');grid.className='grid';grid.dataset.gi=gi;fullEl.appendChild(grid);
+    }
+    var grid2=fullEl.querySelector('.grid[data-gi="'+gi+'"]');
+    while(ii<g.items.length&&feitos<220){
+     var it=g.items[ii];
+     var b=document.createElement('button');
+     b.className='g'+(casa[it.k]?' casa':'');b.dataset.name=it.k;
+     var tg=(TAGS[it.k]||[]).slice(0,6).join(', ');
+     b.title=it.k+(casa[it.k]?' · embarcado':'')+(tg?' — '+tg:'');
+     var ico=document.createElement('span');ico.className='ico';ico.appendChild(svgFromNode(NS[it.p],size));
+     var nm=document.createElement('b');nm.textContent=it.k;
+     b.appendChild(ico);b.appendChild(nm);grid2.appendChild(b);
+     ii++;feitos++;
+    }
+    if(ii>=g.items.length){gi++;ii=0}
+   }
+   if(gi<groups.length)raf=requestAnimationFrame(chunk);else raf=null;
+  }
+  chunk();
+ }
+ fullEl.addEventListener('click',function(e){
+  var b=e.target.closest('.g');if(!b)return;
+  navigator.clipboard.writeText(b.dataset.name).then(function(){
+   b.classList.add('copied');setTimeout(function(){b.classList.remove('copied')},900)},function(){});
+ });
+ var deb=null;
+ document.getElementById('qf').addEventListener('input',function(e){
+  var v=e.target.value;clearTimeout(deb);deb=setTimeout(function(){if(pintado)renderFull(v)},120);
+ });
+ document.getElementById('segf').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  modoF=b.dataset.m;
+  [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});
+  if(pintado)renderFull(document.getElementById('qf').value);
+ });
+ document.getElementById('seg').addEventListener('click',function(){if(pintado)renderFull(document.getElementById('qf').value)});
+ /* metadados oficiais: palavras-chave e categorias */
+ Promise.all([
+  fetch('https://unpkg.com/lucide-static@latest/tags.json').then(function(r){return r.ok?r.json():{}}).catch(function(){return {}}),
+  fetch('https://lucide.dev/api/categories').then(function(r){return r.ok?r.json():{}}).catch(function(){return {}})
+ ]).then(function(res){
+  TAGS=res[0]||{};CATOF=res[1]||{};
+  var nc=Object.keys(CATOF).length;
+  if(!nc)modoF='az',document.querySelector('#segf button[data-m="az"]').setAttribute('aria-pressed','true'),
+   document.querySelector('#segf button[data-m="cat"]').setAttribute('aria-pressed','false');
+  if(pintado)renderFull(document.getElementById('qf').value);
+ });
+ var io2=new IntersectionObserver(function(es){
+  es.forEach(function(en){if(en.isIntersecting&&!pintado){pintado=true;renderFull('')}});
+ },{rootMargin:'300px'});
+ io2.observe(document.getElementById('completo'));
+}
+var domBody=document.getElementById('domBody');
+var domRows=Object.keys(window.NsLegado||{}).map(function(key){
+ var g=NsLegado[key];
+ return {key:key,set:g.set,dom:g.name,lu:NsIcons.MAP[g.name]||null,stroke:g.stroke,view:g.view,uso:usoDe(g.name)};
+});
+function paintDom(){
+ var f=(document.getElementById('qd').value||'').trim().toLowerCase();
+ var mode=document.querySelector('#segd button[aria-pressed="true"]').dataset.f;
+ var rows=domRows.filter(function(r){
+  if(f&&(r.dom+' '+(r.lu||'')+' '+r.uso+' '+SETLBL[r.set]).toLowerCase().indexOf(f)<0)return false;
+  if(mode==='traco'&&r.stroke==='1.5')return false;
+  if(mode==='semuso'&&r.uso)return false;
+  return true;
+ });
+ domBody.innerHTML=rows.map(function(r){
+  var dif=r.stroke!=='1.5'||r.view!=='24';
+  return '<tr class="'+(dif?'dif':'')+'">'+
+   '<td class="old">'+legadoSvg(r.key,22)+'</td>'+
+   '<td><div class="m">'+r.dom+'</div><div class="spec">traço '+r.stroke+' · caixa '+r.view+' · '+SETLBL[r.set]+'</div></td>'+
+   '<td class="arrow">→</td>'+
+   '<td><div style="display:flex;align-items:center;gap:.5rem"><span style="display:grid;place-items:center">'+
+    (r.lu?NsIcons.svg(r.lu,20):'')+'</span><span><span class="m">'+(r.lu||'—')+
+    '</span><div class="spec" style="color:var(--state-ok-fg)">'+(r.lu?'traço 1.5 · caixa 24':'sem destino')+'</div></span></div></td>'+
+   '<td'+(r.uso?'':' class="nouse"')+'>'+(r.uso||'não encontrado no pacote')+'</td></tr>';
+ }).join('');
+ document.getElementById('countDom').textContent=rows.length+' de '+domRows.length;
+}
+document.getElementById('qd').addEventListener('input',paintDom);
+document.getElementById('segd').addEventListener('click',function(e){
+ var b=e.target.closest('button');if(!b)return;
+ [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});
+ paintDom();
+});
+document.getElementById('nDom').textContent=domRows.length;
+paintDom();
+var sizes=document.getElementById('sizes');
+NsIcons.SIZES.forEach(function(s){
+ var d=document.createElement('div');d.className='sz';
+ d.innerHTML='<span>'+NsIcons.svg('shield-check',s)+'</span><b>'+s+'px</b>';sizes.appendChild(d);
+});
+document.getElementById('nTotal').textContent=NsIcons.names.length;
+
+paintFixed();paintCats('');
+var links=[].slice.call(document.querySelectorAll('#nav a'));
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;
+ links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+en.target.id)})})},{rootMargin:'-10% 0px -80% 0px'});
+[].forEach.call(document.querySelectorAll('.sec'),function(s){io.observe(s)});
+</script>
+</body></html>

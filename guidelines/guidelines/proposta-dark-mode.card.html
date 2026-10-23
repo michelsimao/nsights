@@ -1,0 +1,167 @@
+<!-- @dsCard group="Propostas" viewport="1240x2400" name="Proposta · dark mode" subtitle="três peles candidatas a tema escuro total, ao vivo e com todo contraste medido" -->
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Risk Ops — Proposta de dark mode</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+body{margin:0;background:var(--surface);color:var(--text)}
+.doc{max-width:1160px;margin:0 auto;padding:44px 32px 80px;display:flex;flex-direction:column;gap:14px}
+h1{font-size:2rem;margin:0;letter-spacing:-.01em}
+.lede{color:var(--muted);font-size:.95rem;line-height:1.55;max-width:74ch;margin:6px 0 0}
+h2{font-size:1.3rem;margin:36px 0 0}
+h3{font-size:1rem;margin:0}
+p{color:var(--muted);font-size:.82rem;line-height:1.55;margin:0;max-width:84ch}
+.lbl{color:var(--muted);font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+code{font-family:var(--font-geist-mono),ui-monospace,monospace;font-size:.72rem}
+table{border-collapse:collapse;width:100%;font-size:.74rem}
+th{border-bottom:1px solid var(--border);color:var(--muted);font-size:.6rem;font-weight:700;letter-spacing:.06em;padding:0 10px 6px 0;text-align:left;text-transform:uppercase}
+td{border-bottom:1px solid var(--border);padding:7px 10px 7px 0;vertical-align:middle}
+td.m{font-family:var(--font-geist-mono),ui-monospace,monospace;font-size:.66rem;color:var(--muted)}
+.n{font-variant-numeric:tabular-nums;font-weight:650}
+.ok{color:var(--success)}
+.no{color:var(--danger)}
+.box{background:var(--surface-raised);border:1px solid var(--border);border-radius:.7rem;padding:20px;display:flex;flex-direction:column;gap:12px}
+.warnbox{background:#fff5e6;border-radius:.55rem;color:#7a570d;font-size:.78rem;line-height:1.5;padding:.7rem .85rem}
+/* ——— as peles: variáveis sobrescritas no wrapper; o patch abaixo cobre os literais claros ——— */
+.skin{border-radius:.9rem;padding:1.3rem;border:1px solid var(--border);background:var(--surface);color:var(--text);display:flex;flex-direction:column;gap:1rem;color-scheme:dark}
+.skin .result-panel{background:var(--surface-raised);min-height:0}
+.skin .overview-metric{background:var(--surface-raised)}
+.skin .overview-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+.skin .result-panel-heading>strong{background:var(--accent-soft)}
+.skin .button-primary{background:#7024c7;border-color:#7024c7;color:#fff}
+.skin .field-group input{background:var(--surface-subtle)}
+.skin-actions{align-items:end;display:grid;gap:1rem;grid-template-columns:minmax(0,1fr) auto}
+.skin-a{--surface:#19141e;--surface-subtle:#1f1924;--surface-raised:#241d2a;--border:#31283a;--border-strong:#3a3045;--text:#e8e0ef;--ink:#e8e0ef;--muted:#a9a1b0;--accent:#b28df0;--accent-strong:#c3a4f4;--accent-soft:#322447;--success:#4ade9b;--warning:#e8b45a;--danger:#f37c96}
+.skin-b{--surface:#14171d;--surface-subtle:#181c23;--surface-raised:#1d222b;--border:#262c36;--border-strong:#313945;--text:#dfe4ec;--ink:#dfe4ec;--muted:#98a1af;--accent:#b28df0;--accent-strong:#c3a4f4;--accent-soft:#2a2740;--success:#4ade9b;--warning:#e8b45a;--danger:#f37c96}
+.skin-c{--surface:#161618;--surface-subtle:#1a1a1d;--surface-raised:#202023;--border:#2b2b30;--border-strong:#37373d;--text:#e4e2e6;--ink:#e4e2e6;--muted:#a19fa6;--accent:#b28df0;--accent-strong:#c3a4f4;--accent-soft:#2c2836;--success:#4ade9b;--warning:#e8b45a;--danger:#f37c96}
+</style></head>
+<body>
+<div class="doc">
+
+<div class="lbl">Proposta · tema</div>
+<h1>Dark mode total — três peles candidatas</h1>
+<p class="lede">O Risk Ops hoje é claro por declaração (<code>color-scheme: light</code>, globals.css:5) e o seu único vocabulário escuro são as ilhas de <code>--dark #19141e</code> / <code>--dark-raised #241d2a</code> (ver o cartão «Superfícies escuras»). Esta proposta constrói o tema escuro total a partir <b>desse grafite que já existe</b> — não de um cinza inventado. Três peles, cada uma renderizada ao vivo com os componentes reais (<code>window.RiskOpsUI</code>) e com <b>todo par texto/fundo medido</b> com a régua WCAG do repositório.</p>
+
+<div class="warnbox"><b>O que a troca de variáveis NÃO cobre.</b> Sobrescrever os 17 tokens do <code>:root</code> não basta: <code>.result-panel</code> tem fundo literal <code>#fff</code>, <code>.overview-metric</code> usa <code>rgba(255,255,255,.93)</code>, a pílula do painel usa <code>#f4eefc</code>, e <code>.button-primary</code> traz o defeito conhecido <code>color:#04131a</code> sobre o acento (2,48:1 — FALHA, globals.css:136). Cada pele abaixo carrega um patch de 6 regras que cobre esses literais; um dark mode de produto exigiria promover esses literais a token primeiro. Os semânticos também quebram: <code>--success #197054</code> mede 3,01:1 e <code>--danger #9c2943</code> mede <b>2,42:1 (FALHA)</b> sobre o grafite — por isso as peles remapeiam sucesso/atenção/perigo para versões claras, todas medidas.</div>
+
+<h2>Pele A — Grafite da marca</h2>
+<p>O caminho de menor invenção: as superfícies são exatamente <code>--dark</code> e <code>--dark-raised</code>, as bordas são os literais que a sidebar já usa (<code>#31283a</code>/<code>#3a3045</code>), e os textos vêm da própria ilha escura (<code>#e8e0ef</code> do novo-análise, <code>#a9a1b0</code> do wizard-footer). O acento textual sobe meio degrau (<code>#b28df0</code>, derivado do <code>#a86deb</code> da sidebar, que mede só 4,71:1 sobre o raised).</p>
+<div class="skin skin-a" id="skin-a"><p style="color:var(--muted)">Carregando os componentes reais…</p></div>
+<div class="box">
+<table>
+  <thead><tr><th>Papel</th><th>Cor</th><th>sobre --surface #19141e</th><th>sobre --surface-raised #241d2a</th><th>sobre --accent-soft #322447</th></tr></thead>
+  <tbody>
+    <tr><td>texto</td><td class="m">#e8e0ef</td><td class="n ok">14,08:1</td><td class="n ok">12,72:1</td><td class="m">—</td></tr>
+    <tr><td>muted</td><td class="m">#a9a1b0</td><td class="n ok">7,25:1</td><td class="n ok">6,55:1</td><td class="m">—</td></tr>
+    <tr><td>accent (texto)</td><td class="m">#b28df0</td><td class="n ok">6,86:1</td><td class="n ok">6,20:1</td><td class="n ok">5,38:1</td></tr>
+    <tr><td>accent-strong (hover)</td><td class="m">#c3a4f4</td><td class="n ok">8,57:1</td><td class="n ok">7,74:1</td><td class="m">—</td></tr>
+    <tr><td>success</td><td class="m">#4ade9b</td><td class="n ok">10,53:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>warning</td><td class="m">#e8b45a</td><td class="n ok">9,57:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>danger</td><td class="m">#f37c96</td><td class="n ok">7,01:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>botão primário</td><td class="m">#ffffff sobre #7024c7</td><td class="n ok" colspan="3">7,59:1 — o preenchimento continua o roxo da marca; só o texto muda do defeito #04131a para branco</td></tr>
+  </tbody>
+</table>
+<p><b>Custo/risco:</b> é a pele mais fiel à marca, mas a sidebar deixa de ser ilha — chão e navegação viram o mesmo grafite, e a hierarquia que o produto claro ganha de graça teria de ser refeita (sidebar em <code>--surface-raised</code>, ou uma borda mais forte). O violeta do fundo pode «esquentar» telas com muito conteúdo neutro.</p>
+</div>
+
+<h2>Pele B — Ardósia fria</h2>
+<p>Superfícies deslocadas do violeta para o azul (derivadas por matiz, mesma luminância do grafite: <code>#14171d</code>/<code>#1d222b</code>). O acento lilás ganha mais vibração por contraste de temperatura. Textos acompanham o matiz frio.</p>
+<div class="skin skin-b" id="skin-b"><p style="color:var(--muted)">Carregando os componentes reais…</p></div>
+<div class="box">
+<table>
+  <thead><tr><th>Papel</th><th>Cor</th><th>sobre --surface #14171d</th><th>sobre --surface-raised #1d222b</th><th>sobre --accent-soft #2a2740</th></tr></thead>
+  <tbody>
+    <tr><td>texto</td><td class="m">#dfe4ec</td><td class="n ok">14,06:1</td><td class="n ok">12,50:1</td><td class="m">—</td></tr>
+    <tr><td>muted</td><td class="m">#98a1af</td><td class="n ok">6,88:1</td><td class="n ok">6,12:1</td><td class="m">—</td></tr>
+    <tr><td>accent (texto)</td><td class="m">#b28df0</td><td class="n ok">6,80:1</td><td class="n ok">6,05:1</td><td class="n ok">5,44:1</td></tr>
+    <tr><td>accent-strong (hover)</td><td class="m">#c3a4f4</td><td class="n ok">8,49:1</td><td class="n ok">7,55:1</td><td class="m">—</td></tr>
+    <tr><td>success</td><td class="m">#4ade9b</td><td class="n ok">10,44:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>warning</td><td class="m">#e8b45a</td><td class="n ok">9,49:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>danger</td><td class="m">#f37c96</td><td class="n ok">6,95:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>botão primário</td><td class="m">#ffffff sobre #7024c7</td><td class="n ok" colspan="3">7,59:1</td></tr>
+  </tbody>
+</table>
+<p><b>Custo/risco:</b> nenhuma dessas superfícies existe no produto — são 5 hex novos que não descendem de nada da marca além da luminância. A ardósia lê como «ferramenta técnica» genérica (a cara de todo devtool escuro) e abre uma segunda temperatura no sistema: a sidebar grafite-violeta teria de ser convertida também, ou o app conviveria com dois escuros.</p>
+</div>
+
+<h2>Pele C — Carvão quase acromático</h2>
+<p>A saturação do grafite quase zerada (<code>#161618</code>/<code>#202023</code>): o chão fica neutro e toda a cor da tela sobra para os dados — acento, status, gráficos. É a estratégia dos dark modes editoriais.</p>
+<div class="skin skin-c" id="skin-c"><p style="color:var(--muted)">Carregando os componentes reais…</p></div>
+<div class="box">
+<table>
+  <thead><tr><th>Papel</th><th>Cor</th><th>sobre --surface #161618</th><th>sobre --surface-raised #202023</th><th>sobre --accent-soft #2c2836</th></tr></thead>
+  <tbody>
+    <tr><td>texto</td><td class="m">#e4e2e6</td><td class="n ok">14,04:1</td><td class="n ok">12,63:1</td><td class="m">—</td></tr>
+    <tr><td>muted</td><td class="m">#a19fa6</td><td class="n ok">6,91:1</td><td class="n ok">6,21:1</td><td class="m">—</td></tr>
+    <tr><td>accent (texto)</td><td class="m">#b28df0</td><td class="n ok">6,85:1</td><td class="n ok">6,16:1</td><td class="n ok">5,44:1</td></tr>
+    <tr><td>accent-strong (hover)</td><td class="m">#c3a4f4</td><td class="n ok">8,55:1</td><td class="n ok">7,69:1</td><td class="m">—</td></tr>
+    <tr><td>success</td><td class="m">#4ade9b</td><td class="n ok">10,51:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>warning</td><td class="m">#e8b45a</td><td class="n ok">9,56:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>danger</td><td class="m">#f37c96</td><td class="n ok">7,00:1</td><td class="m">—</td><td class="m">—</td></tr>
+    <tr><td>botão primário</td><td class="m">#ffffff sobre #7024c7</td><td class="n ok" colspan="3">7,59:1</td></tr>
+  </tbody>
+</table>
+<p><b>Custo/risco:</b> perde a assinatura violeta que hoje distingue o chassi do Risk Ops — no escuro, o produto viraria «mais um app carvão» e a marca ficaria confinada ao acento. Como na B, são superfícies novas sem parentesco com nada que o produto pinte hoje.</p>
+</div>
+
+<h2>Decisões comuns às três peles (e o que ficou de fora)</h2>
+<div class="box">
+  <p><b>Acento dividido em dois papéis.</b> No claro, <code>--accent #7024c7</code> serve de texto e de preenchimento. No escuro isso quebra: o roxo profundo some como texto (o <code>#a86deb</code> da sidebar mede 4,71:1 sobre o raised — passa raspando). As peles usam <code>#b28df0</code> para texto/ícone e mantêm <code>#7024c7</code> só como preenchimento de botão, com texto branco (7,59:1) — o que de quebra corrige o defeito conhecido do <code>.button-primary</code> (<code>#04131a</code> sobre <code>#7024c7</code> = 2,48:1 FALHA).</p>
+  <p><b>Status badges ficam como estão.</b> <code>.status-regular</code>/<code>.status-attention</code>/<code>.status-critical</code> carregam fundo claro próprio (<code>#e7f6ef</code>, <code>#fff3dc</code>, <code>#fde9ee</code>) e sobrevivem em qualquer pele — mas brilham mais no escuro. Numa segunda fase valeria criar as variantes soturnas; esta proposta não as inventa sem medi-las em uso.</p>
+  <p><b>Superfície «subtle» é derivada.</b> <code>--surface-subtle</code> de cada pele (<code>#1f1924</code>, <code>#181c23</code>, <code>#1a1a1d</code>) é interpolação declarada entre surface e raised — só recebe fundo de input, nunca texto direto, por isso não tem linha própria na tabela.</p>
+</div>
+
+<h2>Recomendação</h2>
+<p><b>Pele A — Grafite da marca.</b> É a única em que o tema escuro é continuação do produto e não um produto novo: as superfícies são os dois tokens que já existem (<code>--dark</code>, <code>--dark-raised</code>), as bordas e os textos são os literais que a sidebar já provou em produção, e a migração vira um trabalho de promoção de literais a token — que precisa acontecer de qualquer forma. As peles B e C compram hexes órfãos e um segundo vocabulário de temperatura. Pré-requisitos da A: (1) promover os literais claros (<code>#fff</code> do panel, <code>rgba(255,255,255,.93)</code> do metric, <code>#f4eefc</code> da pílula) a tokens de superfície; (2) dar à sidebar um degrau próprio para não fundir com o chão; (3) corrigir o texto do <code>.button-primary</code> — que já está errado no claro.</p>
+
+<div class="warnbox"><b>Registro.</b> Isto é <b>proposta</b> — o produto hoje declara <code>color-scheme: light</code> (globals.css:5) e não tem nenhum mecanismo de tema. Nenhum valor deste cartão existe em produção além dos herdados do grafite; os hex novos estão todos marcados como derivação e medidos um a um com <code>tools/contrast.mjs</code>.</div>
+
+</div>
+<script src="../../_vendor/react.js"></script>
+<script src="../../_vendor/react-dom.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script>
+(function () {
+  var UI = window.RiskOpsUI;
+  if (!UI || !window.React || !window.ReactDOM) return;
+  var h = React.createElement;
+
+  function cluster(idPrefix) {
+    var K = UI.KpiCard, P = UI.Panel, S = UI.StatusBadge, B = UI.Button, F = UI.Field, G = UI.MetricGrid;
+    var rows = [
+      ['0001234-56.2024', '3ª Vara Cível — SP', h(S, { label: 'Regular', status: 'regular' }), 'R$ 180.000'],
+      ['0009876-01.2023', 'TRT 2ª Região', h(S, { label: 'Atenção', status: 'attention' }), 'R$ 1.240.000'],
+      ['0004521-33.2022', 'Justiça Federal — PR', h(S, { label: 'Crítico', status: 'critical' }), 'R$ 3.980.000'],
+      ['—', 'Tribunais estaduais N/NE', h(S, { label: 'Fonte indisponível', status: 'gap' }), '—']
+    ];
+    return h('div', null,
+      h(G, null,
+        h(K, { label: 'Análises no mês', value: '128', delta: '+18%', hint: 'vs. julho', tone: 'accent', spark: [72, 80, 76, 91, 88, 104, 128] }),
+        h(K, { label: 'Lacunas abertas', value: '7', delta: '-3', invert: true, hint: 'fontes não verificadas' }),
+        h(K, { label: 'Casos críticos', value: '2', delta: '0', tone: 'danger', hint: 'aguardando decisão' })
+      ),
+      h('div', { style: { marginTop: '1rem' } }, h(P, { title: 'Processos judiciais', description: 'Distribuições localizadas nos últimos 12 meses.', tag: '42 processos' },
+        h('table', { className: 'result-table', style: { minWidth: 0 } },
+          h('thead', null, h('tr', null, ['Processo', 'Órgão', 'Status', 'Valor da causa'].map(function (c, i) { return h('th', { key: i }, c); }))),
+          h('tbody', null, rows.map(function (r, i) {
+            return h('tr', { key: i }, r.map(function (c, j) { return h('td', { key: j }, c); }));
+          }))
+        )
+      )),
+      h('div', { className: 'skin-actions', style: { marginTop: '1rem' } },
+        h(F, { label: 'CNPJ da entidade', hint: 'Somente números; a máscara é aplicada ao digitar.', htmlFor: idPrefix + '-cnpj' },
+          h('input', { id: idPrefix + '-cnpj', placeholder: '12.345.678/0001-90' })),
+        h('div', { style: { display: 'flex', gap: '.6rem' } },
+          h(B, { variant: 'primary' }, 'Iniciar análise'),
+          h(B, { variant: 'secondary' }, 'Exportar'))
+      )
+    );
+  }
+
+  ['skin-a', 'skin-b', 'skin-c'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = '';
+    ReactDOM.createRoot(el).render(cluster(id));
+  });
+})();
+</script>
+</body></html>

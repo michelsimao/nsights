@@ -1,0 +1,127 @@
+/* Nsights report prose — .document-prose (DocumentBlock) and .relatorio-prose (RelatorioBlock). */
+
+/* =========== Shared =========== */
+.document-prose, .relatorio-prose {
+  color: var(--ns-report-text);
+  font-family: var(--ns-font-serif);
+}
+.document-prose a, .relatorio-prose a {
+  color: var(--ns-report-link);
+  text-decoration: underline;
+  text-decoration-color: var(--ns-report-link-decoration);
+  text-underline-offset: 3px;
+}
+.document-prose sup.cite, .relatorio-prose sup.cite {
+  font-family: var(--ns-font-sans); font-size: 0.66em; font-weight: 500;
+  color: var(--ns-text-muted); line-height: 0;
+}
+.document-prose img, .document-prose svg, .relatorio-prose img, .relatorio-prose svg {
+  display: block; margin-left: auto; margin-right: auto; max-width: 100%;
+}
+.document-prose figcaption, .relatorio-prose figcaption {
+  font-size: 11.5px; font-style: italic; color: var(--ns-text-muted); text-align: center; margin-top: 8px;
+}
+.document-prose hr, .relatorio-prose hr {
+  border: none; border-top: 1px solid var(--ns-report-divider); margin: 32px 0;
+}
+
+/* =========== DocumentBlock (.document-prose) =========== */
+.document-prose { max-width: 760px; font-size: 16.5px; line-height: 1.8; }
+.document-prose p { margin: 0 0 1.15em; }
+.document-prose h1 {
+  font-family: var(--ns-font-display); font-size: 28px; line-height: 1.2; font-weight: 400;
+  color: var(--ns-report-heading); border-bottom: 1px solid var(--ns-report-divider);
+  padding-bottom: 12px; margin: 40px 0 16px;
+}
+.document-prose h2 { font-family: var(--ns-font-display); font-size: 22px; line-height: 1.25; font-weight: 400; color: var(--ns-report-heading); margin: 36px 0 12px; }
+.document-prose h3 { font-family: var(--ns-font-display); font-size: 17px; line-height: 1.3; font-weight: 500; color: var(--ns-report-heading); margin: 28px 0 10px; }
+.document-prose h4 {
+  font-family: var(--ns-font-display); font-size: 13.5px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--ns-text-muted); margin: 24px 0 8px;
+}
+.document-prose li { font-size: 16.5px; line-height: 1.8; }
+.document-prose ul, .document-prose ol { padding-left: 1.5em; margin: 0 0 1.15em; }
+.document-prose strong { font-weight: 700; color: var(--ns-report-heading); }
+.document-prose blockquote {
+  font-size: 16.5px; line-height: 1.8; font-style: italic;
+  border-left: 3px solid var(--ns-accent-primary); background: var(--ns-accent-tint);
+  margin: 1.15em 0; padding: 12px 20px; border-radius: 0 8px 8px 0;
+}
+.document-prose table { font-family: var(--ns-font-sans); font-size: 13.5px; border-collapse: collapse; width: 100%; margin: 1.15em 0; }
+.document-prose th {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+  color: var(--ns-text-muted); text-align: left; padding: 8px 12px;
+  border-bottom: 1px solid var(--ns-border-emphasis);
+}
+.document-prose td { padding: 8px 12px; border-bottom: 1px solid var(--ns-border-subtle); }
+.document-prose .dropcap, .document-prose p.has-dropcap::first-letter {
+  font-family: var(--ns-font-display); font-size: 48px; line-height: 0.85; font-weight: 600;
+  color: var(--ns-accent-primary); float: left; padding: 6px 8px 0 0;
+}
+.document-prose figure.chart, .document-prose .svg-block {
+  border-radius: 10px; padding: 14px; background: var(--ns-bg-card); border: 1px solid var(--ns-border-subtle);
+}
+
+/* =========== RelatorioBlock (.relatorio-prose) =========== */
+.relatorio-prose { max-width: 780px; font-size: 16px; line-height: 1.85; }
+.relatorio-prose p { margin: 0 0 1.25em; text-align: left; }
+.relatorio-prose h1 {
+  font-family: var(--ns-font-display); font-size: 30px; line-height: 1.2; font-weight: 400;
+  color: var(--ns-report-heading); border-bottom: 1px solid var(--ns-report-divider);
+  padding-bottom: 12px; margin: 48px 0 18px;
+}
+.relatorio-prose h2 { font-family: var(--ns-font-display); font-size: 23px; line-height: 1.28; font-weight: 400; color: var(--ns-report-heading); margin: 40px 0 14px; }
+.relatorio-prose h3 { font-family: var(--ns-font-display); font-size: 18px; line-height: 1.35; font-weight: 500; color: var(--ns-text-secondary); margin: 32px 0 10px; }
+.relatorio-prose h4 {
+  font-family: var(--ns-font-display); font-size: 15px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--ns-text-muted); margin: 24px 0 8px;
+}
+.relatorio-prose li { font-size: 16px; line-height: 1.75; }
+.relatorio-prose ul, .relatorio-prose ol { padding-left: 1.5em; margin: 0 0 1.25em; }
+.relatorio-prose strong { font-weight: 700; color: var(--ns-report-heading); }
+.relatorio-prose blockquote {
+  font-size: 17px; line-height: 1.7; font-style: italic;
+  border-left: 3px solid var(--ns-accent-primary); background: var(--ns-bg-ghost);
+  margin: 1.25em 0; padding: 14px 22px; border-radius: 0 8px 8px 0;
+}
+.relatorio-prose table { font-family: var(--ns-font-sans); font-size: 13.5px; border-collapse: collapse; width: 100%; margin: 1.25em 0; }
+.relatorio-prose th {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+  color: var(--ns-text-muted); text-align: left; padding: 8px 12px;
+  background: var(--ns-bg-elevated); border-bottom: 1px solid var(--ns-border-emphasis);
+}
+.relatorio-prose td { padding: 8px 12px; border-bottom: 1px solid var(--ns-border-subtle); }
+.relatorio-prose .dropcap, .relatorio-prose p.has-dropcap::first-letter {
+  font-family: var(--ns-font-display); font-size: 58px; line-height: 0.78; font-weight: 500;
+  color: var(--ns-accent-primary); float: left; padding: 8px 10px 0 0;
+}
+.relatorio-prose figure.chart, .relatorio-prose .svg-block {
+  border-radius: 10px; padding: 16px; background: var(--ns-bg-card); border: 1px solid var(--ns-border-subtle);
+}
+
+/* =========== Report cover (capa) — shared =========== */
+.ns-cover-kicker {
+  font-family: var(--ns-font-sans); font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--ns-accent-primary);
+}
+.ns-cover-title {
+  font-family: var(--ns-font-display); font-size: clamp(28px, 4vw, 38px);
+  font-weight: 400; line-height: 1.13; letter-spacing: -0.018em; color: var(--ns-text-heading);
+}
+.ns-cover-lead {
+  font-family: var(--ns-font-display); font-size: 17px; font-weight: 300;
+  font-style: italic; color: var(--ns-text-secondary); line-height: 1.5;
+}
+.ns-cover-meta dt {
+  font-family: var(--ns-font-sans); font-size: 9.5px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--ns-text-muted); margin: 0;
+}
+.ns-cover-meta dd { font-family: var(--ns-font-sans); font-size: 12px; font-weight: 500; color: var(--ns-text-heading); margin: 2px 0 0; }
+
+/* =========== TOC =========== */
+.ns-toc { font-family: var(--ns-font-sans); font-size: 13.5px; width: 240px; }
+.ns-toc-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ns-text-muted); }
+.ns-toc a { display: block; text-decoration: none; padding: 4px 0; color: var(--ns-text-secondary); }
+.ns-toc a.lvl-1 { color: var(--ns-text-heading); font-weight: 500; }
+.ns-toc a.lvl-3 { color: var(--ns-text-muted); margin-left: 16px; padding-left: 10px; border-left: 1px solid var(--ns-border); }
+.ns-toc a.active { color: var(--ns-accent-primary); font-weight: 600; }

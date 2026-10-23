@@ -1,0 +1,295 @@
+<!-- @dsCard group="Fundação" viewport="960x2750" name="Tipografia" subtitle="Geist variável 100–900; 73 tamanhos literais, line-heights por papel, tracking e medida de prosa — tudo medido no CSS" -->
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: var(--surface); color: var(--text); font-family: var(--font-geist), "Avenir Next", "Segoe UI", sans-serif; margin: 0; padding: 1.6rem 1.8rem 2.2rem; }
+  .g-section { background: var(--surface-raised); border: 1px solid var(--border); border-radius: .75rem; margin-top: 1rem; padding: 1.1rem 1.25rem; }
+  .g-section h2 { font-size: .82rem; font-weight: 650; letter-spacing: -.01em; margin: 0 0 .2rem; }
+  .g-section > p { color: var(--muted); font-size: .72rem; line-height: 1.55; margin: .2rem 0 .8rem; }
+  .g-src { color: var(--muted); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .58rem; }
+  .g-spec { border-top: 1px solid var(--border); display: grid; gap: .15rem 1rem; grid-template-columns: 11rem minmax(0,1fr); padding: .55rem 0; align-items: baseline; }
+  .g-spec:first-of-type { border-top: 0; }
+  .g-spec .g-meta { color: var(--muted); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .6rem; font-variant-numeric: tabular-nums; line-height: 1.5; }
+  .g-spec .g-meta b { color: var(--text); display: block; font-weight: 700; }
+  .g-finding { background: var(--accent-soft); border-radius: .5rem; color: var(--accent-strong); font-size: .7rem; line-height: 1.55; margin-top: .8rem; padding: .6rem .75rem; }
+  .g-finding strong { text-transform: uppercase; font-size: .6rem; letter-spacing: .08em; }
+  .g-weights { display: flex; flex-wrap: wrap; gap: .9rem 1.4rem; }
+  .g-weights > div { display: grid; gap: .1rem; }
+  .g-weights span { font-size: 1.35rem; line-height: 1.1; }
+  .g-weights small { color: var(--muted); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .56rem; font-variant-numeric: tabular-nums; }
+  .g-nums { display: grid; gap: .3rem .9rem; grid-template-columns: auto auto 1fr; align-items: baseline; }
+  .g-nums code { font-size: .68rem; }
+  table.g-census { border-collapse: collapse; font-size: .66rem; width: 100%; }
+  table.g-census th { color: var(--muted); font-size: .58rem; font-weight: 800; letter-spacing: .06em; padding: .3rem .5rem; text-align: left; text-transform: uppercase; }
+  table.g-census td { border-top: 1px solid var(--border); padding: .38rem .5rem; vertical-align: top; }
+  table.g-census td:first-child { font-family: var(--font-geist-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+</style></head><body>
+
+<p class="eyebrow">Fundação · Tipografia</p>
+<h1 style="font-size:2rem;letter-spacing:-.04em;margin:.25rem 0 .3rem">Geist e Geist Mono</h1>
+<p style="color:var(--muted);font-size:.78rem;line-height:1.55;margin:0;max-width:46rem">
+  Uma família para tudo, em eixo variável 100–900. O produto não tem escala tipográfica tokenizada:
+  são <b>845 declarações de font-size com 73 valores distintos</b> e <b>412 declarações de font-weight
+  com 23 valores distintos</b>, todos literais no CSS. Este cartão documenta o que existe — agrupado
+  por faixa de papel — sem inventar degraus.</p>
+
+<section class="g-section">
+  <h2>Como a fonte chega</h2>
+  <p>Mesmas famílias por dois caminhos, conforme o ambiente.</p>
+  <div style="display:grid;gap:.8rem;grid-template-columns:1fr 1fr">
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.75rem .85rem">
+      <b style="font-size:.72rem">No app (Next)</b>
+      <p style="color:var(--muted);font-size:.68rem;line-height:1.5;margin:.3rem 0">
+        <code>next/font/google</code> baixa Geist e Geist_Mono no build e injeta as variáveis
+        <code>--font-geist</code> e <code>--font-geist-mono</code>.</p>
+      <span class="g-src">app/layout.tsx:2,6–7</span>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.75rem .85rem">
+      <b style="font-size:.72rem">No design system (fora do Next)</b>
+      <p style="color:var(--muted);font-size:.68rem;line-height:1.5;margin:.3rem 0">
+        <code>@import</code> do Google Fonts, <code>Geist:wght@100..900</code> +
+        <code>Geist+Mono:wght@100..900</code>; <code>tokens.css</code> define
+        <code>--font-geist:"Geist"</code>.</p>
+      <span class="g-src">ds-bundle/_ds_bundle.css:12 · tokens/tokens.css</span>
+    </div>
+  </div>
+  <p style="margin-top:.8rem;margin-bottom:0">Pilha do body:
+    <code style="font-size:.68rem">var(--font-geist), "Avenir Next", "Segoe UI", sans-serif</code>
+    <span class="g-src"> — globals.css:36</span></p>
+</section>
+
+<section class="g-section">
+  <h2>Micro — .5 a .63rem</h2>
+  <p>Eyebrows, captions, selos e cabeçalhos de tabela. Sempre com peso alto (650–900) e quase sempre
+     uppercase + letter-spacing: o tamanho encolhe, o peso e o tracking seguram a leitura.
+     Piso real do sistema: .5rem (2 ocorrências).</p>
+  <div class="g-spec"><div class="g-meta"><b>.55rem · 700 · .06em</b>12× · rótulo de célula mobile<br>globals.css:1111 (advisory-recent td::before)</div>
+    <span style="font-size:.55rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Entidade analisada</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.56rem · mono · .12em</b>15× · carimbo do painel de auth<br>globals.css:388 (auth-access-panel::before)</div>
+    <span style="font-family:var(--font-geist-mono),monospace;font-size:.56rem;letter-spacing:.12em;color:var(--muted)">NSIGHTS / RISK OPERATIONS</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.58rem · 700–900 · .06–.09em</b>35× · caption de navegação, selo de status<br>globals.css:104, 487, 488</div>
+    <span><span class="navigation-caption" style="color:var(--muted);margin:0;display:inline-block">Operações</span>&nbsp;&nbsp;
+    <span class="status-badge status-regular"><span></span>Regular</span>&nbsp;
+    <span class="status-badge status-critical"><span></span>Crítico</span></span></div>
+  <div class="g-spec"><div class="g-meta"><b>.6rem · 800</b>40× · pílula de situação cadastral<br>globals.css:223 (status-pill)</div>
+    <span class="status-pill" style="background:var(--accent-soft);color:var(--accent-strong)">Ativa</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.61rem · 650 · .055em</b>15× · contexto do topbar<br>globals.css:69 (topbar-context span)</div>
+    <span style="font-size:.61rem;font-weight:650;letter-spacing:.055em;text-transform:uppercase;color:var(--muted)">Workspace de risco</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.62rem · 800–900</b>78× · o micro mais usado: th, métricas, filtros<br>globals.css:480, 484, 519</div>
+    <span style="font-size:.62rem;font-weight:800;text-transform:uppercase;color:var(--muted)">Exposição total</span></div>
+</section>
+
+<section class="g-section">
+  <h2>Corpo — .64 a .8rem</h2>
+  <p>A faixa onde o produto vive. A moda do sistema é <b>.68rem</b> (87 ocorrências) — o corpo padrão
+     de célula, hint e meta — seguida de .62, .72 e .7. O corpo "confortável" de descrição é .78–.8rem.</p>
+  <div class="g-spec"><div class="g-meta"><b>.64rem</b>41× · documento da entidade, small de card<br>globals.css:305 (entity-check-document)</div>
+    <span style="font-size:.64rem;color:var(--muted);font-variant-numeric:tabular-nums">12.345.678/0001-90 · sócia desde 2019</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.66rem</b>53× · tooltip, em de check-card<br>globals.css:100, 487</div>
+    <span style="font-size:.66rem;color:var(--muted)">Certidões federais consultadas na Receita e PGFN.</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.68rem · a moda</b>87× · hints, contadores, meta<br>globals.css:192, 694, 731</div>
+    <span style="font-size:.68rem;color:var(--muted)">Anexos aceitos: PDF até 10 MB. 3 de 14 fontes selecionadas.</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.7rem</b>60× · corpo denso de lista e input de filtro<br>globals.css:151, 1131</div>
+    <span style="font-size:.7rem">Movimentação processual mais recente registrada em 14/08/2026.</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.72rem</b>76× · corpo de célula, botão segmented<br>globals.css:73, 175, 463</div>
+    <span style="font-size:.72rem">Análise concluída com 2 apontamentos de atenção.</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.75rem · eyebrow</b>21× · eyebrow (700, .08em), label de métrica<br>globals.css:118, 124</div>
+    <span class="eyebrow">Análise de risco</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.78rem</b>36× · parágrafo de sumário, lead de página<br>globals.css:498 (process-summary p), 1124</div>
+    <span style="font-size:.78rem;line-height:1.55">O contexto operacional descreve a natureza da operação e orienta as fontes consultadas.</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.8rem</b>13× · corpo de wizard, skip-link<br>globals.css:60, 171</div>
+    <span style="font-size:.8rem">Selecione o escopo de análise antes de continuar.</span></div>
+</section>
+
+<section class="g-section">
+  <h2>Títulos — .82 a 1.35rem</h2>
+  <p>Títulos de painel e seção. Pesos moderados (620–700) com letter-spacing levemente negativo.</p>
+  <div class="g-spec"><div class="g-meta"><b>.82rem · 650 · −.01em</b>17× · heading de painel de dados<br>globals.css:1137</div>
+    <span style="font-size:.82rem;font-weight:650;letter-spacing:-.01em">Processos judiciais</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.85rem · 680</b>7× · contexto forte do topbar<br>globals.css:70</div>
+    <span style="font-size:.85rem;font-weight:680">Aurora Participações S.A.</span></div>
+  <div class="g-spec"><div class="g-meta"><b>.92rem · 600 · −.01em</b>2× · título de scope-card<br>globals.css:258</div>
+    <span style="font-size:.92rem;font-weight:600;letter-spacing:-.01em">Análise completa</span></div>
+  <div class="g-spec"><div class="g-meta"><b>1rem · 600</b>15× · h3 de wizard-card<br>globals.css:182</div>
+    <span style="font-size:1rem;font-weight:600">Dados da operação</span></div>
+  <div class="g-spec"><div class="g-meta"><b>1.15rem · 600</b>4× · h2 de result-panel<br>globals.css:485</div>
+    <span style="font-size:1.15rem;font-weight:600">Resumo executivo</span></div>
+  <div class="g-spec"><div class="g-meta"><b>1.35rem · 600</b>4× · h2 de section-heading<br>globals.css:170</div>
+    <span style="font-size:1.35rem;font-weight:600">Escopo da análise</span></div>
+</section>
+
+<section class="g-section">
+  <h2>Display — 2rem fixo e clamp()</h2>
+  <p>Títulos de página são 2rem fixo; heros e KPIs usam clamp() (12 ocorrências no arquivo).
+     Displays numéricos trocam para Geist Mono com peso leve 520 e tracking bem negativo.</p>
+  <div class="g-spec"><div class="g-meta"><b>2rem · −.04em</b>6× · h1 de página e wizard, strong de métrica<br>globals.css:116, 125, 155</div>
+    <span style="font-size:2rem;letter-spacing:-.04em;line-height:1.1">Operações</span></div>
+  <div class="g-spec"><div class="g-meta"><b>clamp(1.8rem, 2.5vw, 2.35rem) · 620 · −.045em</b>h1 do workspace operacional<br>globals.css:1123</div>
+    <span style="font-size:clamp(1.8rem,2.5vw,2.35rem);font-weight:620;letter-spacing:-.045em;line-height:1.05">Análises de risco</span></div>
+  <div class="g-spec"><div class="g-meta"><b>clamp(2rem, 3vw, 2.8rem) · mono · 520 · −.07em</b>KPI do overview, tabular<br>globals.css:999</div>
+    <span style="font-family:var(--font-geist-mono),monospace;font-size:clamp(2rem,3vw,2.8rem);font-variant-numeric:tabular-nums;font-weight:520;letter-spacing:-.07em;line-height:1">R$ 4,2M</span></div>
+  <div class="g-spec"><div class="g-meta"><b>3rem · mono · 520 · −.08em</b>1× · hero de créditos<br>globals.css:1021</div>
+    <span style="color:var(--accent-strong);font-family:var(--font-geist-mono),monospace;font-size:3rem;font-variant-numeric:tabular-nums;font-weight:520;letter-spacing:-.08em;line-height:1">1.284</span></div>
+  <div class="g-spec"><div class="g-meta"><b>clamp(2.25rem, 4vw, 4.25rem) · 590 · −.06em</b>h2 do painel de marca (auth)<br>globals.css:378</div>
+    <span style="font-size:clamp(2.25rem,4vw,3.4rem);font-weight:590;letter-spacing:-.06em;line-height:1.04">Risco sob controle</span></div>
+</section>
+
+<section class="g-section">
+  <h2>Pesos — os 23 em uso</h2>
+  <p>A casa usa o eixo variável fino da Geist: além dos degraus canônicos, aparecem 450, 520, 560,
+     590, 620, 650, 680, 720, 750, 780… A palavra em cada peso, com a contagem real de declarações.
+     Os pilares: <b>800</b> (100×, micro-bold uppercase), <b>700</b> (93×, negrito padrão),
+     <b>650</b> (68×, labels), <b>750</b> (37×) e <b>680</b> (23×). O <b>520</b> é o peso dos
+     displays numéricos em mono; <b>900</b> (9×) fica para selos e monogramas.</p>
+  <div class="g-weights">
+    <div><span style="font-weight:450">Risco</span><small>450 ·1×</small></div>
+    <div><span style="font-weight:500">Risco</span><small>500 ·6×</small></div>
+    <div><span style="font-weight:520">Risco</span><small>520 ·6×</small></div>
+    <div><span style="font-weight:540">Risco</span><small>540 ·1×</small></div>
+    <div><span style="font-weight:550">Risco</span><small>550 ·8×</small></div>
+    <div><span style="font-weight:560">Risco</span><small>560 ·1×</small></div>
+    <div><span style="font-weight:590">Risco</span><small>590 ·2×</small></div>
+    <div><span style="font-weight:600">Risco</span><small>600 ·15×</small></div>
+    <div><span style="font-weight:620">Risco</span><small>620 ·12×</small></div>
+    <div><span style="font-weight:630">Risco</span><small>630 ·2×</small></div>
+    <div><span style="font-weight:650">Risco</span><small>650 ·68×</small></div>
+    <div><span style="font-weight:660">Risco</span><small>660 ·1×</small></div>
+    <div><span style="font-weight:680">Risco</span><small>680 ·23×</small></div>
+    <div><span style="font-weight:700">Risco</span><small>700 ·93×</small></div>
+    <div><span style="font-weight:720">Risco</span><small>720 ·15×</small></div>
+    <div><span style="font-weight:730">Risco</span><small>730 ·2×</small></div>
+    <div><span style="font-weight:740">Risco</span><small>740 ·1×</small></div>
+    <div><span style="font-weight:750">Risco</span><small>750 ·37×</small></div>
+    <div><span style="font-weight:760">Risco</span><small>760 ·1×</small></div>
+    <div><span style="font-weight:780">Risco</span><small>780 ·6×</small></div>
+    <div><span style="font-weight:800">Risco</span><small>800 ·100×</small></div>
+    <div><span style="font-weight:850">Risco</span><small>850 ·2×</small></div>
+    <div><span style="font-weight:900">Risco</span><small>900 ·9×</small></div>
+  </div>
+  <div class="g-finding"><strong>Achado</strong> — não há escala de peso tokenizada nem fallback para
+    ambientes sem fonte variável: em fonte estática, 450/520/560/590/620/630/650/660/680/720/730/740/750/760/780/850
+    arredondam para o peso vizinho e a hierarquia fina se perde. Vale definir os degraus oficiais e
+    mapear os intermediários.</div>
+</section>
+
+<section class="g-section">
+  <h2>Mono e tabular-nums</h2>
+  <p>Todo número que se compara em coluna vira tabular; valores financeiros e KPIs trocam para
+     Geist Mono. A classe utilitária é <code>.mono</code>.</p>
+  <div class="g-nums">
+    <code>.mono</code>
+    <span class="mono" style="font-size:.78rem">R$ 1.240.500,00</span>
+    <span class="g-src">globals.css:654 — font-family: var(--font-geist-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums</span>
+    <code>input de valor</code>
+    <span style="font-family:var(--font-geist-mono),monospace;font-size:1rem;font-variant-numeric:tabular-nums;font-weight:700">2.847.310,55</span>
+    <span class="g-src">globals.css:188 (operation-value-field input) — mono, 1rem, 700, tabular</span>
+    <code>métrica</code>
+    <span style="font-size:2rem;font-variant-numeric:tabular-nums;line-height:1">1.087</span>
+    <span class="g-src">globals.css:125 (metric-card strong) — 2rem tabular, ainda na Geist</span>
+  </div>
+  <p style="margin-bottom:0;margin-top:.8rem">Alinhamento tabular em prática — mesmos dígitos, colunas estáveis:</p>
+  <div class="mono" style="font-size:.72rem;line-height:1.7;margin-top:.3rem">
+    1.111.111,11<br>8.008.808,80<br>0.940.137,29</div>
+  <div class="g-finding"><strong>Achado</strong> — além dos rem, sobrevivem 8 declarações em px:
+    10px no texto SVG dos gráficos (globals.css:1507,1510), 15px e 12px na área de consulta/chat
+    (globals.css:1664, 2124, 2142–2202). São ilhas fora da convenção rem do resto do arquivo.</div>
+</section>
+
+<section class="g-section">
+  <h2>Texto corrido e espaçamento — line-height por papel</h2>
+  <p>Como o resto da tipografia, o entrelinha não é tokenizado: são 21 valores literais. Mas eles se
+     agrupam limpo por papel — quanto menor e mais corrido o texto, mais entrelinha ele ganha.
+     A moda do arquivo é <b>1.5</b> (32×), seguida de 1 sólido (22×) e 1.45 (21×).</p>
+  <div class="g-spec"><div class="g-meta"><b>1 · sólido (22×) e .96–1.1</b>display, KPI, badge — uma linha só<br>globals.css:981 (.96), 999, 655</div>
+    <span style="font-size:1.15rem;font-weight:660;letter-spacing:-.045em;line-height:1">Risco sob controle</span></div>
+  <div class="g-spec"><div class="g-meta"><b>1.15–1.3 · títulos (23×)</b>headings que podem quebrar em 2 linhas<br>globals.css:1094 (1.2), 611 (1.25), 288 (1.3)</div>
+    <span style="font-size:.91rem;font-weight:680;letter-spacing:-.025em;line-height:1.2;display:inline-block;max-width:14rem">Concentração de risco por contraparte</span></div>
+  <div class="g-spec"><div class="g-meta"><b>1.35–1.45 · meta densa (49×)</b>small, caption, hint — curto e apertado<br>globals.css:487 (1.35), 192 (1.4), 259 (1.45)</div>
+    <span style="font-size:.66rem;color:var(--muted);line-height:1.45;display:inline-block;max-width:20rem">Certidões federais consultadas na Receita e PGFN. Anexos aceitos: PDF até 10 MB.</span></div>
+  <div class="g-spec"><div class="g-meta"><b>1.5–1.65 · prosa (56×)</b>parágrafo de verdade; a moda 1.5 vive aqui<br>globals.css:202 (1.5), 1124 (1.55), 117 (1.6), 575 (1.65)</div>
+    <span style="font-size:.78rem;color:var(--muted);line-height:1.55;display:inline-block;max-width:26rem">O contexto operacional descreve a natureza da operação e orienta quais fontes serão consultadas na análise.</span></div>
+  <div class="g-spec"><div class="g-meta"><b>1.62–1.72 · leitura longa (5×)</b>relatório de mídia, o texto mais corrido do app<br>globals.css:1636 (1.62), 2853, 2857 (1.72)</div>
+    <span style="font-size:.88rem;line-height:1.72;display:inline-block;max-width:26rem">A cobertura de imprensa do período não registra apontamento reputacional relevante.</span></div>
+  <p style="margin:1rem 0 .3rem"><b>O mesmo parágrafo em três entrelinhas</b> — 1.35 (meta), 1.5 (a moda) e 1.65 (sumário executivo):</p>
+  <div style="display:grid;gap:.8rem;grid-template-columns:repeat(3,minmax(0,1fr))">
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.7rem .8rem"><span class="g-src">line-height: 1.35 · check-card em (globals.css:487)</span>
+      <p style="font-size:.74rem;line-height:1.35;margin:.4rem 0 0;color:var(--text)">A análise consultou 14 fontes públicas e privadas, cruzou o quadro societário com listas restritivas e não encontrou apontamento impeditivo para a operação.</p></div>
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.7rem .8rem"><span class="g-src">line-height: 1.5 · a moda, 32× (globals.css:202)</span>
+      <p style="font-size:.74rem;line-height:1.5;margin:.4rem 0 0;color:var(--text)">A análise consultou 14 fontes públicas e privadas, cruzou o quadro societário com listas restritivas e não encontrou apontamento impeditivo para a operação.</p></div>
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.7rem .8rem"><span class="g-src">line-height: 1.65 · result-summary p (globals.css:575)</span>
+      <p style="font-size:.74rem;line-height:1.65;margin:.4rem 0 0;color:var(--text)">A análise consultou 14 fontes públicas e privadas, cruzou o quadro societário com listas restritivas e não encontrou apontamento impeditivo para a operação.</p></div>
+  </div>
+</section>
+
+<section class="g-section">
+  <h2>Letter-spacing — três regimes</h2>
+  <p>31 valores distintos, mas três regimes claros: <b>display aperta</b> (−.045 a −.08em, quanto maior o
+     corpo mais negativo), <b>títulos ajustam fino</b> (−.01 a −.025em) e <b>caps abre</b> (.04 a .13em,
+     quanto menor o corpo mais positivo). A moda é .06em (29×), o tracking dos micro-rótulos uppercase.</p>
+  <p style="margin:.2rem 0 .3rem"><b>O mesmo título em três trackings</b> — os dois regimes reais e o neutro para comparação:</p>
+  <div style="display:grid;gap:.8rem;grid-template-columns:repeat(3,minmax(0,1fr))">
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.7rem .8rem"><span class="g-src">−.065em · overview-header h1 (globals.css:981)</span>
+      <div style="font-size:1.7rem;font-weight:660;letter-spacing:-.065em;line-height:1;margin-top:.4rem">Análises de risco</div></div>
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.7rem .8rem"><span class="g-src">−.02em · result-header h1 (globals.css:461)</span>
+      <div style="font-size:1.7rem;font-weight:660;letter-spacing:-.02em;line-height:1;margin-top:.4rem">Análises de risco</div></div>
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.7rem .8rem"><span class="g-src">0 · sem tracking (não usado em display)</span>
+      <div style="font-size:1.7rem;font-weight:660;letter-spacing:0;line-height:1;margin-top:.4rem">Análises de risco</div></div>
+  </div>
+  <div class="g-spec" style="margin-top:.8rem"><div class="g-meta"><b>Display · −.045 a −.08em</b>escala com o corpo; o mono numérico vai mais fundo<br>globals.css:1123 (−.045), 391 (−.055), 378 (−.06), 981 (−.065), 999 (−.07), 1021 (−.08)</div>
+    <span style="font-family:var(--font-geist-mono),monospace;font-size:1.9rem;font-variant-numeric:tabular-nums;font-weight:520;letter-spacing:-.07em;line-height:1">R$ 4,2M</span></div>
+  <div class="g-spec"><div class="g-meta"><b>Títulos · −.01 a −.025em</b>ajuste fino de heading de painel<br>globals.css:1137 (−.01), 1580 (−.015), 1311 (−.02), 1094 (−.025)</div>
+    <span style="font-size:.91rem;font-weight:680;letter-spacing:-.025em">Processos judiciais</span></div>
+  <div class="g-spec"><div class="g-meta"><b>Caps · .04 a .13em</b>abre conforme encolhe: .06em é a moda (29×);<br>.08em no .eyebrow (globals.css:118), .11em (980), .12em (389–390), .13em (379)</div>
+    <span style="display:inline-flex;gap:1.2rem;align-items:baseline;flex-wrap:wrap">
+      <span style="font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Exposição total</span>
+      <span class="eyebrow" style="margin:0">Análise de risco</span>
+      <span style="font-family:var(--font-geist-mono),monospace;font-size:.56rem;letter-spacing:.12em;color:var(--muted)">NSIGHTS / RISK OPERATIONS</span>
+    </span></div>
+</section>
+
+<section class="g-section">
+  <h2>Largura de medida — onde a prosa para</h2>
+  <p>Todo parágrafo de leitura tem teto. O app mistura duas unidades: <b>rem</b> para descrições de página
+     e <b>ch</b> para prosa de resultado — de 24rem no login a 92ch no sumário executivo. As três medidas
+     de trabalho, em tamanho real (corpo .78rem):</p>
+  <div style="display:grid;gap:.7rem">
+    <div style="border-left:3px solid var(--accent-soft);padding-left:.8rem"><span class="g-src">max-width: 46rem · platform-page-description (globals.css:1124) e risk-verdict-main (1310)</span>
+      <p style="color:var(--muted);font-size:.78rem;line-height:1.55;margin:.25rem 0 0;max-width:46rem">Toda análise de KYC iniciada nesta organização, com o veredito consolidado, as fontes consultadas e a trilha de auditoria de cada decisão tomada pelo time de operações de risco ao longo do período selecionado.</p></div>
+    <div style="border-left:3px solid var(--accent-soft);padding-left:.8rem"><span class="g-src">max-width: 52ch · preflight-progress-lead (globals.css:315) e .entry .lede (3271)</span>
+      <p style="color:var(--muted);font-size:.78rem;line-height:1.55;margin:.25rem 0 0;max-width:52ch">Toda análise de KYC iniciada nesta organização, com o veredito consolidado, as fontes consultadas e a trilha de auditoria de cada decisão tomada pelo time de operações de risco ao longo do período selecionado.</p></div>
+    <div style="border-left:3px solid var(--accent-soft);padding-left:.8rem"><span class="g-src">max-width: 62ch · media-general-summary-header p (globals.css:2478)</span>
+      <p style="color:var(--muted);font-size:.78rem;line-height:1.55;margin:.25rem 0 0;max-width:62ch">Toda análise de KYC iniciada nesta organização, com o veredito consolidado, as fontes consultadas e a trilha de auditoria de cada decisão tomada pelo time de operações de risco ao longo do período selecionado.</p></div>
+  </div>
+  <p style="margin-top:.8rem;margin-bottom:0">O censo completo: 24rem (auth-card-intro, 392) · 34rem (383) · 39rem (982) ·
+     41rem (1058) · <b>46rem</b> (1124, 1310) · <b>52ch</b> (315, 3271) · 56ch (505) · <b>62ch</b> (2478) ·
+     72ch (profile-prose, 1518; media-overview-copy, 1632) · 82ch (result-verdict-body p, 552) ·
+     92ch (result-summary p, 575). Prosa longa de leitura fica em 62–72ch; 82–92ch já é generoso demais e
+     só aparece nos painéis de resultado.</p>
+</section>
+
+<section class="g-section">
+  <h2>O par parágrafo + margem</h2>
+  <p>Dois padrões, os dois assimétricos — nunca margem dos dois lados:</p>
+  <div style="display:grid;gap:.8rem;grid-template-columns:1fr 1fr">
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.75rem .85rem">
+      <b style="font-size:.72rem">Descrição sob título: margem só em cima</b>
+      <p style="color:var(--muted);font-size:.68rem;line-height:1.5;margin:.3rem 0 0">
+        <code>margin: .6rem 0 0</code> (platform-page-description, 1124) ·
+        <code>.58rem 0 0</code> (1058) · <code>1rem 0 0</code> (982, 392).
+        O título zera a base; a descrição traz o respiro.</p>
+      <span class="g-src">globals.css:1124, 1058, 982, 392</span>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:.55rem;padding:.75rem .85rem">
+      <b style="font-size:.72rem">Prosa corrida: margem só embaixo (ou gap)</b>
+      <p style="color:var(--muted);font-size:.68rem;line-height:1.5;margin:.3rem 0 0">
+        <code>margin: 0 0 .65rem</code> (result-summary p, 575) ·
+        <code>0 0 1.4rem</code> no lede (3271) · pilhas em grid usam
+        <code>gap: .65rem</code> e parágrafo com <code>margin: 0</code> (media-overview-copy, 1632, 1636).</p>
+      <span class="g-src">globals.css:575, 3271, 1632, 1636</span>
+    </div>
+  </div>
+  <div class="g-finding"><strong>Achado</strong> — como tamanhos e pesos, entrelinha, tracking, medida e
+    margens são literais sem token. Os agrupamentos acima (1.35/1.5/1.65; −.02/−.065; 46rem/52–62ch) já são
+    a escala de fato — tokenizá-los é registrar o que o CSS já pratica.</div>
+</section>
+
+</body></html>

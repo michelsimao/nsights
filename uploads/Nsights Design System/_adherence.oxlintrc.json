@@ -1,0 +1,321 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/badges/**",
+              "components/buttons/**",
+              "components/cards/**",
+              "components/forms/**",
+              "components/icons/**",
+              "ui_kits/nsights/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Manrope|Newsreader|JetBrains Mono))/i]",
+        "message": "Font not provided by the design system. Available: Manrope, Newsreader, JetBrains Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|children|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: variant, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:default|primary|success|warning|danger|premium|critical)$/]",
+        "message": "<Badge> variant must be one of 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'premium' | 'critical'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|size|iconOnly|disabled|children|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, size, iconOnly, disabled, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost|gold)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'ghost' | 'gold'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:md|sm)$/]",
+        "message": "<Button> size must be one of 'md' | 'sm'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute > JSXIdentifier[name!=/^(?:padding|children|key|ref|className|style|children)$/]",
+        "message": "<Card> doesn't accept that prop. Declared props: padding, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Icon'] > JSXAttribute > JSXIdentifier[name!=/^(?:name|size|strokeWidth|key|ref|className|style|children)$/]",
+        "message": "<Icon> doesn't accept that prop. Declared props: name, size, strokeWidth."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Input'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|key|ref|className|style|children)$/]",
+        "message": "<Input> doesn't accept that prop. Declared props: label."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Badge": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "Card": {
+        "replaces": []
+      },
+      "Icon": {
+        "replaces": []
+      },
+      "Input": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--card-accent-border",
+      "--card-accent-glow",
+      "--ns-accent-border",
+      "--ns-accent-glow",
+      "--ns-accent-gold",
+      "--ns-accent-neon",
+      "--ns-accent-primary",
+      "--ns-accent-secondary",
+      "--ns-accent-tertiary",
+      "--ns-accent-tint",
+      "--ns-bg-active",
+      "--ns-bg-base",
+      "--ns-bg-card",
+      "--ns-bg-elevated",
+      "--ns-bg-ghost",
+      "--ns-bg-hover",
+      "--ns-bg-input",
+      "--ns-bg-sidebar",
+      "--ns-border",
+      "--ns-border-active",
+      "--ns-border-emphasis",
+      "--ns-border-hover",
+      "--ns-border-subtle",
+      "--ns-btn-primary-base",
+      "--ns-btn-primary-text",
+      "--ns-chart-cat-1",
+      "--ns-chart-cat-2",
+      "--ns-chart-cat-3",
+      "--ns-chart-cat-4",
+      "--ns-chart-cat-5",
+      "--ns-chart-cat-6",
+      "--ns-chart-cat-7",
+      "--ns-chart-cat-8",
+      "--ns-chart-div-1",
+      "--ns-chart-div-10",
+      "--ns-chart-div-11",
+      "--ns-chart-div-2",
+      "--ns-chart-div-3",
+      "--ns-chart-div-4",
+      "--ns-chart-div-5",
+      "--ns-chart-div-6",
+      "--ns-chart-div-7",
+      "--ns-chart-div-8",
+      "--ns-chart-div-9",
+      "--ns-chart-seq-1",
+      "--ns-chart-seq-10",
+      "--ns-chart-seq-2",
+      "--ns-chart-seq-3",
+      "--ns-chart-seq-4",
+      "--ns-chart-seq-5",
+      "--ns-chart-seq-6",
+      "--ns-chart-seq-7",
+      "--ns-chart-seq-8",
+      "--ns-chart-seq-9",
+      "--ns-chart-seqlight-1",
+      "--ns-chart-seqlight-10",
+      "--ns-chart-seqlight-2",
+      "--ns-chart-seqlight-3",
+      "--ns-chart-seqlight-4",
+      "--ns-chart-seqlight-5",
+      "--ns-chart-seqlight-6",
+      "--ns-chart-seqlight-7",
+      "--ns-chart-seqlight-8",
+      "--ns-chart-seqlight-9",
+      "--ns-chart-warm-1",
+      "--ns-chart-warm-10",
+      "--ns-chart-warm-2",
+      "--ns-chart-warm-3",
+      "--ns-chart-warm-4",
+      "--ns-chart-warm-5",
+      "--ns-chart-warm-6",
+      "--ns-chart-warm-7",
+      "--ns-chart-warm-8",
+      "--ns-chart-warm-9",
+      "--ns-danger",
+      "--ns-ease",
+      "--ns-font-display",
+      "--ns-font-mono",
+      "--ns-font-sans",
+      "--ns-font-serif",
+      "--ns-info",
+      "--ns-radius-button",
+      "--ns-radius-card",
+      "--ns-radius-input",
+      "--ns-radius-pill",
+      "--ns-report-divider",
+      "--ns-report-heading",
+      "--ns-report-link",
+      "--ns-report-link-decoration",
+      "--ns-report-text",
+      "--ns-shadow-lg",
+      "--ns-shadow-md",
+      "--ns-shadow-sm",
+      "--ns-shadow-xl",
+      "--ns-success",
+      "--ns-text-body",
+      "--ns-text-disabled",
+      "--ns-text-heading",
+      "--ns-text-inverted",
+      "--ns-text-muted",
+      "--ns-text-placeholder",
+      "--ns-text-secondary",
+      "--ns-transition-theme",
+      "--ns-warning"
+    ],
+    "tokenKinds": {
+      "--ns-font-sans": "font",
+      "--ns-font-display": "font",
+      "--ns-font-serif": "font",
+      "--ns-font-mono": "font",
+      "--ns-bg-base": "color",
+      "--ns-bg-card": "color",
+      "--ns-bg-elevated": "color",
+      "--ns-bg-sidebar": "color",
+      "--ns-bg-hover": "color",
+      "--ns-bg-active": "color",
+      "--ns-bg-ghost": "color",
+      "--ns-bg-input": "color",
+      "--ns-text-heading": "font",
+      "--ns-text-body": "font",
+      "--ns-text-secondary": "font",
+      "--ns-text-muted": "font",
+      "--ns-text-placeholder": "font",
+      "--ns-text-disabled": "font",
+      "--ns-text-inverted": "font",
+      "--ns-accent-primary": "color",
+      "--ns-accent-secondary": "color",
+      "--ns-accent-tertiary": "color",
+      "--ns-accent-tint": "color",
+      "--ns-accent-glow": "color",
+      "--ns-accent-border": "color",
+      "--ns-accent-gold": "color",
+      "--ns-accent-neon": "color",
+      "--ns-success": "color",
+      "--ns-warning": "color",
+      "--ns-danger": "color",
+      "--ns-info": "color",
+      "--ns-border": "color",
+      "--ns-border-subtle": "color",
+      "--ns-border-emphasis": "color",
+      "--ns-border-hover": "color",
+      "--ns-border-active": "color",
+      "--ns-report-text": "font",
+      "--ns-report-heading": "color",
+      "--ns-report-link": "color",
+      "--ns-report-link-decoration": "color",
+      "--ns-report-divider": "color",
+      "--ns-shadow-sm": "shadow",
+      "--ns-shadow-md": "shadow",
+      "--ns-shadow-lg": "shadow",
+      "--ns-shadow-xl": "shadow",
+      "--ns-radius-card": "radius",
+      "--ns-radius-button": "radius",
+      "--ns-radius-input": "radius",
+      "--ns-radius-pill": "radius",
+      "--ns-ease": "other",
+      "--ns-transition-theme": "color",
+      "--ns-btn-primary-base": "color",
+      "--ns-btn-primary-text": "font",
+      "--ns-chart-seq-1": "color",
+      "--ns-chart-seq-2": "color",
+      "--ns-chart-seq-3": "color",
+      "--ns-chart-seq-4": "color",
+      "--ns-chart-seq-5": "color",
+      "--ns-chart-seq-6": "color",
+      "--ns-chart-seq-7": "color",
+      "--ns-chart-seq-8": "color",
+      "--ns-chart-seq-9": "color",
+      "--ns-chart-seq-10": "color",
+      "--ns-chart-seqlight-1": "color",
+      "--ns-chart-seqlight-2": "color",
+      "--ns-chart-seqlight-3": "color",
+      "--ns-chart-seqlight-4": "color",
+      "--ns-chart-seqlight-5": "color",
+      "--ns-chart-seqlight-6": "color",
+      "--ns-chart-seqlight-7": "color",
+      "--ns-chart-seqlight-8": "color",
+      "--ns-chart-seqlight-9": "color",
+      "--ns-chart-seqlight-10": "color",
+      "--ns-chart-div-1": "color",
+      "--ns-chart-div-2": "color",
+      "--ns-chart-div-3": "color",
+      "--ns-chart-div-4": "color",
+      "--ns-chart-div-5": "color",
+      "--ns-chart-div-6": "color",
+      "--ns-chart-div-7": "color",
+      "--ns-chart-div-8": "color",
+      "--ns-chart-div-9": "color",
+      "--ns-chart-div-10": "color",
+      "--ns-chart-div-11": "color",
+      "--ns-chart-warm-1": "color",
+      "--ns-chart-warm-2": "color",
+      "--ns-chart-warm-3": "color",
+      "--ns-chart-warm-4": "color",
+      "--ns-chart-warm-5": "color",
+      "--ns-chart-warm-6": "color",
+      "--ns-chart-warm-7": "color",
+      "--ns-chart-warm-8": "color",
+      "--ns-chart-warm-9": "color",
+      "--ns-chart-warm-10": "color",
+      "--ns-chart-cat-1": "color",
+      "--ns-chart-cat-2": "color",
+      "--ns-chart-cat-3": "color",
+      "--ns-chart-cat-4": "color",
+      "--ns-chart-cat-5": "color",
+      "--ns-chart-cat-6": "color",
+      "--ns-chart-cat-7": "color",
+      "--ns-chart-cat-8": "color",
+      "--card-accent-border": "color",
+      "--card-accent-glow": "color"
+    },
+    "fontFamilies": [
+      "JetBrains Mono",
+      "Manrope",
+      "Newsreader"
+    ]
+  }
+}

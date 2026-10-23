@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Auditoria — Nsights Risk Ops</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{margin:0;background:var(--surface);color:var(--text)}
+.doc{max-width:1140px;margin:0 auto;padding:44px 32px 96px;display:flex;flex-direction:column;gap:14px}
+h1{font-size:2.1rem;margin:0;letter-spacing:-.02em}
+h2{font-size:1.2rem;margin:34px 0 0;letter-spacing:-.01em}
+h3{font-size:.9rem;margin:20px 0 0}
+.lede{color:var(--muted);font-size:.95rem;line-height:1.6;max-width:78ch;margin:6px 0 0;text-wrap:pretty}
+p{color:var(--muted);font-size:.82rem;line-height:1.6;margin:0;max-width:88ch;text-wrap:pretty}
+p b,p strong{color:var(--text)}
+.lbl{color:var(--muted);font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+code{font-family:var(--font-geist-mono),ui-monospace,monospace;font-size:.72rem;background:var(--surface-subtle);border:1px solid var(--border);border-radius:.25rem;padding:.05rem .25rem}
+table{border-collapse:collapse;width:100%;background:var(--surface-raised);border:1px solid var(--border);border-radius:.6rem;overflow:hidden;font-size:.74rem}
+th{background:var(--surface-subtle);color:var(--muted);font-size:.58rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;text-align:left;padding:.6rem .7rem;border-bottom:1px solid var(--border)}
+td{padding:.55rem .7rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45}
+tr:last-child td{border-bottom:0}
+td.n{font-family:var(--font-geist-mono),monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hex{font-family:var(--font-geist-mono),monospace;font-size:.68rem}
+td.hex{white-space:normal}
+.hex span{white-space:nowrap;display:inline-block}
+.sw{display:inline-block;width:.7rem;height:.7rem;border-radius:.2rem;border:1px solid rgba(29,23,34,.15);vertical-align:-.05rem;margin-right:.3rem}
+.card{background:var(--surface-raised);border:1px solid var(--border);border-radius:.7rem;padding:20px;display:grid;gap:10px}
+.card.alarm{border-left:4px solid var(--danger)}
+.card.open{border-left:4px solid var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:.7rem;overflow:hidden}
+.kpi{background:var(--surface-raised);padding:.9rem 1rem;display:grid;gap:.15rem}
+.kpi span{color:var(--muted);font-size:.55rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.kpi strong{font-family:var(--font-geist-mono),monospace;font-size:1.5rem;font-weight:520;letter-spacing:-.05em}
+.kpi small{color:var(--muted);font-size:.6rem}
+.fail{color:var(--danger);font-weight:700}
+.pass{color:var(--success);font-weight:700}
+ul{margin:0;padding-left:1.1rem;color:var(--muted);font-size:.82rem;line-height:1.65;max-width:88ch}
+ul li+li{margin-top:.2rem}
+li b{color:var(--text)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+@media(max-width:1200px){.two{grid-template-columns:1fr}}
+a{color:var(--accent-strong);text-decoration:underline;text-underline-offset:.15rem}
+a:hover{color:var(--accent)}
+.btn-demo{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.btn-demo button{border:1px solid var(--accent);background:var(--accent);border-radius:.35rem;font-size:.72rem;font-weight:700;padding:.55rem .9rem;min-height:2.75rem}
+.layout{display:grid;grid-template-columns:264px minmax(0,1fr)}
+.side{position:sticky;top:0;height:100vh;background:var(--dark,#17131b);color:var(--dark-text,#f8f4fa);display:flex;flex-direction:column;gap:18px;padding:26px 18px 22px;overflow-y:auto}
+.side .brand{display:grid;gap:2px}
+.side .brand .lbl{color:var(--dark-muted,#a9a1b0)}
+.side .brand strong{font-size:.92rem;font-weight:650;letter-spacing:-.01em;color:var(--dark-text,#f8f4fa)}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav .item{display:grid;grid-template-columns:1.35rem 1fr;align-items:center;gap:.5rem;padding:.5rem .55rem;border-radius:.45rem;text-decoration:none;color:var(--dark-muted,#a9a1b0);font-size:.78rem;line-height:1.3;border:1px solid transparent}
+.nav .item:hover{background:rgba(255,255,255,.05);color:var(--dark-text,#f8f4fa)}
+.nav .item .num{font-family:var(--font-geist-mono),monospace;font-size:.62rem;font-variant-numeric:tabular-nums;color:rgba(255,255,255,.32);text-align:center}
+.nav .item.active{background:rgba(168,109,235,.14);border-color:rgba(168,109,235,.34);color:#fff}
+.nav .item.active .num{color:var(--accent-on-dark,#a86deb)}
+.subnav{display:flex;flex-direction:column;margin:.1rem 0 .35rem 1.9rem;border-left:1px solid rgba(255,255,255,.12)}
+.subnav .subitem{padding:.3rem .6rem;font-size:.7rem;color:rgba(255,255,255,.46);text-decoration:none;line-height:1.35}
+.subnav .subitem:hover{color:var(--dark-text,#f8f4fa)}
+.side .foot{margin-top:auto;display:grid;gap:.4rem}
+.side .foot a{color:var(--accent-on-dark,#a86deb);font-size:.7rem;text-decoration:none;font-family:var(--font-geist-mono),monospace}
+.side .foot a:hover{text-decoration:underline}
+.side .foot span{color:rgba(255,255,255,.34);font-size:.62rem}
+.doc{max-width:1000px;min-width:0}
+.sec>*{min-width:0}
+.sec table{max-width:100%}
+@media(max-width:1400px){td.n{white-space:normal}.hex span{white-space:nowrap}}
+.kpis{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media(max-width:1400px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:860px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sec{display:flex;flex-direction:column;gap:14px;min-width:0;scroll-margin-top:24px;padding-bottom:26px;border-bottom:1px solid var(--border)}
+.sec:last-child{border-bottom:0}
+.sec>h2{margin-top:0}
+h3{scroll-margin-top:24px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.side{position:static;height:auto}}
+</style></head>
+<body>
+<div class="layout">
+<aside class="side">
+<div class="brand"><div class="lbl">Nsights Risk Ops</div><strong>Auditoria do design system</strong></div>
+<nav class="nav">
+<a href="#panorama" class="item" data-target="panorama"><span class="num">·</span><span class="txt">Panorama</span></a>
+<a href="#contraste" class="item" data-target="contraste"><span class="num">1</span><span class="txt">Reprovações de contraste</span></a>
+<a href="#conflitos" class="item" data-target="conflitos"><span class="num">2</span><span class="txt">Conflitos de código</span></a><div class="subnav"><a href="#conflitos-sub0" class="subitem">Divergência entre documentação e código</a></div>
+<a href="#cores" class="item" data-target="cores"><span class="num">3</span><span class="txt">Cores</span></a><div class="subnav"><a href="#cores-sub0" class="subitem">Rampas de estado</a></div>
+<a href="#dark-light" class="item" data-target="dark-light"><span class="num">4</span><span class="txt">Dark / light</span></a>
+<a href="#tipografia" class="item" data-target="tipografia"><span class="num">5</span><span class="txt">Tipografia</span></a>
+<a href="#icones" class="item" data-target="icones"><span class="num">6</span><span class="txt">Ícones</span></a>
+<a href="#campos" class="item" data-target="campos"><span class="num">7</span><span class="txt">Campos</span></a>
+<a href="#aplicar" class="item" data-target="aplicar"><span class="num">·</span><span class="txt">Como aplicar</span></a>
+</nav>
+<div class="foot"><a href="./patch-normalizacao.css">patch-normalizacao.css</a><span>Revisão · agosto 2026</span></div>
+</aside>
+<main class="doc">
+<section id="panorama" class="sec">
+<div class="lbl">Revisão · agosto 2026</div>
+<h1>Auditoria do design system</h1>
+<p class="lede">Revisão completa de <code>_ds_bundle.css</code> (1.790 linhas), dos 17 tokens, dos 75 glifos do
+registro de ícones e dos 12 cartões de guideline. O sistema tem um vocabulário bem definido no papel;
+a divergência está entre esse vocabulário e o que o CSS realmente pinta. Três achados reprovam
+contraste AA, seis são conflito de código (não estilo), e o resto é consolidação: um token por papel,
+um contrato por campo. Cada correção está pronta em
+<a href="./patch-normalizacao.css">patch-normalizacao.css</a>.</p>
+
+<div class="kpis">
+  <div class="kpi"><span>Hex distintos</span><strong>157</strong><small>contra 17 tokens</small></div>
+  <div class="kpi"><span>Tamanhos de fonte</span><strong>61</strong><small>24 usados 1× só</small></div>
+  <div class="kpi"><span>Pesos de fonte</span><strong>17</strong><small>de 500 a 900</small></div>
+  <div class="kpi"><span>Raios</span><strong>33</strong><small>de .1rem a 1rem</small></div>
+  <div class="kpi"><span>Alturas de campo</span><strong>7</strong><small>2rem → 3,25rem</small></div>
+  <div class="kpi"><span>Traços de ícone</span><strong>6</strong><small>na mesma caixa 16</small></div>
+</div>
+</section>
+
+<section id="contraste" class="sec">
+<h2>1. Reprovações de contraste — corrigir primeiro</h2>
+<table>
+  <thead><tr><th>Regra</th><th>Par</th><th>Medido</th><th>Correção</th></tr></thead>
+  <tbody>
+    <tr><td><code>.button-primary</code></td><td class="hex"><span class="sw" style="background:#04131a"></span>#04131a sobre <span class="sw" style="background:#7024c7"></span>#7024c7</td><td class="n fail">2,48:1</td><td><code>color: #ffffff</code> → <span class="pass">7,59:1</span></td></tr>
+    <tr><td><code>.status-empty</code></td><td class="hex"><span class="sw" style="background:#8b8b9b"></span>#8b8b9b sobre <span class="sw" style="background:#f7f7fa"></span>#f7f7fa</td><td class="n fail">3,14:1</td><td>usar o par de <code>.status-gap</code> → <span class="pass">7,53:1</span></td></tr>
+    <tr><td><code>.auth-form input::placeholder</code></td><td class="hex"><span class="sw" style="background:#a49ba7"></span>#a49ba7 sobre branco</td><td class="n fail">2,68:1</td><td rowspan="3"><code>--placeholder: #6f6675</code> (=<code>--muted</code>) → <span class="pass">5,2:1</span></td></tr>
+    <tr><td><code>.granular-filters input::placeholder</code></td><td class="hex"><span class="sw" style="background:#8d8494"></span>#8d8494 sobre branco</td><td class="n fail">3,58:1</td></tr>
+    <tr><td><code>.composer textarea</code>, <code>.sel-search input</code></td><td class="hex"><span class="sw" style="background:#8a8290"></span>#8a8290 sobre branco</td><td class="n fail">3,70:1</td></tr>
+  </tbody>
+</table>
+<p>O botão primário já estava registrado como achado aberto no cartão <b>Papéis de cor</b>; os outros quatro são novos.
+Os três placeholders também são três valores para um papel só — a correção resolve contraste e divergência na mesma linha.</p>
+
+<div class="card alarm">
+  <div class="lbl">O botão primário, hoje e corrigido</div>
+  <div class="btn-demo">
+    <button type="button" style="color:#04131a">Nova análise — 2,48:1</button>
+    <button type="button" style="color:#fff">Nova análise — 7,59:1</button>
+  </div>
+  <p><code>#04131a</code> é um quase-preto ciano que não pertence a nenhuma paleta do sistema — é o único
+  valor do arquivo com matiz azul-verde. A variante <code>.platform-page-action .button-primary</code> já usa
+  <code>#fff</code>: o defeito é só do botão base.</p>
+</div>
+</section>
+
+<section id="conflitos" class="sec">
+<h2>2. Conflitos de código — não são estilo, são bug</h2>
+<table>
+  <thead><tr><th>Linhas</th><th>O que está lá</th><th>Efeito</th></tr></thead>
+  <tbody>
+    <tr><td class="n">1472–1500</td><td>Bloco duplicado byte a byte de <code>1359</code> + <code>1411–1445</code>: <code>.ai-message[data-from="user"]&nbsp;…</code>, <code>.detail-spinner</code>, <code>.run-progress</code> até <code>.coverage-pill.failed</code> — 30 regras</td><td>~1,8 KB morto; qualquer edição feita em um dos blocos não vale no outro</td></tr>
+    <tr><td class="n">1511, 1512</td><td><code>@keyframes consultaSpin</code> declarado duas vezes, idêntico</td><td>morto</td></tr>
+    <tr><td class="n">774–778 vs 1164–1166</td><td><code>.status-regular</code>, <code>.status-attention</code> e <code>.status-critical</code> definidas duas vezes com <b>cores diferentes</b></td><td>a segunda vence; os pares documentados no cartão <b>Rampas de estado</b> são os da definição morta</td></tr>
+    <tr><td class="n">1167</td><td><code>.status-gap, .status-empty { background:#eeeef2; color:#5c5c6b }</code></td><td>totalmente sobrescrita pelas duas linhas seguintes</td></tr>
+    <tr><td class="n">853/854 e 1161/1162</td><td><code>.dot-critical</code> e <code>.dot-attention</code> duplicadas, mesmo valor</td><td>morto</td></tr>
+    <tr><td class="n">708</td><td><code>color: #b9afbE</code></td><td>maiúscula solta no hex — sintoma de valor escrito à mão</td></tr>
+  </tbody>
+</table>
+
+<h3 id="conflitos-sub0">Divergência entre documentação e código</h3>
+<p>O cartão <b>Rampas de estado</b> documenta a família <code>.status-*</code> com <code>.status-no_data</code>
+(<span class="hex">#efedf1 / #69616f / #8a818f</span>) e os pares <span class="hex">#e7f6ef/#176b4d</span>,
+<span class="hex">#fff3dc/#80540c</span>, <span class="hex">#fde9ee/#8f1833</span>. O CSS entregue não tem
+<code>.status-no_data</code> — tem <code>.status-gap</code> e <code>.status-empty</code>, com outros hex — e os três
+pares documentados são justamente as definições sobrescritas. Quem ler o cartão e inspecionar a tela vê valores
+diferentes. Uma vez feito o item 2, o cartão precisa ser regerado.</p>
+</section>
+
+<section id="cores" class="sec">
+<h2>3. Cores — um token por papel</h2>
+<p>Nenhum valor abaixo é invenção: cada token proposto é um dos literais que já estão no arquivo, eleito como
+o único da sua função. A régua é o papel, não uma escala numerada — o sistema já recusou escalas 50–900 e isso se mantém.</p>
+<table>
+  <thead><tr><th>Papel</th><th>Valores hoje</th><th>Token proposto</th><th>Aposenta</th></tr></thead>
+  <tbody>
+    <tr><td>Chão / painel / branco de painel</td><td class="n">~20 quase-brancos</td><td><code>--surface</code> <code>--surface-subtle</code> <code>--surface-raised</code></td><td class="hex"><span>#f3f0f4</span> <span>#f0eef2</span> <span>#f4f1f5</span> <span>#f0f0f4</span> <span>#f1eef3</span> <span>#faf9fb</span> <span>#f7f7fa</span> <span>#faf9fa</span> <span>#fdfbff</span> <span>#fbfaff</span> …</td></tr>
+    <tr><td>Branco de tinta roxa (cartão selecionado, run-progress)</td><td class="n">6</td><td><code>--accent-wash</code> <span class="hex">#faf6ff</span></td><td class="hex"><span>#fbf8ff</span> <span>#fdfbff</span> <span>#faf7fd</span> <span>#faf7fc</span> <span>#fbf8fe</span></td></tr>
+    <tr><td>Traço estrutural / de afordância</td><td class="n">19 cinzas</td><td><code>--border</code> <code>--border-strong</code></td><td class="hex"><span>#ddd7e2</span> <span>#e4e0e7</span> <span>#d8d1dd</span> <span>#e8e4ec</span> <span>#e2e2e8</span> <span>#c9c2ce</span> <span>#c6bdcb</span> <span>#c3c3ce</span> <span>#bdb7c4</span> <span>#b9b2c0</span> …</td></tr>
+    <tr><td>Traço com tinta de acento (hover, selecionado)</td><td class="n">6</td><td><code>--border-accent</code> <span class="hex">#d9c4f2</span></td><td class="hex"><span>#d7c4ec</span> <span>#d9c7f0</span> <span>#dcc9f2</span> <span>#d3c2ec</span> <span>#e2d4f1</span></td></tr>
+    <tr><td>Texto de apoio</td><td class="n">17 cinzas</td><td><code>--muted</code> + <code>--text-secondary</code> <span class="hex">#4e4654</span></td><td class="hex"><span>#7c7286</span> <span>#6f6577</span> <span>#69626f</span> <span>#5f5866</span> <span>#5c5c6b</span> <span>#4a4a58</span> <span>#4a4352</span> <span>#8a8290</span> <span>#8d8494</span> <span>#8a7f93</span> …</td></tr>
+    <tr><td>Ilhas escuras (sidebar, wizard, auth, monograma)</td><td class="n">13 valores</td><td><code>--dark</code> <code>--dark-raised</code> <code>--dark-hover</code> <code>--dark-border</code> <code>--dark-border-strong</code></td><td class="hex"><span>#17131b</span> <span>#241a29</span> <span>#251d2c</span> <span>#251b2a</span> <span>#241b2c</span> <span>#221a29</span> <span>#2a2133</span> <span>#33293b</span> <span>#3a3045</span> <span>#4a3e52</span> <span>#423847</span></td></tr>
+    <tr><td>Texto sobre escuro</td><td class="n">8 valores</td><td><code>--dark-text</code> <code>--dark-muted</code> <code>--dark-muted-strong</code></td><td class="hex"><span>#f8f4fa</span> <span>#e8e0ef</span> <span>#a9a1b0</span> <span>#928798</span> <span>#958b99</span> <span>#bbb0c2</span> <span>#b9afbe</span></td></tr>
+    <tr><td>Roxo sobre escuro</td><td class="n">7 valores</td><td><code>--accent-on-dark</code> <span class="hex">#a86deb</span> + <code>--accent-on-dark-soft</code></td><td class="hex"><span>#8c3ed0</span> <span>#a274d8</span> <span>#aa70cd</span> <span>#c8a8dc</span> <span>#5a4570</span> <span>#7a5ea8</span></td></tr>
+    <tr><td>Texto sobre acento</td><td class="n">2 (um reprova)</td><td><code>--on-accent</code> <span class="hex">#ffffff</span></td><td class="hex">#04131a</td></tr>
+  </tbody>
+</table>
+
+<h3 id="cores-sub0">Rampas de estado: o mesmo papel em cinco famílias</h3>
+<p>Cinco famílias de pílula (<code>.result-badge-*</code>, <code>.status-*</code>, <code>.verdict-badge</code>,
+<code>.coverage-pill</code>, <code>.ns-alert-*</code>) e as barras de risco definem cada uma o seu par fundo/texto.
+Resultado: <b>seis verdes</b>, <b>sete âmbares</b> e <b>seis vermelhos</b> para três estados. A proposta é três
+papéis por estado — tinta de fundo, texto sobre a tinta, sólido/ponto — e todas as famílias lendo os mesmos tokens.</p>
+<table>
+  <thead><tr><th>Estado</th><th>Fundos hoje</th><th>Textos hoje</th><th>Par eleito</th><th>Contraste</th></tr></thead>
+  <tbody>
+    <tr><td>Regular / sem apontamento</td><td class="hex"><span>#e7f6ef</span> <span>#e9f5f0</span> <span>#e4f3ec</span> <span>#e6f5ee</span> <span>#e8f4ee</span></td><td class="hex"><span>#176b4d</span> <span>#137a51</span> <span>#177d59</span> <span>#197054</span> <span>#1f9a70</span></td><td class="hex"><span class="sw" style="background:#e7f6ef"></span>#e7f6ef / <span class="sw" style="background:#176b4d"></span>#176b4d</td><td class="n pass">5,80:1</td></tr>
+    <tr><td>Atenção</td><td class="hex"><span>#fff3dc</span> <span>#fdf1de</span> <span>#fdf1e2</span> <span>#fff5e6</span></td><td class="hex"><span>#80540c</span> <span>#8f5b00</span> <span>#7a570d</span> <span>#946310</span> <span>#b0620d</span> <span>#c27c12</span> <span>#c38a25</span></td><td class="hex"><span class="sw" style="background:#fff3dc"></span>#fff3dc / <span class="sw" style="background:#80540c"></span>#80540c</td><td class="n pass">5,99:1</td></tr>
+    <tr><td>Crítico</td><td class="hex"><span>#fde9ee</span> <span>#fbe9ec</span> <span>#f7e7ea</span> <span>#f8e8ec</span></td><td class="hex"><span>#8f1833</span> <span>#a8283b</span> <span>#8f0f2c</span> <span>#b91c3c</span> <span>#9c2943</span> <span>#b42318</span></td><td class="hex"><span class="sw" style="background:#fde9ee"></span>#fde9ee / <span class="sw" style="background:#8f1833"></span>#8f1833</td><td class="n pass">7,70:1</td></tr>
+    <tr><td>Lacuna / não se aplica</td><td class="hex"><span>#eeeef2</span> <span>#f0eef2</span> <span>#f7f7fa</span></td><td class="hex"><span>#4a4a58</span> <span>#5c5c6b</span> <span>#69626f</span> <span>#8b8b9b</span></td><td class="hex"><span class="sw" style="background:#eeeef2"></span>#eeeef2 / <span class="sw" style="background:#4a4a58"></span>#4a4a58</td><td class="n pass">7,53:1</td></tr>
+    <tr><td>Inconclusivo</td><td class="hex">#efe8f8</td><td class="hex">#5b2d86</td><td class="hex"><span class="sw" style="background:#efe8f8"></span>#efe8f8 / <span class="sw" style="background:#5b2d86"></span>#5b2d86</td><td class="n pass">8,12:1</td></tr>
+  </tbody>
+</table>
+<p>Os três níveis de agravamento da grade de risco (<code>.risk-sw.aten</code> <span class="hex">#946310</span>,
+<code>.agrav</code> <span class="hex">#b0620d</span>, <code>.veto</code> <span class="hex">#8f0f2c</span>) são
+papéis reais e ganham token próprio (<code>--warning-strong</code>, <code>--veto</code>) — não devem ser fundidos
+com o âmbar de aviso.</p>
+</section>
+
+<section id="dark-light" class="sec">
+<h2>4. Dark / light</h2>
+<p>Hoje o produto é claro por declaração (<code>color-scheme: light</code>) com ilhas escuras. O cartão
+<b>Proposta de dark mode</b> já desenha três peles candidatas; esta auditoria mede o bloqueio prático:
+<b>sobrescrever tokens não pinta o tema</b> porque as superfícies claras estão literais no CSS —
+<b>74 ocorrências de <code>#ffffff</code>/<code>#fff</code></b> mais ~20 quase-brancos, além de 13 valores escuros
+que não passam por token. A ordem correta é: (1) mover todo literal claro para
+<code>--surface*</code>, (2) tokenizar a ilha escura como no item 3, (3) só então escolher a pele. Sem os passos 1 e 2,
+qualquer dark mode vira um segundo CSS mantido à mão.</p>
+</section>
+
+<section id="tipografia" class="sec">
+<h2>5. Tipografia</h2>
+<ul>
+  <li><b>Pilha de fallback em três versões.</b> <code>--font-geist-mono</code> aparece como
+  <code>, ui-monospace, monospace</code> (só em <code>.mono</code>), como <code>, monospace</code> (10 regras) e
+  como <code>inherit</code> em <code>.ns-kbd</code> e <code>.profile-chart text</code> — dois lugares que deveriam
+  ser mono e não são (a tecla impressa e os números do eixo do gráfico de perfil). Com a pilha dentro do token,
+  toda regra volta a ser só <code>var(--font-geist-mono)</code>.</li>
+  <li><b>Duas famílias de gráfico, duas fontes.</b> <code>.profile-chart text</code> herda a sans;
+  <code>.ns-chart-center</code> usa mono. Número de gráfico deveria ser sempre mono tabular.</li>
+  <li><b>17 pesos</b> (500, 520, 550, 560, 590, 600, 620, 630, 650, 680, 700, 720, 730, 750, 780, 800, 900) para
+  cinco intenções. Consolidação: 400 corpo · 550 medium · 650 semi · 700 bold · 800 caixa alta.
+  Isso também protege ambientes sem fonte variável, onde 520/560/590/630 arredondam sozinhos.</li>
+  <li><b>61 tamanhos</b>, 24 deles usados uma vez só, em passos de 0,01rem (.61/.62/.63/.64/.65/.66/.67/.68/.69).
+  Uma régua de 10 degraus (.55 .58 .62 .66 .70 .75 .82 .95 1.15 1.6 + os <code>clamp()</code> de display)
+  cobre todos os usos sem diferença perceptível.</li>
+  <li><b>Line-height</b>: 1.35 / 1.5 / 1.55 / 1.6 / 1.65 → três degraus (título, corpo, lede).</li>
+</ul>
+</section>
+
+<section id="icones" class="sec">
+<h2>6. Ícones</h2>
+<table>
+  <thead><tr><th>Achado</th><th>Detalhe</th></tr></thead>
+  <tbody>
+    <tr><td><b>Dois nomes, o mesmo desenho</b></td><td><code>download</code> e <code>relatorio</code> têm geometria <b>idêntica</b> (o mesmo <code>d</code>, caixa 16, traço 1.35). <code>download</code> é hoje um documento, não uma seta descendo — o nome mente e o registro tem um glifo redundante. Desenhar o <code>download</code> de verdade ou tirá-lo do registro.</td></tr>
+    <tr><td><b>Seis traços na mesma caixa</b></td><td>Na caixa 16 convivem 1.0 (<code>carregando</code>), 1.2 (<code>copiar</code>), 1.35 (19 glifos), 1.5 (42 glifos), 1.6 (<code>expandir</code>, <code>aviso</code>) e 1.7 (<code>busca</code>, <code>fechar</code>). O efeito é visível quando ficam lado a lado: <code>busca</code> (1.7) e <code>filtro</code> (1.5) na mesma toolbar, <code>upload</code> (1.5) e <code>download</code> (1.35) no mesmo par de ações.</td></tr>
+    <tr><td><b>A regra da casa não é o que o registro pratica</b></td><td>O cartão declara "caixa 16, traço 1.5" e 42 glifos obedecem; 33 não. Proposta: dois contratos declarados — <b>16/1.5</b> para tudo em texto e <b>24/1.7</b> para os 8 glifos de navegação — e normalizar os 25 fora deles em um lote (os 19 de 1.35 são o grosso e ficam mais firmes a 1.5).</td></tr>
+    <tr><td><b>Pares quase-duplicados</b></td><td><code>perfil</code> e <code>pessoa-fisica</code> são o mesmo círculo com ombros, com raios 2 e 2.15; <code>relatorio</code>, <code>documentos</code> e <code>evidencias</code> são três folhas com dobra. Vale decidir qual sobrevive.</td></tr>
+    <tr><td><b>SVG inline fora do registro</b></td><td>O exemplo do próprio README desenha o ícone do botão à mão (<code>&lt;path d="M8 3v10M3 8h10"&gt;</code>) sem <code>stroke-width</code>, o que cai em 1 — mais fino que qualquer glifo do registro. O exemplo deveria usar <code>&lt;Icon name="adicionar"&gt;</code>.</td></tr>
+  </tbody>
+</table>
+</section>
+
+<section id="campos" class="sec">
+<h2>7. Campos — um contrato só</h2>
+<p>Nenhum cartão de guideline cobre formulário, e é onde a divergência é maior: <b>onze caixas de entrada,
+onze desenhos</b>. Um campo do login, um da tabela granular, um do wizard e um do date picker não se parecem
+em altura, raio, borda, fundo nem foco.</p>
+<table>
+  <thead><tr><th>Propriedade</th><th>Valores hoje</th><th>Padrão proposto</th></tr></thead>
+  <tbody>
+    <tr><td>Altura</td><td class="n">7 — 2rem · 2,3 · 2,35 · 2,45 · 2,5 · 2,75 · 3,25rem</td><td><code>--field-h: 2.75rem</code> (alvo de toque 44px) + <code>--field-h-sm: 2.35rem</code> para barra de filtro. Login mantém 3,25rem como exceção declarada.</td></tr>
+    <tr><td>Raio</td><td class="n">6 — .35 · .4 · .42 · .45 · .6 · .9rem</td><td><code>--field-radius: .45rem</code> (o do <code>select</code> global)</td></tr>
+    <tr><td>Borda</td><td class="n">4 — <code>--border</code>, <code>--border-strong</code>, <span class="hex">#cfc7d5</span> literal, <span class="hex">#bdb3c5</span> tracejada</td><td><code>--border-strong</code> em tudo que é interativo; <code>--border</code> fica para estrutura</td></tr>
+    <tr><td>Fundo</td><td class="n">5 — <code>--surface</code>, <code>--surface-subtle</code>, <code>--surface-raised</code>, <span class="hex">#fff</span>, <code>rgba(255,255,255,.78)</code></td><td><code>--surface-raised</code></td></tr>
+    <tr><td>Foco</td><td class="n">4 anéis</td><td>Um só: <code>outline: 2px solid var(--accent); outline-offset: 2px</code></td></tr>
+    <tr><td>Hover</td><td class="n">5 — <code>--border-strong</code>, <span class="hex">#b8adbd</span>, <span class="hex">#b799dd</span>, <span class="hex">#b89ad4</span>, <code>--accent</code></td><td><code>--accent</code></td></tr>
+    <tr><td>Placeholder</td><td class="n">3 — todos reprovam AA</td><td><code>--placeholder: #6f6675</code></td></tr>
+    <tr><td>Desabilitado</td><td class="n">2 opacidades (.6 e .55), definido em 2 lugares de 11</td><td><code>--disabled-opacity: .6</code> + <code>cursor: not-allowed</code> para todos</td></tr>
+    <tr><td>Inválido</td><td class="n">não existe</td><td><code>[aria-invalid="true"]</code> lendo a rampa crítica — hoje só <code>.auth-form-error</code> e <code>.upload-error</code> existem, com dois desenhos diferentes</td></tr>
+  </tbody>
+</table>
+<p><b>Os quatro anéis de foco em detalhe.</b> <code>select:focus-visible</code> usa borda + <code>box-shadow 0 0 0 3px var(--accent-soft)</code>;
+<code>input</code>/<code>textarea</code> caem na regra global <code>outline 2px var(--accent)</code>;
+<code>.auth-form input:focus</code> usa <code>box-shadow .22rem color-mix(…)</code>;
+<code>.qsa-multi-select-trigger:focus-visible</code> usa <code>outline 2px #eee1fa</code> — um anél em lilás claro
+sobre fundo branco, praticamente invisível. Como <code>select</code> não está na regra global e os outros estão,
+o anel muda conforme o tipo de controle, não conforme a intenção.</p>
+</section>
+
+<section id="aplicar" class="sec">
+<h2>Como aplicar</h2>
+<div class="card open">
+  <div class="lbl">Como aplicar</div>
+  <p>O design system deste projeto é <b>sincronizado do repo e read-only</b> — nada aqui deve ser editado. O patch
+  em <a href="./patch-normalizacao.css">patch-normalizacao.css</a> está escrito para colar em
+  <code>app/globals.css</code> + os tokens do repo, em seis blocos na ordem de aplicação: tokens, campos,
+  contraste, famílias de estado, fonte, e a lista do código morto a remover. Depois de aplicado,
+  rodar <code>/design-sync</code> traz tudo de volta — e os cartões <b>Rampas de estado</b>, <b>Papéis de cor</b> e
+  <b>Ícones</b> precisam ser regerados junto, porque documentam valores que o patch muda.</p>
+  <p><b>Fora do patch, por exigirem decisão do time:</b> a régua de 10 tamanhos e 5 pesos (mexe em quase toda
+  regra do arquivo), a normalização de traço dos 25 ícones fora de contrato, a fusão dos glifos duplicados, e a
+  escolha da pele de dark mode.</p>
+</div>
+</section>
+</main>
+</div>
+<script>
+const items=[...document.querySelectorAll('.nav .item')];
+const secs=items.map(i=>document.getElementById(i.dataset.target));
+const setActive=id=>items.forEach(i=>i.classList.toggle('active',i.dataset.target===id));
+const io=new IntersectionObserver(es=>{
+  const vis=es.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);
+  if(vis.length)setActive(vis[0].target.id);
+},{rootMargin:'-10% 0px -70% 0px',threshold:0});
+secs.forEach(s=>s&&io.observe(s));
+setActive('panorama');
+</script>
+</body></html>

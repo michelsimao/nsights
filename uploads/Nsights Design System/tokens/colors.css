@@ -1,0 +1,131 @@
+/* Nsights Editorial — color tokens. :root = light theme; .dark = partial override.
+   App default is DARK. Never pure black / pure white. */
+
+:root {
+  /* Backgrounds */
+  --ns-bg-base: #f7f5f0;
+  --ns-bg-card: #fcfaf6;
+  --ns-bg-elevated: #f2efe8;
+  --ns-bg-sidebar: #edebe4;
+  --ns-bg-hover: rgba(26,22,18,0.055);
+  --ns-bg-active: rgba(107,63,212,0.07);
+  --ns-bg-ghost: rgba(26,22,18,0.025);
+  --ns-bg-input: rgba(26,22,18,0.03);
+
+  /* Text */
+  --ns-text-heading: #1a1612;
+  --ns-text-body: #1a1612;
+  --ns-text-secondary: #4a4035;
+  --ns-text-muted: #7a6e60;
+  --ns-text-placeholder: rgba(26,22,18,0.4);
+  --ns-text-disabled: rgba(26,22,18,0.30);
+  --ns-text-inverted: #fcfaf6;
+
+  /* Accents */
+  --ns-accent-primary: #6b3fd4;
+  --ns-accent-secondary: #5c35b5;
+  --ns-accent-tertiary: #5429b8;
+  --ns-accent-tint: rgba(107,63,212,0.07);
+  --ns-accent-glow: rgba(107,63,212,0.20);
+  --ns-accent-border: rgba(107,63,212,0.28);
+  --ns-accent-gold: #b8843c;
+  --ns-accent-neon: #b8843c;
+
+  /* Semantic */
+  --ns-success: #4a7a4f;
+  --ns-warning: #b8843c;
+  --ns-danger: #b25a3f;
+  --ns-info: #b8843c;
+
+  /* Borders */
+  --ns-border: #ddd7c8;
+  --ns-border-subtle: #e8e2d4;
+  --ns-border-emphasis: #c8c0b0;
+  --ns-border-hover: #c4baa8;
+  --ns-border-active: #6b3fd4;
+
+  /* Report layer */
+  --ns-report-text: rgba(26,22,18,0.78);
+  --ns-report-heading: var(--ns-text-heading);
+  --ns-report-link: var(--ns-accent-primary);
+  --ns-report-link-decoration: rgba(107,63,212,0.28);
+  --ns-report-divider: var(--ns-border);
+
+  /* Shadows */
+  --ns-shadow-sm: 0 1px 2px rgba(26,22,18,0.04);
+  --ns-shadow-md: 0 4px 12px rgba(26,22,18,0.05);
+  --ns-shadow-lg: 0 8px 24px rgba(26,22,18,0.06);
+  --ns-shadow-xl: 0 16px 48px rgba(26,22,18,0.08);
+
+  /* Radii */
+  --ns-radius-card: 8px;
+  --ns-radius-button: 6px;
+  --ns-radius-input: 6px;
+  --ns-radius-pill: 9999px;
+
+  /* Motion */
+  --ns-ease: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --ns-transition-theme: background-color 0.4s var(--ns-ease), border-color 0.4s var(--ns-ease), color 0.4s var(--ns-ease);
+
+  /* Buttons */
+  --ns-btn-primary-base: var(--ns-accent-primary);
+  --ns-btn-primary-text: #fcfaf6;
+}
+
+.dark {
+  /* Backgrounds */
+  --ns-bg-base: #0e0c09;
+  --ns-bg-card: #1b1814;
+  --ns-bg-elevated: #262219;
+  --ns-bg-sidebar: #0e0c09;
+  --ns-bg-hover: rgba(245,241,232,0.06);
+  --ns-bg-active: rgba(174,122,255,0.10);
+  --ns-bg-ghost: rgba(245,241,232,0.02);
+  --ns-bg-input: rgba(245,241,232,0.03);
+
+  /* Text */
+  --ns-text-heading: #f5f1e8;
+  --ns-text-body: #f5f1e8;
+  --ns-text-secondary: #c9bfa8;
+  --ns-text-muted: #b3a890;
+  --ns-text-placeholder: rgba(245,241,232,0.4);
+  --ns-text-disabled: rgba(245,241,232,0.30);
+  --ns-text-inverted: #0e0c09;
+
+  /* Accents */
+  --ns-accent-primary: #ae7aff;
+  --ns-accent-secondary: #c09bff;
+  --ns-accent-tertiary: #8e54e5;
+  --ns-accent-tint: rgba(174,122,255,0.10);
+  --ns-accent-glow: rgba(174,122,255,0.30);
+  --ns-accent-border: rgba(174,122,255,0.35);
+  --ns-accent-gold: #e0b26a;
+  --ns-accent-neon: #f0c962;
+
+  /* Semantic */
+  --ns-success: #6ce599;
+  --ns-warning: #f0c962;
+  --ns-danger: #f08368;
+  --ns-info: #e0b26a;
+
+  /* Borders */
+  --ns-border: rgba(245,241,232,0.08);
+  --ns-border-subtle: rgba(245,241,232,0.07);
+  --ns-border-emphasis: rgba(245,241,232,0.20);
+  --ns-border-hover: rgba(245,241,232,0.14);
+  --ns-border-active: #ae7aff;
+
+  /* Report layer */
+  --ns-report-text: rgba(245,241,232,0.78);
+  --ns-report-link-decoration: rgba(174,122,255,0.35);
+
+  /* Shadows */
+  --ns-shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --ns-shadow-md: 0 4px 12px rgba(0,0,0,0.2);
+  --ns-shadow-lg: 0 8px 24px rgba(0,0,0,0.3);
+  --ns-shadow-xl: 0 16px 48px rgba(0,0,0,0.4);
+
+  /* Buttons */
+  --ns-btn-primary-base: var(--ns-accent-primary);
+  --ns-btn-primary-text: #0e0c09;
+}

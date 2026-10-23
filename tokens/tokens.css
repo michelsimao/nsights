@@ -1,0 +1,29 @@
+/* Tokens do Nsights Risk Ops.
+   Copiados sem alteração de app/globals.css — as mesmas variáveis que as telas do
+   produto leem hoje. Mudou aqui, muda no app. */
+
+:root {
+  color-scheme: light;
+  --surface: #f2f0f3;
+  --surface-subtle: #f8f6f9;
+  --surface-raised: #ffffff;
+  --border: #ded9e2;
+  --border-strong: #cfc7d5;
+  --text: #1d1722;
+  --ink: var(--text);
+  --muted: #6f6675;
+  --accent: #7024c7;
+  --accent-strong: #5a159f;
+  --accent-soft: #eee4f8;
+  --coral: #c85c75;
+  --dark: #19141e;
+  --dark-raised: #241d2a;
+  --success: #197054;
+  --warning: #946310;
+  --danger: #9c2943;
+
+  /* No app estas duas vêm de next/font/google (app/layout.tsx: Geist e Geist_Mono).
+     Fora do Next, fonts.css carrega as mesmas famílias do Google Fonts. */
+  --font-geist: "Geist";
+  --font-geist-mono: "Geist Mono";
+}

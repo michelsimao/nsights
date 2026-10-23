@@ -1,0 +1,130 @@
+<!-- @dsCard group="Fundação" viewport="960x1720" name="Superfícies e motion" subtitle="flat com borda 1px, meia dúzia de sombras reais e transições de .12 a .2s" -->
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: radial-gradient(circle at 78% -12%, rgba(112, 36, 199, .055), transparent 28rem), var(--surface); color: var(--text); font-family: var(--font-geist), "Avenir Next", "Segoe UI", sans-serif; margin: 0; padding: 1.6rem 1.8rem 2.2rem; }
+  .g-section { background: var(--surface-raised); border: 1px solid var(--border); border-radius: .75rem; margin-top: 1rem; padding: 1.1rem 1.25rem; }
+  .g-section h2 { font-size: .82rem; font-weight: 650; letter-spacing: -.01em; margin: 0 0 .2rem; }
+  .g-section > p { color: var(--muted); font-size: .72rem; line-height: 1.55; margin: .2rem 0 .9rem; }
+  .g-src { color: var(--muted); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .58rem; }
+  .g-surfaces { display: grid; gap: .8rem; grid-template-columns: repeat(5, 1fr); }
+  .g-surface { border: 1px solid var(--border-strong); border-radius: .55rem; display: grid; gap: .15rem; align-content: end; min-height: 6.5rem; padding: .6rem .7rem; }
+  .g-surface b { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .6rem; font-variant-numeric: tabular-nums; }
+  .g-surface small { font-size: .58rem; line-height: 1.4; }
+  .g-shadow { align-items: center; border-top: 1px solid var(--border); display: grid; gap: 1.2rem; grid-template-columns: 8.5rem minmax(0,1fr); padding: .8rem 0; }
+  .g-shadow:first-of-type { border-top: 0; }
+  .g-shadow .g-meta { color: var(--muted); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .58rem; line-height: 1.55; }
+  .g-shadow .g-meta b { color: var(--text); display: block; font-family: var(--font-geist), sans-serif; font-size: .68rem; font-weight: 700; }
+  .g-finding { background: var(--accent-soft); border-radius: .5rem; color: var(--accent-strong); font-size: .7rem; line-height: 1.55; margin-top: .9rem; padding: .6rem .75rem; }
+  .g-finding strong { text-transform: uppercase; font-size: .6rem; letter-spacing: .08em; }
+  table.g-kf { border-collapse: collapse; font-size: .66rem; width: 100%; }
+  table.g-kf th { color: var(--muted); font-size: .58rem; font-weight: 800; letter-spacing: .06em; padding: .3rem .5rem; text-align: left; text-transform: uppercase; }
+  table.g-kf td { border-top: 1px solid var(--border); line-height: 1.5; padding: .45rem .5rem; vertical-align: top; }
+  table.g-kf td:first-child { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: .62rem; white-space: nowrap; }
+  .g-demo-bar { background: #cfc7d5; border-radius: 2px; height: .3rem; overflow: hidden; position: relative; width: 2.8rem; }
+  .g-demo-bar::after { animation: g-risk-sweep 1.25s ease-in-out infinite; background: #7024c7; border-radius: 2px; content: ""; inset: 0 auto 0 0; position: absolute; width: 42%; }
+  @keyframes g-risk-sweep { 0% { left: -42%; } 100% { left: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .g-demo-bar::after { animation: none; } }
+</style></head><body>
+
+<p class="eyebrow">Fundação · Superfícies e motion</p>
+<h1 style="font-size:2rem;letter-spacing:-.04em;margin:.25rem 0 .3rem">Flat, com borda de 1px</h1>
+<p style="color:var(--muted);font-size:.78rem;line-height:1.55;margin:0;max-width:46rem">
+  O sistema não empilha sombras: superfícies se separam por <b>cor + borda 1px</b>
+  (<code>--border #ded9e2</code>, <code>--border-strong #cfc7d5</code>). Sombra é exceção com papel
+  definido, e o movimento é curto — .12 a .2s — com um easing próprio só para o shell.</p>
+
+<section class="g-section">
+  <h2>As superfícies</h2>
+  <p>Quatro claras + a variante elevada do escuro. Cada amostra está pintada com o var() real.
+     Contrastes medidos com tools/contrast.mjs.</p>
+  <div class="g-surfaces">
+    <div class="g-surface" style="background:var(--surface)"><b>--surface<br>#f2f0f3</b><small style="color:var(--muted)">o chão do app (html e body)</small></div>
+    <div class="g-surface" style="background:var(--surface-subtle)"><b>--surface-subtle<br>#f8f6f9</b><small style="color:var(--muted)">zona rebaixada dentro de painel; linha excluída</small></div>
+    <div class="g-surface" style="background:var(--surface-raised)"><b>--surface-raised<br>#ffffff</b><small style="color:var(--muted)">cartões, painéis, inputs — o "elevado" é só mais claro</small></div>
+    <div class="g-surface" style="background:var(--dark);border-color:#31283a"><b style="color:#c6bdcb">--dark<br>#19141e</b><small style="color:#94899c">sidebar, wizard-footer, monogramas</small></div>
+    <div class="g-surface" style="background:var(--dark-raised);border-color:#31283a"><b style="color:#c6bdcb">--dark-raised<br>#241d2a</b><small style="color:#94899c">hover/ativo dentro do escuro</small></div>
+  </div>
+  <p style="font-size:.68rem;line-height:1.6;margin:.8rem 0 0">
+    <b>Medido:</b> texto #1d1722 sobre --surface = <b>15.47:1</b> · sobre --surface-raised = <b>17.53:1</b> ·
+    muted #6f6675 sobre --surface = <b>4.83:1</b> (AA texto) · no escuro, #c6bdcb sobre #19141e = <b>9.95:1</b>
+    e o muted da sidebar #94899c = <b>5.45:1</b>.</p>
+  <p class="g-src" style="margin:.4rem 0 0">globals.css:6–10, 19–20 (tokens) · 76 (sidebar) · 305 (excluded) · 1135 (painel)</p>
+</section>
+
+<section class="g-section">
+  <h2>O fundo e o topbar</h2>
+  <p>O body não é chapado: um radial-gradient roxo a 5,5% de opacidade nasce fora do canto
+     superior direito e morre em 28rem — este cartão está sobre ele. O topbar não tem sombra:
+     a profundidade vem de fundo translúcido + blur, fechado por border-bottom.</p>
+  <pre style="background:var(--surface-subtle);border:1px solid var(--border);border-radius:.5rem;font-size:.62rem;line-height:1.6;margin:0;overflow-x:auto;padding:.6rem .75rem">background:
+  radial-gradient(circle at 78% -12%, rgba(112, 36, 199, .055), transparent 28rem),
+  var(--surface);                                          /* globals.css:32–34 */
+
+.topbar { backdrop-filter: blur(14px); background: rgba(255, 255, 255, .9);
+  border-bottom: 1px solid var(--border); }                /* globals.css:67 */</pre>
+  <div class="g-finding"><strong>Achado</strong> — a pauta pedia "a sombra do topbar", mas o topbar
+    real não declara box-shadow nenhuma: é blur + translucidez. Registrado como está no arquivo.</div>
+</section>
+
+<section class="g-section">
+  <h2>As poucas sombras reais</h2>
+  <p>Num sistema flat, cada sombra existente tem um porquê. As recorrentes:</p>
+  <div class="g-shadow"><div class="g-meta"><b>Painel de dados</b>0 12px 34px rgba(35,25,40,.045)<br>globals.css:1135</div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:.55rem;box-shadow:0 12px 34px rgba(35,25,40,.045);min-height:3.4rem;display:grid;place-items:center"><span style="color:var(--muted);font-size:.66rem">platform-data-panel — difusa e quase invisível, só descola a mesa de dados do fundo</span></div></div>
+  <div class="g-shadow"><div class="g-meta"><b>Card em hover</b>0 .4rem .9rem rgba(35,24,40,.06) + translateY(-1px)<br>globals.css:252</div>
+    <div style="background:#fff;border:1px solid var(--border-strong);border-radius:.85rem;box-shadow:0 .4rem .9rem rgba(35,24,40,.06);min-height:3.4rem;display:grid;place-items:center;transform:translateY(-1px)"><span style="color:var(--muted);font-size:.66rem">scope-card:hover — o único "levantar" de cartão do sistema</span></div></div>
+  <div class="g-shadow"><div class="g-meta"><b>Controle flutuante</b>0 1px 3px rgba(32,22,38,.06)<br>globals.css:111</div>
+    <div style="align-items:center;background:#fff;border:1px solid var(--border);border-radius:.45rem;box-shadow:0 1px 3px rgba(32,22,38,.06);display:inline-flex;height:2.5rem;justify-content:center;width:2.5rem"><span style="color:var(--muted);font-size:.8rem">≡</span></div>
+    </div>
+  <div class="g-shadow"><div class="g-meta"><b>Tooltip</b>0 .4rem 1rem rgba(20,12,24,.18)<br>globals.css:100</div>
+    <span style="background:#fff;border:1px solid var(--border);border-radius:.35rem;box-shadow:0 .4rem 1rem rgba(20,12,24,.18);display:inline-block;font-size:.66rem;font-weight:650;padding:.42rem .55rem">Nova análise</span></div>
+  <div class="g-shadow"><div class="g-meta"><b>Anel de foco</b>0 0 0 3px var(--accent-soft) · 9×<br>globals.css:54, 498…</div>
+    <span style="background:#fff;border:1px solid var(--accent);border-radius:.45rem;box-shadow:0 0 0 3px var(--accent-soft);display:inline-block;font-size:.7rem;padding:.45rem .8rem">select em :focus-visible</span></div>
+  <div class="g-shadow"><div class="g-meta"><b>Botão de ação</b>inset .18rem 0 var(--accent), inset 0 1px rgba(255,255,255,.1), 0 3px 8px rgba(30,20,34,.12)<br>globals.css:1126</div>
+    <span style="align-items:center;background:#251b2a;border:1px solid #241a29;border-radius:.34rem;box-shadow:inset .18rem 0 var(--accent),inset 0 1px rgba(255,255,255,.1),0 3px 8px rgba(30,20,34,.12);color:#fff;display:inline-flex;font-size:.7rem;font-weight:560;min-height:2.35rem;padding:0 .9rem">Nova análise</span></div>
+</section>
+
+<section class="g-section">
+  <h2>Vocabulário de movimento</h2>
+  <p>Transições curtas, sempre em propriedades nomeadas (nunca "all"). Contagem real das durações
+     com ease: <b>.12s</b> ·8× (micro-hover) · <b>.14s</b> ·12× (tooltip, tabs do resultado) ·
+     <b>.15s</b> ·31× e <b>.18s</b> ·31× (o par de trabalho: hover de controle e navegação) ·
+     <b>.2s</b> ·14× (skip-link, entradas maiores). Curvas próprias, cada uma com um dono:</p>
+  <pre style="background:var(--surface-subtle);border:1px solid var(--border);border-radius:.5rem;font-size:.62rem;line-height:1.7;margin:0;overflow-x:auto;padding:.6rem .75rem">.platform-shell   grid-template-columns .18s cubic-bezier(.2,.8,.2,1)   /* :63 — abre/fecha a sidebar */
+.sidebar-toggle   left .18s cubic-bezier(.2,.8,.2,1)                     /* :111 — acompanha o shell */
+.analysis-meter-fill   width .5s cubic-bezier(.22,.61,.36,1)             /* :517 — barra de progresso */
+.auth-card        animation: auth-card-enter .55s cubic-bezier(.22,1,.36,1) both   /* :389 — entrada do login */</pre>
+</section>
+
+<section class="g-section">
+  <h2>Keyframes existentes</h2>
+  <p>Todos os nomes que o arquivo declara, com o que fazem. Demonstração viva só da varredura
+     (valores copiados de :1361–1363):&nbsp;&nbsp;<span class="g-demo-bar" style="display:inline-block;vertical-align:middle"></span></p>
+  <table class="g-kf">
+    <tr><th>keyframe</th><th>o que faz</th><th>fonte</th></tr>
+    <tr><td>skeleton-pulse</td><td>placeholder de loading: fundo #e4e0e7 pulsa até #f0edf2, 1.3s ease-in-out alternate.</td><td class="g-src">globals.css:1045–1046</td></tr>
+    <tr><td>analysis-skeleton-pulse</td><td>esqueleto da tabela de análises: opacity 1 → .45 no meio do ciclo, 1.4s.</td><td class="g-src">globals.css:685, 689</td></tr>
+    <tr><td>analysis-meter-pulse</td><td>brilho sobre a barra de progresso (opacity .15 → .65), 1.6s — declarado DENTRO de @media (prefers-reduced-motion: no-preference): sem preferência por movimento, nem existe.</td><td class="g-src">globals.css:521–523</td></tr>
+    <tr><td>preflight-stage-pulse</td><td>ponto de .44rem da etapa ativa do preflight cai a opacity .25 em 50%, 1.2s.</td><td class="g-src">globals.css:327, 333</td></tr>
+    <tr><td>button-icon-spin</td><td>ícone de botão gira 360°, .8s linear. Com reduced-motion não some: desacelera para 2.4s — o spinner ainda comunica "trabalhando".</td><td class="g-src">globals.css:210–212</td></tr>
+    <tr><td>risk-sweep</td><td>na célula de risco em processamento, um segmento roxo de 42% varre a barra de -42% a 100%, 1.25s.</td><td class="g-src">globals.css:1362–1363</td></tr>
+    <tr><td>consultaTyping</td><td>os três pontos do chat de consulta piscam (opacity .3 → 1 em 30%), 1s, com delay escalonado.</td><td class="g-src">globals.css:3282–3285</td></tr>
+    <tr><td>demais</td><td>auth-card-enter e o trio auth-typewriter-* (entrada do login), process-summary-pulse, result-verdict-pulse, map-spin e consultaSpin (rotações de loading).</td><td class="g-src">globals.css:420–423, 498, 571, 1419, 3510</td></tr>
+  </table>
+</section>
+
+<section class="g-section">
+  <h2>A regra da casa: reduced-motion sempre honrado</h2>
+  <p>Um bloco global zera tudo, e sete regras pontuais tratam os casos que precisam de nuance
+     (o spin que desacelera em vez de sumir; o typewriter do login que já nasce revelado).</p>
+  <pre style="background:var(--surface-subtle);border:1px solid var(--border);border-radius:.5rem;font-size:.62rem;line-height:1.7;margin:0;overflow-x:auto;padding:.6rem .75rem">@media (prefers-reduced-motion: reduce) {                       /* globals.css:1114–1118 */
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important; scroll-behavior: auto !important;
+    transition-duration: .01ms !important; }
+  .auth-typewriter-line { border-right-color: transparent; grid-template-columns: 1fr; }
+}</pre>
+  <p style="font-size:.68rem;margin:.7rem 0 0">Regras pontuais em globals.css:212, 334, 690, 3286, 3365, 3511 e 3711 — nenhuma animação do produto escapa da preferência do usuário.</p>
+</section>
+
+</body></html>

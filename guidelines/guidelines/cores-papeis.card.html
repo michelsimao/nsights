@@ -1,0 +1,126 @@
+<!-- @dsCard group="Fundação" viewport="900x1550" name="Papéis semânticos" subtitle="accent, success, warning e danger aplicados — contraste medido por par" -->
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: var(--surface); color: var(--text); font-family: var(--font-geist), "Avenir Next", "Segoe UI", sans-serif; margin: 0; padding: 1.5rem 1.75rem 2.25rem; }
+  h1 { font-size: 1.15rem; letter-spacing: -.01em; margin: 0 0 .25rem; }
+  .lede { color: var(--muted); font-size: .78rem; line-height: 1.5; margin: 0 0 1.1rem; max-width: 46rem; }
+  h2 { font-size: .72rem; font-weight: 800; letter-spacing: .06em; margin: 1.6rem 0 .55rem; text-transform: uppercase; }
+  .role { background: var(--surface-raised); border: 1px solid var(--border); border-radius: .7rem; margin-top: .8rem; padding: .9rem 1rem 1rem; }
+  .role header { align-items: baseline; display: flex; gap: .6rem; }
+  .role h3 { font-size: .85rem; margin: 0; }
+  .role header .hex { color: var(--muted); }
+  .trio { display: flex; gap: .75rem; margin: .6rem 0 .7rem; }
+  .trio > div { flex: 1 1 0; }
+  .trio .chip { border: 1px solid var(--border); border-radius: .4rem; height: 2.2rem; }
+  .trio .lbl { font-size: .62rem; font-weight: 700; margin-top: .3rem; }
+  .trio .hex { color: var(--muted); font-size: .6rem; }
+  .apply { align-items: center; display: flex; flex-wrap: wrap; gap: .5rem; }
+  code, .hex { font-family: var(--font-geist-mono), monospace; font-size: .68rem; font-variant-numeric: tabular-nums; }
+  table { border-collapse: collapse; margin-top: .55rem; width: 100%; }
+  th { color: var(--muted); font-size: .56rem; font-weight: 800; letter-spacing: .06em; padding: .25rem .5rem; text-align: left; text-transform: uppercase; }
+  td { border-top: 1px solid var(--border); font-size: .7rem; padding: .42rem .5rem; vertical-align: middle; }
+  .src { color: var(--muted); font-size: .6rem; white-space: nowrap; }
+  .open { background: var(--surface-raised); border: 1px solid var(--danger); border-radius: .7rem; margin-top: 1.5rem; padding: .95rem 1.05rem 1.1rem; }
+  .open h2 { color: var(--danger); margin: 0 0 .5rem; }
+  .open p { font-size: .76rem; line-height: 1.55; margin: .4rem 0; max-width: 46rem; }
+  .demo-pair { display: flex; gap: .6rem; margin: .7rem 0; }
+</style></head><body>
+
+<h1>Papéis semânticos aplicados</h1>
+<p class="lede">Cada papel de cor do Risk Ops é um <strong>trio</strong>: a cor de texto (token de :root), o tint de fundo
+que os badges usam (literal no CSS do app — ver cartão “Rampas de estado”) e os componentes onde o par aparece.
+Todos os contrastes abaixo foram <strong>medidos</strong> com <code>tools/contrast.mjs</code>, nunca estimados.</p>
+
+<div class="role">
+  <header><h3>Accent</h3><span class="hex">--accent #7024c7 · --accent-strong #5a159f · --accent-soft #eee4f8</span></header>
+  <div class="trio">
+    <div><div class="chip" style="background:var(--accent)"></div><div class="lbl">texto/ação</div><div class="hex">var(--accent) #7024c7</div></div>
+    <div><div class="chip" style="background:var(--accent-strong)"></div><div class="lbl">texto sobre tint</div><div class="hex">var(--accent-strong) #5a159f</div></div>
+    <div><div class="chip" style="background:var(--accent-soft)"></div><div class="lbl">tint de fundo</div><div class="hex">var(--accent-soft) #eee4f8</div></div>
+  </div>
+  <div class="apply">
+    <span class="coverage-pill running">running</span>
+    <span class="advisory-state status-collecting">collecting</span>
+    <span class="status-pill" style="background:var(--accent-soft);color:var(--accent-strong)">round: queued</span>
+  </div>
+  <table><thead><tr><th>Par medido</th><th>Razão</th><th>Veredito</th><th>Fonte do par</th></tr></thead><tbody>
+    <tr><td>#5a159f sobre #eee4f8 (accent-strong sobre accent-soft)</td><td class="hex">8.37:1</td><td>AA texto</td><td class="src">coverage-pill.running (globals.css:3574), advisory-state em andamento (:1106), round-status-* (:3459)</td></tr>
+    <tr><td>#7024c7 sobre #f2f0f3 (accent sobre surface)</td><td class="hex">6.70:1</td><td>AA texto</td><td class="src">links, media-citations a (:1533)</td></tr>
+    <tr><td>#7024c7 sobre #ffffff (accent sobre surface-raised)</td><td class="hex">7.59:1</td><td>AA texto</td><td class="src">links em cartões</td></tr>
+  </tbody></table>
+</div>
+
+<div class="role">
+  <header><h3>Success</h3><span class="hex">--success #197054 · tint #e4f3ec (literal)</span></header>
+  <div class="trio">
+    <div><div class="chip" style="background:var(--success)"></div><div class="lbl">texto</div><div class="hex">var(--success) #197054</div></div>
+    <div><div class="chip" style="background:#e4f3ec"></div><div class="lbl">tint de fundo</div><div class="hex">#e4f3ec (literal)</div></div>
+    <div><div class="chip" style="background:#e4f3ec;display:grid;place-items:center"><span style="color:var(--success);font-size:.62rem;font-weight:800">AMOSTRA</span></div><div class="lbl">par aplicado</div><div class="hex">5.26:1</div></div>
+  </div>
+  <div class="apply">
+    <span class="status-pill status-ativa">ativa</span>
+    <span class="coverage-pill done">done</span>
+    <span class="status-pill status-done">done</span>
+  </div>
+  <table><thead><tr><th>Par medido</th><th>Razão</th><th>Veredito</th><th>Fonte do par</th></tr></thead><tbody>
+    <tr><td>#197054 sobre #e4f3ec</td><td class="hex">5.26:1</td><td>AA texto</td><td class="src">status-ativa (:224), status-done (:674), coverage-pill.done (:3573), round-status-completed (:3455)</td></tr>
+    <tr><td>#197054 sobre #f2f0f3 (surface)</td><td class="hex">5.32:1</td><td>AA texto</td><td class="src">texto solto em success</td></tr>
+  </tbody></table>
+</div>
+
+<div class="role">
+  <header><h3>Warning</h3><span class="hex">--warning #946310 · tints #fdf1e2 / #fbf0df / #f9eed8 (literais)</span></header>
+  <div class="trio">
+    <div><div class="chip" style="background:var(--warning)"></div><div class="lbl">texto</div><div class="hex">var(--warning) #946310</div></div>
+    <div><div class="chip" style="background:#fdf1e2"></div><div class="lbl">tint principal</div><div class="hex">#fdf1e2 (literal)</div></div>
+    <div><div class="chip" style="background:#fdf1e2;display:grid;place-items:center"><span style="color:var(--warning);font-size:.62rem;font-weight:800">AMOSTRA</span></div><div class="lbl">par aplicado</div><div class="hex">4.65:1</div></div>
+  </div>
+  <div class="apply">
+    <span class="status-pill status-alerta">alerta</span>
+    <span class="status-pill" style="background:#fbf0df;color:var(--warning)">completed_with_gaps</span>
+  </div>
+  <table><thead><tr><th>Par medido</th><th>Razão</th><th>Veredito</th><th>Fonte do par</th></tr></thead><tbody>
+    <tr><td>#946310 sobre #fdf1e2</td><td class="hex">4.65:1</td><td>AA texto</td><td class="src">status-alerta (:225)</td></tr>
+    <tr><td>#946310 sobre #fbf0df</td><td class="hex">4.60:1</td><td>AA texto</td><td class="src">round-status-completed_with_gaps (:3456)</td></tr>
+    <tr><td>#946310 sobre #f9eed8</td><td class="hex">4.50:1</td><td>AA texto</td><td class="src">recent-status completed_with_gaps (:1039)</td></tr>
+    <tr><td>#946310 sobre #f2f0f3 (surface)</td><td class="hex">4.57:1</td><td>AA texto — margem apertada; não clarear o tom</td><td class="src">texto solto em warning</td></tr>
+  </tbody></table>
+</div>
+
+<div class="role">
+  <header><h3>Danger</h3><span class="hex">--danger #9c2943 · tints #f7e7ea / #f8e4e9 / #f7e5e9 (literais)</span></header>
+  <div class="trio">
+    <div><div class="chip" style="background:var(--danger)"></div><div class="lbl">texto</div><div class="hex">var(--danger) #9c2943</div></div>
+    <div><div class="chip" style="background:#f7e7ea"></div><div class="lbl">tint principal</div><div class="hex">#f7e7ea (literal)</div></div>
+    <div><div class="chip" style="background:#f7e7ea;display:grid;place-items:center"><span style="color:var(--danger);font-size:.62rem;font-weight:800">AMOSTRA</span></div><div class="lbl">par aplicado</div><div class="hex">6.25:1</div></div>
+  </div>
+  <div class="apply">
+    <span class="status-pill status-inativa">inativa</span>
+    <span class="status-pill status-failed">failed</span>
+    <span class="coverage-pill failed">failed</span>
+  </div>
+  <table><thead><tr><th>Par medido</th><th>Razão</th><th>Veredito</th><th>Fonte do par</th></tr></thead><tbody>
+    <tr><td>#9c2943 sobre #f7e7ea</td><td class="hex">6.25:1</td><td>AA texto</td><td class="src">status-inativa (:226), status-failed (:675), coverage-pill.failed (:3576)</td></tr>
+    <tr><td>#9c2943 sobre #f8e4e9</td><td class="hex">6.14:1</td><td>AA texto</td><td class="src">recent-status failed (:1039)</td></tr>
+    <tr><td>#9c2943 sobre #f7e5e9</td><td class="hex">6.17:1</td><td>AA texto</td><td class="src">advisory-state failed (:1106)</td></tr>
+    <tr><td>#9c2943 sobre #f2f0f3 (surface)</td><td class="hex">6.59:1</td><td>AA texto</td><td class="src">texto solto em danger</td></tr>
+  </tbody></table>
+</div>
+
+<div class="open">
+  <h2>Aberto — decisão pendente do time</h2>
+  <p><strong>.button-primary reprova contraste.</strong> A regra real (globals.css:136) é
+  <code>background: var(--accent); color: #04131a</code> — texto quase-preto sobre roxo #7024c7.
+  Medido: <strong>#04131a sobre #7024c7 = 2.48:1 — FALHA</strong> (mínimo AA para texto é 4.5:1).</p>
+  <div class="demo-pair">
+    <button class="button-primary" type="button">Como está hoje (2.48:1)</button>
+    <button class="button-primary" type="button" style="color:#ffffff">Recomendação: #fff (7.59:1)</button>
+  </div>
+  <p><strong>Recomendação:</strong> trocar a cor do texto para <code>#ffffff</code> — medido
+  <strong>#ffffff sobre #7024c7 = 7.59:1, AA texto</strong>. Nenhuma outra mudança necessária.
+  Observação: a variante <code>.platform-page-action .button-primary</code> (globals.css:1126) já usa
+  <code>color: #fff</code> sobre fundo escuro #251b2a — o defeito é só do botão base.
+  <em>Registrado como achado; a correção é decisão do time, não deste estudo.</em></p>
+</div>
+
+</body></html>

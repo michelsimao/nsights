@@ -1,0 +1,78 @@
+/* Nsights components — buttons, badges, inputs, cards. */
+
+/* ---------- Buttons ---------- */
+.ns-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  font-family: var(--ns-font-sans); font-weight: 500; font-size: 13px; line-height: 1;
+  letter-spacing: 0.01em;
+  padding: 8px 14px; border-radius: var(--ns-radius-button); border: 1px solid transparent;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background-color 0.18s var(--ns-ease), border-color 0.18s var(--ns-ease), color 0.18s var(--ns-ease), box-shadow 0.18s var(--ns-ease);
+}
+.ns-btn:disabled { cursor: not-allowed; opacity: 0.45; }
+.ns-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--ns-accent-primary) 14%, transparent); }
+.ns-btn:active:not(:disabled) { transform: translateY(0.5px); }
+.ns-btn svg { margin: -2px 0; }
+
+.ns-btn-primary { background: var(--ns-btn-primary-base); color: var(--ns-btn-primary-text); font-weight: 600; }
+.ns-btn-primary:hover:not(:disabled) { background: var(--ns-accent-secondary); }
+
+.ns-btn-secondary { background: transparent; border-color: var(--ns-border); color: var(--ns-text-body); }
+.ns-btn-secondary:hover:not(:disabled) { border-color: var(--ns-border-hover); background: var(--ns-bg-hover); }
+.ns-btn-secondary svg { color: var(--ns-text-muted); }
+
+.ns-btn-ghost { background: transparent; color: var(--ns-accent-primary); }
+.ns-btn-ghost:hover:not(:disabled) { background: var(--ns-accent-tint); }
+
+.ns-btn-gold { background: linear-gradient(135deg, var(--ns-accent-gold), var(--ns-accent-neon)); color: var(--ns-text-inverted); font-weight: 600; }
+.ns-btn-gold:hover:not(:disabled) { filter: brightness(1.06); }
+
+.ns-btn-sm { padding: 5px 10px; font-size: 12px; gap: 6px; }
+.ns-btn-iconly { padding: 8px; }
+.ns-btn-sm.ns-btn-iconly { padding: 6px; }
+
+/* ---------- Badges ---------- */
+.ns-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 6px;
+  font-family: var(--ns-font-sans); font-size: 11px; font-weight: 500;
+  border: 1px solid transparent; white-space: nowrap;
+}
+.ns-badge-default { background: var(--ns-bg-hover); color: var(--ns-text-secondary); }
+.ns-badge-primary { background: var(--ns-accent-tint); color: var(--ns-accent-primary); }
+.ns-badge-success { background: color-mix(in srgb, var(--ns-success) 12%, transparent); color: var(--ns-success); }
+.ns-badge-warning { background: color-mix(in srgb, var(--ns-warning) 12%, transparent); color: var(--ns-warning); }
+.ns-badge-danger { background: color-mix(in srgb, var(--ns-danger) 12%, transparent); color: var(--ns-danger); }
+.ns-badge-premium { background: linear-gradient(135deg, var(--ns-accent-gold), var(--ns-accent-neon)); color: var(--ns-text-inverted); }
+.ns-badge-critical { background: color-mix(in srgb, var(--ns-info) 10%, transparent); color: var(--ns-warning); border-color: color-mix(in srgb, var(--ns-warning) 30%, transparent); }
+
+/* ---------- Inputs ---------- */
+.ns-input {
+  display: block; width: 100%; box-sizing: border-box;
+  padding: 12px 16px; font-family: var(--ns-font-sans); font-size: 14px;
+  color: var(--ns-text-body); background: var(--ns-bg-card);
+  border: 1px solid var(--ns-border); border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s var(--ns-ease), box-shadow 0.2s var(--ns-ease);
+}
+.ns-input::placeholder { color: var(--ns-text-placeholder); }
+.ns-input:focus { border-color: var(--ns-border-active); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ns-accent-primary) 8%, transparent); }
+
+/* ---------- Cards ---------- */
+.ns-unified-card {
+  position: relative;
+  background: var(--ns-bg-card);
+  border: 1px solid var(--ns-border);
+  border-radius: var(--ns-radius-card);
+  box-shadow: var(--ns-shadow-sm);
+  transition: border-color 0.25s ease-out, box-shadow 0.25s ease-out;
+  --card-accent-border: var(--ns-accent-border);
+  --card-accent-glow: 0 0 0 1px var(--ns-accent-tint), var(--ns-shadow-md);
+}
+.ns-unified-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 40%; height: 1px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--ns-text-heading) 18%, transparent), transparent);
+  border-radius: var(--ns-radius-card) 0 0 0;
+  pointer-events: none;
+}
+.ns-unified-card:hover { border-color: var(--card-accent-border); box-shadow: var(--card-accent-glow); }

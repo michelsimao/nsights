@@ -1,0 +1,177 @@
+/* ==========================================================================
+   patch-normalizacao.css — proposta de consolidação do Nsights Risk Ops
+   Gerado pela auditoria em revisao/Auditoria — Nsights Risk Ops.html
+
+   ESTE ARQUIVO NÃO É PARA CARREGAR AQUI. O design system deste projeto é
+   sincronizado do repo (read-only). Aplique estas regras em
+   app/globals.css + os tokens do repo e rode /design-sync de novo.
+
+   Ordem: 1) tokens consolidados · 2) contrato único de campo ·
+   3) correções de contraste · 4) famílias de estado lendo token ·
+   5) fonte · 6) código morto a remover.
+   ========================================================================== */
+
+/* ---- 1. TOKENS ---------------------------------------------------------- */
+/* 157 hex distintos no CSS hoje contra 17 tokens. Abaixo, um token por papel
+   que o CSS já pratica — nenhum valor novo foi inventado: cada um é um dos
+   literais que já estão no arquivo, eleito como o único da sua função. */
+:root {
+  /* fontes: pilha embutida no token, para nenhuma regra repetir fallback */
+  --font-geist: "Geist", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-geist-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* superfícies claras — substituem ~20 quase-brancos */
+  --surface: #f2f0f3;
+  --surface-subtle: #f8f6f9;
+  --surface-raised: #ffffff;
+  --accent-wash: #faf6ff;          /* branco de tinta roxa: cartão selecionado, run-progress */
+
+  /* traços */
+  --border: #ded9e2;
+  --border-strong: #cfc7d5;
+  --border-accent: #d9c4f2;        /* substitui #d7c4ec #d9c7f0 #dcc9f2 #d3c2ec #e2d4f1 */
+
+  /* texto */
+  --text: #1d1722;
+  --ink: var(--text);
+  --text-secondary: #4e4654;       /* substitui #4a4352 #4a4a58 #4e4654 */
+  --muted: #6f6675;                /* substitui 17 cinzas de apoio */
+  --placeholder: #6f6675;          /* os três placeholders atuais reprovam AA */
+  --disabled-opacity: .6;
+
+  /* estado — três papéis por estado: tinta de fundo, texto sobre a tinta, sólido/ponto */
+  --ok-bg: #e7f6ef;   --ok-fg: #176b4d;   --ok-dot: #1f9a70;   --success: #197054;
+  --warn-bg: #fff3dc; --warn-fg: #80540c; --warn-dot: #c27c12; --warning: #946310;
+  --warning-strong: #b0620d;                                   /* risk-sw.agrav */
+  --crit-bg: #fde9ee; --crit-fg: #8f1833; --crit-dot: #b91c3c; --danger: #9c2943;
+  --veto: #8f0f2c;                                             /* veredito vetado */
+  --gap-bg: #eeeef2;  --gap-fg: #4a4a58;  --gap-dot: #8e8899;
+  --unknown-bg: #efe8f8; --unknown-fg: #5b2d86; --unknown-dot: #7c7286;
+  --info-bg: var(--accent-soft);  --info-fg: var(--accent-strong);
+
+  /* acento */
+  --accent: #7024c7;
+  --accent-strong: #5a159f;
+  --accent-soft: #eee4f8;
+  --coral: #c85c75;
+  --on-accent: #ffffff;            /* corrige .button-primary: 2,48:1 -> 7,59:1 */
+
+  /* ilhas escuras — substituem 13 valores dispersos */
+  --dark: #19141e;                 /* absorve #17131b (auth-shell/brand-panel) */
+  --dark-raised: #241d2a;          /* absorve #241a29 #251d2c #251b2a #241b2c #221a29 */
+  --dark-hover: #2b2133;           /* absorve #2a2133 */
+  --dark-border: #31283a;          /* absorve #33293b #3a3045 #4a3e52 */
+  --dark-border-strong: #3d3047;
+  --dark-text: #f6f2f8;            /* absorve #f8f4fa #e8e0ef */
+  --dark-muted: #94899c;           /* absorve #a9a1b0 #928798 #958b99 */
+  --dark-muted-strong: #c6bdcb;    /* absorve #bbb0c2 #b9afbe */
+  --accent-on-dark: #a86deb;       /* absorve #8c3ed0 #a274d8 #aa70cd */
+  --accent-on-dark-soft: #d4b3f2;  /* absorve #c8a8dc #d4b3f2 */
+
+  /* campos — um contrato só */
+  --field-h: 2.75rem;
+  --field-h-sm: 2.35rem;
+  --field-radius: .45rem;
+  --field-pad: .7rem .8rem;
+  --field-pad-sm: .48rem .62rem;
+  --field-bg: var(--surface-raised);
+  --field-border: var(--border-strong);
+  --field-border-hover: var(--accent);
+  --field-invalid: var(--danger);
+  --field-invalid-bg: var(--crit-bg);
+  --focus-ring: 2px solid var(--accent);
+  --focus-offset: 2px;
+
+  /* pesos: 17 valores -> 5 degraus */
+  --w-regular: 400; --w-medium: 550; --w-semi: 650; --w-bold: 700; --w-caps: 800;
+}
+
+/* ---- 2. CAMPOS: UM CONTRATO ------------------------------------------- */
+/* Hoje: 7 alturas, 6 raios, 5 fundos, 4 bordas, 4 anéis de foco, 3 placeholders. */
+.field-group input, .field-group textarea, .settings-invite-form input,
+.entity-picker-panel input, .granular-filters input[type="search"],
+.granular-filters select, .ns-datepicker-field, .ns-datepicker-inputs input,
+.qsa-multi-select-trigger, select, .auth-form input {
+  background: var(--field-bg);
+  border: 1px solid var(--field-border);
+  border-radius: var(--field-radius);
+  color: var(--text);
+  font: inherit;
+  min-height: var(--field-h);
+  padding: var(--field-pad);
+  transition: border-color .15s ease;
+  width: 100%;
+}
+/* variante compacta — barras de filtro, toolbars, seletores de tabela */
+.granular-filters :is(input, select), .ns-datepicker-inputs input,
+.qsa-multi-select-trigger, .entity-picker-panel input,
+.workspace-filter select, .workspace-search input {
+  font-size: .72rem;
+  min-height: var(--field-h-sm);
+  padding: var(--field-pad-sm);
+}
+/* única exceção sancionada: o login é mais arejado de propósito */
+.auth-form input { min-height: 3.25rem; padding: .8rem .9rem; }
+
+:is(input, textarea, select)::placeholder { color: var(--placeholder); }
+:is(input, textarea, select):hover:not(:disabled) { border-color: var(--field-border-hover); }
+:is(input, textarea, select, button, a, .table-scroll, .ns-datepicker-field,
+    .qsa-multi-select-trigger):focus-visible {
+  box-shadow: none;                /* retira o anel duplo de select/auth-form */
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+:is(input, textarea, select):disabled, .ns-disabled {
+  cursor: not-allowed;
+  opacity: var(--disabled-opacity);
+}
+/* estado inválido — o sistema não tem nenhum hoje */
+[data-invalid] :is(input, textarea, select),
+:is(input, textarea, select)[aria-invalid="true"] {
+  background: var(--field-invalid-bg);
+  border-color: var(--field-invalid);
+}
+
+/* ---- 3. CORREÇÕES DE CONTRASTE ---------------------------------------- */
+.button-primary { color: var(--on-accent); }        /* 2,48:1 -> 7,59:1 */
+.status-empty { background: var(--gap-bg); color: var(--gap-fg); }  /* 3,14:1 -> 7,53:1 */
+
+/* ---- 4. FAMÍLIAS DE ESTADO LENDO TOKEN -------------------------------- */
+/* mesmo papel, mesmo par, nas cinco famílias que hoje divergem */
+.result-badge-ok, .status-regular, .verdict-badge.low, .profile-trend-up,
+.ns-alert-success, .coverage-pill.done { background: var(--ok-bg); color: var(--ok-fg); }
+.result-badge-attention, .status-attention, .verdict-badge.medium,
+.alert { background: var(--warn-bg); color: var(--warn-fg); }
+.result-badge-critical, .status-critical, .verdict-badge.high, .verdict-badge.vetoed,
+.profile-trend-down, .ns-alert-danger, .ai-error, .upload-error,
+.ai-tool-state[data-state="output-error"], .coverage-pill.failed { background: var(--crit-bg); color: var(--crit-fg); }
+.result-badge-gap, .status-gap { background: var(--gap-bg); color: var(--gap-fg); }
+.verdict-badge.inconclusive { background: var(--unknown-bg); color: var(--unknown-fg); }
+.dot-regular { background: var(--ok-dot); }
+.dot-attention { background: var(--warn-dot); }
+.dot-critical { background: var(--crit-dot); }
+.dot-gap { background: var(--gap-dot); }
+.risk-sw.aten { background: var(--warning); }
+.risk-sw.agrav { background: var(--warning-strong); }
+.risk-sw.grave, .risk-verdict.is-high .risk-stamp { background: var(--crit-dot); }
+.risk-sw.veto, .risk-stamp { background: var(--veto); }
+.risk-verdict.is-unknown .risk-stamp, .risk-verdict.is-run .risk-stamp { background: var(--unknown-dot); }
+.risk-verdict.is-veto { border-left-color: var(--veto); }
+.risk-verdict.is-high { border-left-color: var(--crit-dot); }
+.risk-verdict.is-unknown { border-left-color: var(--unknown-dot); }
+
+/* ---- 5. FONTE --------------------------------------------------------- */
+/* as duas regras que caem em font-family: inherit e deveriam ser mono */
+.ns-kbd, .profile-chart text { font-family: var(--font-geist-mono); }
+/* com a pilha no token, toda regra passa a ser só var(--font-geist-mono) */
+
+/* ---- 6. CÓDIGO MORTO A REMOVER (no repo) ------------------------------ */
+/* • _ds_bundle.css 1472–1500: bloco duplicado byte a byte de 1359 + 1411–1445
+     (.ai-message[data-from="user"] .ai-message-content, .detail-spinner,
+      .run-progress … .coverage-pill.failed).
+   • @keyframes consultaSpin declarado duas vezes (1511 e 1512).
+   • .status-regular/.status-attention/.status-critical: as definições de
+     774–778 são sobrescritas por 1164–1166 com OUTRAS cores — apagar uma.
+   • .status-gap, .status-empty (1167): totalmente sobrescrita por 1168/1169.
+   • .dot-critical / .dot-attention: duplicadas com valor idêntico (853/854 e 1161/1162).
+   • #04131a e #b9afbE (maiúscula solta) não pertencem a nenhuma paleta. */

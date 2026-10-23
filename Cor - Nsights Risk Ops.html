@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Cor — Nsights Risk Ops</title>
+<link rel="icon" type="image/png" href="brand/icon.png">
+<link rel="apple-touch-icon" href="brand/icon.png">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="tokens-estado.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font-geist),system-ui,sans-serif}
+a{color:var(--accent-strong);text-decoration:none}a:hover{color:var(--accent)}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr)}
+.side{position:sticky;top:0;height:100vh;background:var(--dark);color:#f8f4fa;display:flex;flex-direction:column;gap:16px;padding:26px 16px 20px;overflow-y:auto}
+.side .brand{display:flex;align-items:center;gap:.55rem;min-width:0}
+.side .brand .compact{height:1.75rem;width:auto;display:block;flex:0 0 auto}
+.side .brand .qual{border-left:1px solid #4a3e52;color:#bbb0c2;font-size:.62rem;font-weight:650;line-height:1;padding-left:.55rem;white-space:nowrap}
+.lbl{font-size:.6rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.side .brand .lbl{color:#a9a1b0}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:var(--control-gap);padding:.45rem .55rem;border-radius:var(--control-radius);color:#a9a1b0;font-size:.78rem;line-height:1.3;border:1px solid transparent;min-height:var(--control-h-sm)}
+.nav a>.num{flex:0 0 1.3rem}
+.nav a:hover{background:rgba(255,255,255,.05);color:#f8f4fa}
+.nav a.active{background:rgba(168,109,235,.15);border-color:rgba(168,109,235,.34);color:#fff}
+.nav a .num{font-family:var(--font-geist-mono),monospace;font-size:.62rem;color:rgba(255,255,255,.32);text-align:center}
+.nav a.active .num{color:#a86deb}
+.side .foot{margin-top:auto;color:rgba(255,255,255,.34);font-size:.62rem;border-top:1px solid rgba(255,255,255,.1);padding-top:.8rem;display:grid;gap:.3rem}
+.side .foot code{font-family:var(--font-geist-mono),monospace;color:#a86deb;font-size:.62rem}
+.doc{max-width:1000px;margin:0 auto;padding:40px 32px 96px;display:flex;flex-direction:column;gap:14px;min-width:0}
+h1{font-size:2rem;margin:0;letter-spacing:-.025em}
+h2{font-size:1.15rem;margin:0;letter-spacing:-.015em}
+h3{font-size:.84rem;margin:0;font-weight:700}
+.lede{color:var(--muted);font-size:.94rem;line-height:1.6;max-width:74ch;margin:4px 0 0;text-wrap:pretty}
+p{color:var(--muted);font-size:.8rem;line-height:1.6;margin:0;max-width:86ch;text-wrap:pretty}
+p b,p strong,li b{color:var(--text)}
+ul,ol{margin:0;padding-left:1.15rem;color:var(--muted);font-size:.8rem;line-height:1.65;max-width:86ch}
+ul{list-style:disc}ol{list-style:decimal}.doc li{list-style:inherit}
+li+li{margin-top:.28rem}
+code{font-family:var(--font-geist-mono),monospace;font-size:.72rem;background:var(--surface-subtle);border:1px solid var(--border);border-radius:.25rem;padding:.05rem .25rem}
+.sec{display:flex;flex-direction:column;gap:14px;min-width:0;overflow-x:clip;scroll-margin-top:20px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+.sec:last-child{border-bottom:0}
+.card{background:var(--surface-raised);border:1px solid var(--border);border-radius:.7rem;padding:20px;display:grid;gap:12px}
+table{border-collapse:collapse;width:100%;background:var(--surface-raised);border:1px solid var(--border);border-radius:.6rem;overflow:hidden;font-size:.74rem}
+th{background:var(--surface-subtle);color:var(--muted);font-size:.56rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:.55rem .65rem;border-bottom:1px solid var(--border)}
+td{padding:.5rem .65rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45}
+tr:last-child td{border-bottom:0}
+td.m{font-family:var(--font-geist-mono),monospace;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:.7rem}
+td.use{color:var(--muted)}
+.sw{display:inline-block;width:.7rem;height:.7rem;border-radius:.2rem;border:1px solid rgba(29,23,34,.15);vertical-align:-.05rem;margin-right:.35rem}
+pre{margin:0;background:var(--dark);color:#e9e2ee;border-radius:.6rem;padding:18px 20px;overflow:auto;font-family:var(--font-geist-mono),monospace;font-size:.68rem;line-height:1.65;max-height:24rem}
+pre b{color:#a86deb;font-weight:400}
+.copy{justify-self:start;border:1px solid var(--border);background:var(--surface-raised);color:var(--text);font-family:inherit;font-size:.7rem;font-weight:650;border-radius:var(--control-radius);padding:0 var(--control-pad-x);cursor:pointer;min-height:var(--control-h-sm)}
+.copy:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-strong)}
+.do{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.do>div{border:1px solid var(--border);border-radius:.55rem;padding:14px 16px;display:grid;gap:8px;background:var(--surface-raised)}
+.do .yes{border-left:3px solid var(--state-ok-solid)}
+.do .no{border-left:3px solid var(--state-danger-solid)}
+.do .lbl{letter-spacing:.08em}
+.do pre{max-height:none;font-size:.66rem;padding:12px 14px}
+.pend{background:var(--state-warn-bg);border:1px solid var(--state-warn-border);border-radius:.55rem;padding:14px 16px;display:grid;gap:6px}
+.pend .lbl{color:var(--state-warn-fg)}
+.pend p{color:var(--state-warn-fg);opacity:.92}
+.seg{display:flex;border:1px solid var(--border);border-radius:var(--control-radius);overflow:hidden;justify-self:start}
+.seg button{border:0;background:var(--surface-raised);color:var(--muted);font-family:inherit;white-space:nowrap;font-size:.7rem;font-weight:650;padding:0 var(--control-pad-x);cursor:pointer;min-height:var(--control-h-sm)}
+.seg button+button{border-left:1px solid var(--border)}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-strong)}
+.tk-demo{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:.7rem;padding:18px;display:grid;gap:14px;transition:background-color .18s,border-color .18s}
+.tk-demo h2,.tk-demo b,.tk-demo strong{color:var(--text)}
+.tk-demo .tk-panel{background:var(--surface-raised);border:1px solid var(--border);border-radius:.6rem;padding:14px 16px;display:grid;gap:10px}
+.tk-demo p{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{position:static;height:auto}.do{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="layout">
+<aside class="side">
+<div class="brand"><img class="compact" src="brand/icon.png" alt="n-sights"><span class="qual">Risk Ops · Cor</span></div>
+<nav class="nav" id="nav">
+<a href="#regras" class="active"><span class="num">1</span><span>Regras de uso</span></a>
+<a href="#papeis"><span class="num">2</span><span>Qual token usar</span></a>
+<a href="#estado"><span class="num">3</span><span>Estado em componentes</span></a>
+<a href="#escuro"><span class="num">4</span><span>Tema escuro</span></a>
+<a href="#root"><span class="num">5</span><span>Bloco :root</span></a>
+<a href="#pendente"><span class="num">!</span><span>Pendente</span></a>
+</nav>
+<div class="foot"><span>54 tokens</span><span>Fonte: <code>tokens-estado.css</code></span></div>
+</aside>
+<div class="doc">
+
+<section class="sec" id="regras">
+<h1>Cor</h1>
+<p class="lede">Toda cor da interface vem de token. Este documento diz qual token usar em cada papel, como pintar estado em componente e o que o tema escuro exige.</p>
+<div class="card">
+<h3>Sete regras</h3>
+<ol>
+<li><b>Nunca escreva hex numa regra de componente.</b> Se a cor que você precisa não tem token, o passo é propor o token — não colar o hex.</li>
+<li><b>Estado se pinta com o par completo.</b> Fundo e texto sempre da mesma família: <code>--state-ok-bg</code> com <code>--state-ok-fg</code>, nunca cruzado.</li>
+<li><b>Sólido é para marca, não para texto.</b> <code>-solid</code> pinta bolinha, barra e preenchimento; texto sobre claro é sempre <code>-fg</code>.</li>
+<li><b>Chão saturado pede a tinta certa.</b> Sobre <code>--accent</code> e <code>-solid</code>, use <code>--on-accent</code>; sobre a rampa escura, <code>--on-dark</code>. Nunca <code>--text</code> nem um escuro literal.</li>
+<li><b>Neutro tem matiz.</b> O cinza do produto é roxo-acinzentado. Cinza puro (<code>#8b8b9b</code> e parentes de matiz 240°) não pertence à paleta.</li>
+<li><b>Um papel, um token.</b> O mesmo estado nunca tem dois tons: "regular" é <code>--state-ok-solid</code> no badge e no ponto de gráfico; "sem dado" é o par <code>--state-neutral-*</code> em badge, pill e ponto, e <code>--chart-neutral</code> quando é série de gráfico.</li>
+<li><b>Cor nunca é o único indicador.</b> Todo estado leva rótulo, ícone ou forma junto — gráficos incluídos.</li>
+</ol>
+</div>
+<div class="do">
+<div class="yes"><span class="lbl">Faça</span><pre>.status-regular {
+  background: var(--state-ok-bg);
+  color: var(--state-ok-fg);
+}
+.status-regular > span {
+  background: var(--state-ok-solid);
+}</pre></div>
+<div class="no"><span class="lbl">Não faça</span><pre>.status-regular {
+  background: #e6f5ee;
+  color: #137a51;
+}
+.status-regular > span {
+  background: #1f9a70;
+}</pre></div>
+</div>
+</section>
+
+<section class="sec" id="papeis">
+<h2>2 · Qual token usar</h2>
+<p>Escolha pela função do elemento, não pela cor que ele parece ter.</p>
+
+<span class="lbl">Superfícies e bordas</span>
+<table><thead><tr><th>Token</th><th>Use em</th></tr></thead><tbody>
+<tr><td class="m"><span class="sw" style="background:#f2f0f3"></span>--surface</td><td class="use">Fundo de página e de tela.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#ffffff"></span>--surface-raised</td><td class="use">Card, painel, tabela, modal — tudo que assenta sobre a página.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#f8f6f9"></span>--surface-subtle</td><td class="use">Cabeçalho de tabela, rodapé de painel, zona de leitura dentro de card.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#eeeaf0"></span>--surface-sunken</td><td class="use">Trilha, poço, divisória larga, célula desabilitada.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#faf6ff"></span>--surface-accent-tint</td><td class="use">Hover e seleção de card, dropzone com arquivo.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#ded9e2"></span>--border</td><td class="use">Borda padrão e divisória de lista.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#cfc7d5"></span>--border-strong</td><td class="use">Campo de formulário, contorno de controle interativo.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#d9c4f2"></span>--border-accent</td><td class="use">Item selecionado, aba ativa, progresso em curso.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#b89ad4"></span>--border-accent-strong</td><td class="use">Foco e arraste sobre item já selecionado.</td></tr>
+</tbody></table>
+
+<span class="lbl">Texto</span>
+<table><thead><tr><th>Token</th><th>Use em</th></tr></thead><tbody>
+<tr><td class="m"><span class="sw" style="background:#1d1722"></span>--text</td><td class="use">Título, valor, corpo. Padrão de tudo que precisa ser lido.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#4e4654"></span>--muted-strong</td><td class="use">Rótulo de campo, lede, texto secundário que ainda carrega informação.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#6f6675"></span>--muted</td><td class="use">Legenda, unidade, eyebrow, descrição de menu e placeholder de campo. É o piso do texto legível: 5.48:1 sobre branco.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#8a8290"></span>--muted-weak</td><td class="use">Decorativo apenas: filete, ícone desabilitado, separador. Não pinta texto — 3.70:1 reprova AA.</td></tr>
+</tbody></table>
+
+<span class="lbl">Marca e foco</span>
+<table><thead><tr><th>Token</th><th>Use em</th></tr></thead><tbody>
+<tr><td class="m"><span class="sw" style="background:#7024c7"></span>--accent</td><td class="use">Ação primária, barra de gráfico, indicador ativo.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#5a159f"></span>--accent-strong</td><td class="use">Texto e ícone de marca sobre claro; hover da ação primária.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#eee4f8"></span>--accent-soft</td><td class="use">Tint de pill em execução, chip selecionado.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#d3c2ec"></span>--accent-muted</td><td class="use">Trilha de barra, fundo de progresso.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#8c3ed0"></span>--focus-ring</td><td class="use">Contorno de <code>:focus-visible</code>.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#eee1fa"></span>--focus-halo</td><td class="use">Halo em volta do contorno de foco.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#ffffff"></span>--on-accent</td><td class="use">Texto e ícone sobre <code>--accent</code> e sobre <code>-solid</code>: botão primário, CTA. Inverte com o tema — branco no claro, <code>#1d1722</code> no escuro, onde o roxo clareia.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#ffffff"></span>--on-dark</td><td class="use">Texto sobre a rampa escura: <code>.button-link</code>, botão do login, rodapé do wizard. Branco nos dois temas — esse chão não inverte.</td></tr>
+</tbody></table>
+
+<span class="lbl">Gráficos</span>
+<table><thead><tr><th>Token</th><th>Use em</th></tr></thead><tbody>
+<tr><td class="m"><span class="sw" style="background:#7024c7"></span>--accent</td><td class="use">Série principal.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#a274d8"></span>--chart-accent-soft</td><td class="use">Série secundária, comparativo.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#c85c75"></span>--coral</td><td class="use">Terceira série, contraponto.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#8d8491"></span>--chart-neutral</td><td class="use">Série sem dado e referência num gráfico; segmento e ponto inativos. É o neutro que ainda é indicador: 3.59:1.</td></tr>
+<tr><td class="m"><span class="sw" style="background:#b3aec0"></span>--chart-neutral-soft</td><td class="use">Decorativo apenas: trilha atrás da barra, anel, filete de migalha. Nunca indicador sozinho — 2.16:1.</td></tr>
+</tbody></table>
+</section>
+
+<section class="sec" id="estado">
+<h2>3 · Estado em componentes</h2>
+<p>Cinco famílias, quatro papéis cada: <code>-bg</code> e <code>-fg</code> pintam badge, pill e alerta; <code>-solid</code> é bolinha, barra e preenchimento; <code>-border</code> é contorno de swatch e de faixa. Nenhuma família empresta token de outra — <code>info</code> tem o próprio <code>--state-info-fg</code>, mesmo coincidindo com o roxo da marca.</p>
+<table><thead><tr><th>Família</th><th>Quando</th><th class="m">-bg + -fg</th><th class="m">-solid</th></tr></thead><tbody>
+<tr><td><b>ok</b></td><td class="use">Nada encontrado, fonte respondeu, conta ativa.</td><td class="m"><span class="sw" style="background:#e9f5f0"></span>#e9f5f0 · <span class="sw" style="background:#176b4d"></span>#176b4d</td><td class="m"><span class="sw" style="background:#1f9a70"></span>#1f9a70</td></tr>
+<tr><td><b>warn</b></td><td class="use">Ressalva, dado defasado, agravante.</td><td class="m"><span class="sw" style="background:#fff5e6"></span>#fff5e6 · <span class="sw" style="background:#80540c"></span>#80540c</td><td class="m"><span class="sw" style="background:#b0620d"></span>#b0620d</td></tr>
+<tr><td><b>danger</b></td><td class="use">Impedimento, veto, falha de consulta.</td><td class="m"><span class="sw" style="background:#fde9ee"></span>#fde9ee · <span class="sw" style="background:#8f1833"></span>#8f1833</td><td class="m"><span class="sw" style="background:#b91c3c"></span>#b91c3c</td></tr>
+<tr><td><b>neutral</b></td><td class="use">Sem dado, em fila, cancelado, fora de escopo — tudo que ainda não produziu resultado.</td><td class="m"><span class="sw" style="background:#eeeef2"></span>#eeeef2 · <span class="sw" style="background:#4e4654"></span>#4e4654</td><td class="m"><span class="sw" style="background:#8d8491"></span>#8d8491</td></tr>
+<tr><td><b>info</b></td><td class="use">Aviso do sistema e veredito inconclusivo.</td><td class="m"><span class="sw" style="background:#f4eefc"></span>#f4eefc · <span class="sw" style="background:#5a159f"></span>#5a159f</td><td class="m"><span class="sw" style="background:#7024c7"></span>#7024c7</td></tr></tbody></table>
+<p><code>--state-danger-strong</code> (<span class="sw" style="background:#8f0f2c"></span><code>#8f0f2c</code>) é exclusivo de veto: selo de veredito e borda esquerda do card. <code>--state-danger-on-dark</code> (<span class="sw" style="background:#e0879a"></span><code>#e0879a</code>) é a única cor de estado permitida sobre superfície escura.</p>
+<p><b>Progresso não é estado.</b> "Em execução" usa a família da marca — <code>--accent-soft</code> com <code>--accent-strong</code> no pill, <code>--accent</code> no selo e na barra — porque indica atividade, não resultado. Só quando a consulta termina o elemento assume uma família de estado.</p>
+<span class="lbl">Referência viva</span>
+<div class="seg" id="theme"><button data-t="light" aria-pressed="true">Claro</button><button data-t="dark" aria-pressed="false">Escuro</button></div>
+<div class="tk-demo" id="demo">
+<div class="tk-panel"><span class="lbl">Badges</span>
+<div class="row">
+<span class="status-badge status-regular"><span></span>Regular</span>
+<span class="status-badge status-attention"><span></span>Atenção</span>
+<span class="status-badge status-critical"><span></span>Crítico</span>
+<span class="status-badge status-gap">Sem dado</span>
+</div>
+<div class="row">
+<span class="result-badge result-badge-ok">Nada encontrado</span>
+<span class="result-badge result-badge-attention">Ressalva</span>
+<span class="result-badge result-badge-critical">Impedimento</span>
+<span class="result-badge result-badge-gap">Fonte indisponível</span>
+</div>
+<div class="row">
+<span class="verdict-badge low">Baixo</span>
+<span class="verdict-badge medium">Médio</span>
+<span class="verdict-badge high">Alto</span>
+<span class="verdict-badge vetoed">Veto</span>
+<span class="verdict-badge inconclusive">Inconclusivo</span>
+</div>
+</div>
+<div class="tk-panel"><span class="lbl">Pills e alertas</span>
+<div class="row">
+<span class="status-pill status-ativa">Ativa</span>
+<span class="status-pill status-alerta">Alerta</span>
+<span class="status-pill status-inativa">Inativa</span>
+<span class="coverage-pill done">Receita Federal</span>
+<span class="coverage-pill running">Processos</span>
+<span class="coverage-pill queued">Mídia adversa</span>
+</div>
+<div class="alert ns-alert-success"><b class="ns-alert-title">Análise concluída</b>Nenhum impedimento nas 9 fontes consultadas.</div>
+<div class="alert ns-alert-danger"><b class="ns-alert-title">Veto registrado</b>Sanção ativa no CEIS impede a contratação.</div>
+<div class="alert ns-alert-info"><b class="ns-alert-title">Consulta em fila</b>Duas fontes respondem fora do horário comercial.</div>
+</div>
+<div class="tk-panel"><span class="lbl">Botões</span>
+<div class="row">
+<button class="button-primary">Iniciar análise</button>
+<button class="button-secondary">Cancelar</button>
+</div>
+</div>
+<div class="tk-panel"><span class="lbl">Veredito e escala</span>
+<div class="risk-verdict is-high">
+<div class="risk-verdict-main"><div class="risk-verdict-head"><span class="risk-stamp">Alto</span><h2>Risco alto — 3 achados materiais</h2></div><p>Dois processos trabalhistas em curso e uma sanção expirada há 4 meses.</p></div>
+<div class="risk-facts"><div><span>Fontes</span><b>9 de 9</b></div><div><span>Atualizado</span><b>há 2 min</b></div></div>
+</div>
+<div class="risk-scale">
+<span class="risk-scale-title">Escala</span>
+<span class="risk-scale-item"><i class="risk-sw clear"></i>Limpo</span>
+<span class="risk-scale-item"><i class="risk-sw aten"></i>Atenção</span>
+<span class="risk-scale-item"><i class="risk-sw agrav"></i>Agravante</span>
+<span class="risk-scale-item"><i class="risk-sw grave"></i>Grave</span>
+<span class="risk-scale-item"><i class="risk-sw veto"></i>Veto</span>
+<span class="risk-scale-item"><i class="risk-sw unknown"></i>Sem dado</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="escuro">
+<h2>4 · Tema escuro</h2>
+<p>O escuro é troca de valor de token, nada mais: nenhuma regra de componente muda. Para que isso funcione, três exigências valem para todo componente novo.</p>
+<ul>
+<li><b>Leia sempre <code>--surface-raised</code> para o fundo de card</b> — nunca <code>#fff</code>. É esse token que vira <code>#241d2a</code> no escuro.</li>
+<li><b>Não presuma tinta escura.</b> Todo container define <code>color: var(--text)</code>; o que herda de fora do container quebra quando o fundo inverte.</li>
+<li><b>Sombra não substitui borda.</b> Sobre superfície escura só a borda separa planos — use <code>--border</code> em vez de depender de <code>box-shadow</code>.</li>
+</ul>
+<p>As ilhas escuras que já existem no produto claro (sidebar, rodapé do wizard, monogramas) usam a rampa própria: <code>--dark</code>, <code>--dark-raised</code>, <code>--dark-border</code>, <code>--dark-border-strong</code>, <code>--dark-text</code>, <code>--dark-muted</code>, <code>--dark-accent</code>. Não misture essa rampa com a de superfície: ela existe para o que é escuro por decisão de design, não por tema.</p>
+</section>
+
+<section class="sec" id="root">
+<h2>5 · Bloco <code>:root</code></h2>
+<p>Os 54 tokens em vigor. É o bloco que <code>app/globals.css</code> deve conter; <code>--success</code>, <code>--warning</code> e <code>--danger</code> seguem existindo como apelido para o código que já os lê.</p>
+<div class="card">
+<button class="copy" id="copyRoot">Copiar bloco</button>
+<pre id="rootBlock">:root {
+  <b>/* superfícies */</b>
+  --surface: #f2f0f3;
+  --surface-subtle: #f8f6f9;
+  --surface-raised: #ffffff;
+  --surface-sunken: #eeeaf0;
+  --surface-accent-tint: #faf6ff;
+  <b>/* bordas */</b>
+  --border: #ded9e2;
+  --border-strong: #cfc7d5;
+  --border-accent: #d9c4f2;
+  --border-accent-strong: #b89ad4;
+  <b>/* texto */</b>
+  --text: #1d1722;
+  --ink: var(--text);
+  --muted-strong: #4e4654;
+  --muted: #6f6675;
+  --muted-weak: #8a8290;
+  <b>/* marca */</b>
+  --accent: #7024c7;
+  --accent-strong: #5a159f;
+  --accent-soft: #eee4f8;
+  --accent-muted: #d3c2ec;
+  --focus-ring: #8c3ed0;
+  --focus-halo: #eee1fa;
+  <b>/* tinta sobre chão saturado ou escuro */</b>
+  --on-accent: #ffffff;      <b>/* 7.59:1 sobre --accent */</b>
+  --on-dark: #ffffff;        <b>/* 16.35:1 sobre --dark-raised */</b>
+  <b>/* estado — ok */</b>
+  --state-ok-bg: #e9f5f0;
+  --state-ok-fg: #176b4d;
+  --state-ok-solid: #1f9a70;
+  --state-ok-border: #c4e2d4;
+  <b>/* estado — atenção */</b>
+  --state-warn-bg: #fff5e6;
+  --state-warn-fg: #80540c;
+  --state-warn-solid: #b0620d;
+  --state-warn-border: #efd9ad;
+  <b>/* estado — crítico */</b>
+  --state-danger-bg: #fde9ee;
+  --state-danger-fg: #8f1833;
+  --state-danger-solid: #b91c3c;
+  --state-danger-strong: #8f0f2c;
+  --state-danger-border: #f3ccd6;
+  --state-danger-on-dark: #e0879a;
+  <b>/* estado — info e neutro */</b>
+  --state-info-bg: #f4eefc;
+  --state-info-fg: #5a159f;
+  --state-info-solid: #7024c7;
+  --state-info-border: #ddcdf2;
+  --state-neutral-bg: #eeeef2;
+  --state-neutral-fg: #4e4654;
+  --state-neutral-solid: #8d8491;
+  --state-neutral-border: #dcd7e0;
+  <b>/* gráficos */</b>
+  --coral: #c85c75;
+  --chart-accent-soft: #a274d8;
+  --chart-neutral: #8d8491;
+  --chart-neutral-soft: #b3aec0;
+  <b>/* superfícies escuras */</b>
+  --dark: #17131b;
+  --dark-raised: #241d2a;
+  --dark-border: #31283a;
+  --dark-border-strong: #4a3e52;
+  --dark-text: #f8f4fa;
+  --dark-muted: #a9a1b0;
+  --dark-accent: #a86deb;
+  <b>/* apelidos */</b>
+  --success: var(--state-ok-fg);
+  --warning: var(--state-warn-fg);
+  --danger: var(--state-danger-fg);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #17131b;
+  --surface-subtle: #1e1824;
+  --surface-raised: #241d2a;
+  --surface-sunken: #120f16;
+  --surface-accent-tint: #251b34;
+  --border: #31283a;
+  --border-strong: #4a3e52;
+  --border-accent: #4b3466;
+  --border-accent-strong: #6b4a94;
+  --text: #f8f4fa;
+  --muted-strong: #cfc7d5;
+  --muted: #a9a1b0;
+  --muted-weak: #8a8290;
+  --accent: #a86deb;
+  --accent-strong: #c8a8dc;
+  --accent-soft: #2c2140;
+  --accent-muted: #3d2b57;
+  --focus-ring: #c08bf0;
+  --focus-halo: #3a2857;
+  --on-accent: #1d1722;      <b>/* 5.05:1 sobre o --accent claro do escuro */</b>
+  --on-dark: #ffffff;
+  --state-ok-bg: #233236;
+  --state-ok-fg: #55b292;
+  --state-ok-solid: #1f9a70;
+  --state-ok-border: #2f4a44;
+  --state-warn-bg: #3c2925;
+  --state-warn-fg: #c9945a;
+  --state-warn-solid: #b0620d;
+  --state-warn-border: #4e3728;
+  --state-danger-bg: #3d1d2d;
+  --state-danger-fg: #d88092;
+  --state-danger-solid: #b91c3c;
+  --state-danger-strong: #8f0f2c;
+  --state-danger-border: #54293a;
+  --state-info-bg: #311e45;
+  --state-info-fg: #c8a8dc;
+  --state-info-solid: #a86deb;
+  --state-info-border: #4a3266;
+  --state-neutral-bg: #352e3b;
+  --state-neutral-fg: #a6a0ab;
+  --state-neutral-solid: #8d8491;
+  --state-neutral-border: #443d4a;
+  --chart-neutral: #8d8491;
+  --chart-neutral-soft: #6b6475;
+}</pre>
+</div>
+</section>
+
+<section class="sec" id="pendente">
+<h2>! · Pendente</h2>
+<div class="pend">
+<span class="lbl">Aguardando aplicação no repo</span>
+<p>As regras de componente de <code>app/globals.css</code> ainda carregam os pares de estado como hex literal, e <code>.button-primary</code> ainda declara <code>color: #04131a</code> — 2.48:1 sobre <code>--accent</code>, reprova AA. Enquanto não forem trocadas por <code>var(--state-*)</code> e <code>var(--on-accent)</code>, trocar o <code>:root</code> não re-pinta badge, pill, alerta nem botão. Ordem: colar o bloco da seção 5, substituir os literais nas regras, rodar <code>/design-sync</code>.</p>
+</div>
+</section>
+
+</div>
+</div>
+<script>
+document.getElementById('theme').addEventListener('click',function(e){
+ var b=e.target.closest('button');if(!b)return;
+ [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});
+ var d=document.getElementById('demo');
+ if(b.dataset.t==='dark')d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');
+});
+document.getElementById('copyRoot').addEventListener('click',function(){
+ var t=document.getElementById('rootBlock').innerText,btn=this;
+ navigator.clipboard.writeText(t).then(function(){btn.textContent='Copiado';setTimeout(function(){btn.textContent='Copiar bloco'},1600)},
+  function(){btn.textContent='Selecione e copie'});
+});
+var links=[].slice.call(document.querySelectorAll('#nav a'));
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;
+ links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+en.target.id)})})},{rootMargin:'-10% 0px -80% 0px'});
+[].forEach.call(document.querySelectorAll('.sec'),function(s){io.observe(s)});
+</script>
+</body></html>

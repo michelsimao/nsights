@@ -1,0 +1,90 @@
+<!-- @dsCard group="Fundação" viewport="900x1650" name="Rampas de estado" subtitle="os pares bg/fg hard-coded dos badges — literais no CSS, não tokens" -->
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: var(--surface); color: var(--text); font-family: var(--font-geist), "Avenir Next", "Segoe UI", sans-serif; margin: 0; padding: 1.5rem 1.75rem 2.25rem; }
+  h1 { font-size: 1.15rem; letter-spacing: -.01em; margin: 0 0 .25rem; }
+  .lede { color: var(--muted); font-size: .78rem; line-height: 1.5; margin: 0 0 1.1rem; max-width: 46rem; }
+  h2 { font-size: .72rem; font-weight: 800; letter-spacing: .06em; margin: 1.6rem 0 .5rem; text-transform: uppercase; }
+  h2 .src { font-weight: 600; letter-spacing: 0; text-transform: none; }
+  table { background: var(--surface-raised); border: 1px solid var(--border); border-collapse: collapse; border-radius: .6rem; width: 100%; }
+  th { color: var(--muted); font-size: .56rem; font-weight: 800; letter-spacing: .06em; padding: .4rem .55rem; text-align: left; text-transform: uppercase; }
+  td { border-top: 1px solid var(--border); font-size: .7rem; padding: .45rem .55rem; vertical-align: middle; }
+  code, .hex { font-family: var(--font-geist-mono), monospace; font-size: .66rem; font-variant-numeric: tabular-nums; }
+  .src { color: var(--muted); font-size: .6rem; }
+  .note { background: var(--surface-raised); border: 1px solid var(--border); border-radius: .6rem; font-size: .74rem; line-height: 1.55; margin-top: 1.4rem; padding: .85rem 1rem; }
+  .note strong { font-weight: 800; }
+  .tok { background: var(--accent-soft); border-radius: .25rem; color: var(--accent-strong); font-size: .56rem; font-weight: 800; padding: .1rem .3rem; text-transform: uppercase; }
+  .lit { background: var(--surface); border: 1px solid var(--border); border-radius: .25rem; color: var(--muted); font-size: .56rem; font-weight: 800; padding: .1rem .3rem; text-transform: uppercase; }
+</style></head><body>
+
+<h1>Rampas de estado — o que os componentes realmente pintam</h1>
+<p class="lede">Os badges de estado do Risk Ops não leem uma escala de tokens: cada família define seus pares
+fundo/texto <strong>hard-coded no CSS do app</strong>. Este cartão lista os pares reais, com contraste
+<strong>medido</strong> (<code>tools/contrast.mjs</code>) e a linha de origem em <code>app/globals.css</code>.
+Marcação: <span class="lit">literal</span> = hex solto no CSS · <span class="tok">token</span> = valor que vem de :root.</p>
+
+<h2>.result-badge-* <span class="src">— globals.css:622–627</span></h2>
+<table>
+  <thead><tr><th>Aplicado</th><th>Fundo</th><th>Texto</th><th>Contraste</th><th>Origem dos valores</th></tr></thead>
+  <tbody>
+    <tr><td><span class="result-badge result-badge-ok">Sem apontamentos</span></td><td class="hex">#e9f5f0</td><td class="hex">#176b4d</td><td class="hex">5.79:1 AA</td><td><span class="lit">literal</span> <span class="lit">literal</span></td></tr>
+    <tr><td><span class="result-badge result-badge-attention">Atenção</span></td><td class="hex">#fdf1de</td><td class="hex">#8f5b00</td><td class="hex">5.13:1 AA</td><td><span class="lit">literal</span> <span class="lit">literal</span></td></tr>
+    <tr><td><span class="result-badge result-badge-critical">Crítico</span></td><td class="hex">#fbe9ec</td><td class="hex">#a8283b</td><td class="hex">5.93:1 AA</td><td><span class="lit">literal</span> <span class="lit">literal</span></td></tr>
+    <tr><td><span class="result-badge result-badge-gap">Lacuna</span></td><td class="hex">#f0eef2</td><td class="hex">#69626f</td><td class="hex">5.09:1 AA</td><td><span class="lit">literal</span> <span class="lit">literal</span></td></tr>
+    <tr><td><span class="result-badge result-badge-neutral">Neutro</span></td><td class="hex">#f8f6f9</td><td class="hex">#6f6675</td><td class="hex">5.10:1 AA</td><td><span class="tok">--surface-subtle</span> <span class="tok">--muted</span></td></tr>
+  </tbody>
+</table>
+
+<h2>.status-badge + .status-* <span class="src">— globals.css:488 (uma linha só)</span></h2>
+<table>
+  <thead><tr><th>Aplicado</th><th>Fundo</th><th>Texto</th><th>Contraste</th><th>Ponto</th><th>Ponto vs fundo</th></tr></thead>
+  <tbody>
+    <tr><td><span class="status-badge status-regular"><span></span>Regular</span></td><td class="hex">#e7f6ef</td><td class="hex">#176b4d</td><td class="hex">5.80:1 AA</td><td class="hex">#1f9a70</td><td class="hex">3.18:1 (UI ok)</td></tr>
+    <tr><td><span class="status-badge status-attention"><span></span>Atenção</span></td><td class="hex">#fff3dc</td><td class="hex">#80540c</td><td class="hex">5.99:1 AA</td><td class="hex">#c27c12</td><td class="hex">3.09:1 (UI ok)</td></tr>
+    <tr><td><span class="status-badge status-critical"><span></span>Crítico</span></td><td class="hex">#fde9ee</td><td class="hex">#8f1833</td><td class="hex">7.70:1 AA</td><td class="hex">#b91c3c</td><td class="hex">5.48:1</td></tr>
+    <tr><td><span class="status-badge status-no_data"><span></span>Sem dados</span></td><td class="hex">#efedf1</td><td class="hex">#69616f</td><td class="hex">5.10:1 AA</td><td class="hex">#8a818f</td><td class="hex">3.21:1 (UI ok)</td></tr>
+  </tbody>
+</table>
+<p class="lede" style="margin:.45rem 0 0">Todos os 12 valores desta família são literais. Os pontos são elemento
+gráfico (não texto): 3:1 basta pelo WCAG 1.4.11, e os quatro passam.</p>
+
+<h2>.verdict-badge <span class="src">— globals.css:655–659</span></h2>
+<table>
+  <thead><tr><th>Aplicado</th><th>Fundo</th><th>Texto</th><th>Contraste</th><th>Origem dos valores</th></tr></thead>
+  <tbody>
+    <tr><td><span class="verdict-badge low">low</span></td><td class="hex">#e7f6ef</td><td class="hex">#176b4d</td><td class="hex">5.80:1 AA</td><td><span class="lit">literal</span> <span class="lit">literal</span></td></tr>
+    <tr><td><span class="verdict-badge medium">medium</span></td><td class="hex">#fff3dc</td><td class="hex">#80540c</td><td class="hex">5.99:1 AA</td><td><span class="lit">literal</span> <span class="lit">literal</span></td></tr>
+    <tr><td><span class="verdict-badge high">high / vetoed</span></td><td class="hex">#fde9ee</td><td class="hex">#8f1833</td><td class="hex">7.70:1 AA</td><td><span class="lit">literal</span> <span class="lit">literal</span></td></tr>
+    <tr><td><span class="verdict-badge inconclusive">inconclusive</span></td><td class="hex">#efe8f8</td><td class="hex">#5b2d86</td><td class="hex">8.12:1 AA</td><td><span class="lit">literal</span> <span class="lit">literal</span></td></tr>
+  </tbody>
+</table>
+
+<h2>.coverage-pill <span class="src">— globals.css:3572–3576 (a família mais “tokenizada”)</span></h2>
+<table>
+  <thead><tr><th>Aplicado</th><th>Fundo</th><th>Texto</th><th>Contraste</th><th>Origem dos valores</th></tr></thead>
+  <tbody>
+    <tr><td><span class="coverage-pill done">done</span></td><td class="hex">#e4f3ec</td><td class="hex">#197054</td><td class="hex">5.26:1 AA</td><td><span class="lit">literal</span> <span class="tok">--success</span></td></tr>
+    <tr><td><span class="coverage-pill running">running</span></td><td class="hex">#eee4f8</td><td class="hex">#5a159f</td><td class="hex">8.37:1 AA</td><td><span class="tok">--accent-soft</span> <span class="tok">--accent-strong</span></td></tr>
+    <tr><td><span class="coverage-pill queued">queued</span></td><td class="hex">#f2f0f3</td><td class="hex">#6f6675</td><td class="hex">4.83:1 AA</td><td><span class="tok">--surface</span> <span class="tok">--muted</span></td></tr>
+    <tr><td><span class="coverage-pill failed">failed</span></td><td class="hex">#f7e7ea</td><td class="hex">#9c2943</td><td class="hex">6.25:1 AA</td><td><span class="lit">literal</span> <span class="tok">--danger</span></td></tr>
+  </tbody>
+</table>
+<p class="lede" style="margin:.45rem 0 0">Metade token, metade literal — dentro da mesma regra. É o padrão do arquivo:
+nem os componentes mais novos leem só :root.</p>
+
+<div class="note">
+  <strong>Nota honesta — literais, não tokens.</strong> Nenhum desses pares (fora as células marcadas
+  <span class="tok">token</span>) passa por :root: são hex soltos nas regras de componente.
+  Consequências práticas num re-tema:
+  <br>• Trocar os 17 tokens de :root <strong>não</strong> re-pinta os badges — os tints claros e a maior parte dos
+  textos de estado ficam como estão. Um tema escuro ou um re-brand exige editar as regras de componente uma a uma.
+  <br>• O mesmo papel diverge por família: só no verde “ok” convivem <strong>seis tons distintos</strong> —
+  #197054 (token --success), #176b4d (result/status/verdict), #137a51 (:1242), #24704c (:892), #187c5a (:244)
+  e #1f9a70 (ponto) — e os tints de fundo também variam (#e9f5f0 / #e7f6ef / #e4f3ec / #e6f5ee…).
+  <br>• No total, <code>globals.css</code> soma <strong>264 hex de 6 dígitos distintos</strong> contra 17 tokens.
+  <br>Registrado como achado de fundação: promover esses pares a tokens de estado (ex.:
+  <code>--state-ok-bg/fg</code>) é o passo que destravaria re-tema — decisão do time, não deste estudo.
+  Enquanto isso, todos os pares medidos passam AA para texto; o sistema está acessível, só não está tokenizado.
+</div>
+
+</body></html>

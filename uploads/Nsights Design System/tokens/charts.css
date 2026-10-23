@@ -1,0 +1,74 @@
+/* Nsights chart scales — DERIVED values (spec named the scales; exact stops were
+   not provided in source). Amethyst-anchored, warm-neutral midpoints. */
+
+:root {
+  /* Sequential (magnitude): dark amethyst → light */
+  --ns-chart-seq-1: #2d1a5e;
+  --ns-chart-seq-2: #3d2481;
+  --ns-chart-seq-3: #4d2ea3;
+  --ns-chart-seq-4: #5c35b5;
+  --ns-chart-seq-5: #6b3fd4;
+  --ns-chart-seq-6: #8259e0;
+  --ns-chart-seq-7: #9a74ea;
+  --ns-chart-seq-8: #b291f2;
+  --ns-chart-seq-9: #cab0f7;
+  --ns-chart-seq-10: #e3d3fb;
+
+  /* Sequential light: mid anchor → very light */
+  --ns-chart-seqlight-1: #6b3fd4;
+  --ns-chart-seqlight-2: #7c52dc;
+  --ns-chart-seqlight-3: #8d66e3;
+  --ns-chart-seqlight-4: #9d7ae9;
+  --ns-chart-seqlight-5: #ad8eee;
+  --ns-chart-seqlight-6: #bda2f2;
+  --ns-chart-seqlight-7: #ccb6f6;
+  --ns-chart-seqlight-8: #dbcaf9;
+  --ns-chart-seqlight-9: #e9defc;
+  --ns-chart-seqlight-10: #f5f0fd;
+
+  /* Diverging (polarity): amethyst → warm muted → peach */
+  --ns-chart-div-1: #4d2ea3;
+  --ns-chart-div-2: #6b3fd4;
+  --ns-chart-div-3: #8d66e3;
+  --ns-chart-div-4: #b291f2;
+  --ns-chart-div-5: #d6c4ef;
+  --ns-chart-div-6: #cfc5b4;
+  --ns-chart-div-7: #e0bc95;
+  --ns-chart-div-8: #e0a578;
+  --ns-chart-div-9: #d98a5e;
+  --ns-chart-div-10: #c96f48;
+  --ns-chart-div-11: #b25a3f;
+
+  /* Warm (monochrome temperature): deep peach → cream */
+  --ns-chart-warm-1: #8f3f27;
+  --ns-chart-warm-2: #a34e30;
+  --ns-chart-warm-3: #b25a3f;
+  --ns-chart-warm-4: #c66f4c;
+  --ns-chart-warm-5: #d5855e;
+  --ns-chart-warm-6: #e09b74;
+  --ns-chart-warm-7: #e8b18e;
+  --ns-chart-warm-8: #efc6ab;
+  --ns-chart-warm-9: #f5dac8;
+  --ns-chart-warm-10: #faede0;
+
+  /* Categorical (no ranking) */
+  --ns-chart-cat-1: #6b3fd4;
+  --ns-chart-cat-2: #b8843c;
+  --ns-chart-cat-3: #4a7a4f;
+  --ns-chart-cat-4: #b25a3f;
+  --ns-chart-cat-5: #8e54e5;
+  --ns-chart-cat-6: #7a6e60;
+  --ns-chart-cat-7: #c09bff;
+  --ns-chart-cat-8: #e0b26a;
+}
+
+.dark {
+  --ns-chart-cat-1: #ae7aff;
+  --ns-chart-cat-2: #e0b26a;
+  --ns-chart-cat-3: #6ce599;
+  --ns-chart-cat-4: #f08368;
+  --ns-chart-cat-5: #8e54e5;
+  --ns-chart-cat-6: #b3a890;
+  --ns-chart-cat-7: #c09bff;
+  --ns-chart-cat-8: #f0c962;
+}

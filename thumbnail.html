@@ -1,0 +1,104 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Nsights Risk Ops — Design System</title>
+<!--
+  Capa do design system. O Claude Design renderiza este arquivo como miniatura
+  na lista de sistemas (é o que o manifesto chama de hasThumbnailHtml); sem ele
+  a lista mostra um bloco genérico. Rev. 2026-08-30 (wordmark maior).
+
+  A marca vem dos arquivos reais em brand/ — o monograma N com o gradiente da
+  casa e o wordmark branco. Nada é redesenhado nem redigitado aqui: um símbolo
+  aproximado e um nome em caixa alta não são a marca, são uma imitação dela.
+
+  Ela é lida a ~100px de largura, então só entra o que sobrevive a essa redução:
+  marca, nome em corpo grande e a faixa das seis cores de estado. As cores saem
+  de tokens/tokens.css, e por isso a capa acompanha a paleta.
+-->
+<!-- Caminhos como o projeto PUBLICADO os expõe: tokens/tokens.css na raiz.
+     A Geist vem do mesmo endereço que fonts.css usa. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap">
+<link rel="stylesheet" href="tokens/tokens.css">
+<style>
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: grid;
+    /* Altura da faixa em unidade de viewport, não em porcentagem: numa linha de
+       grid a porcentagem resolveria contra uma altura que ainda não existe, e a
+       faixa colapsaria. */
+    grid-template-rows: 1fr clamp(8px, 4.4vh, 58px);
+    background: var(--dark, #19141e);
+    color: #fff;
+    font-family: var(--font-geist, "Geist"), system-ui, -apple-system, "Segoe UI", sans-serif;
+    overflow: hidden;
+  }
+
+  /* Brilho da marca, o mesmo do painel de login. */
+  .palco {
+    position: relative;
+    display: grid;
+    /* Centrado nos dois eixos: a capa é vista tanto a 100px na lista quanto em
+       tela cheia, e um bloco ancorado num canto desequilibra na proporção larga. */
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+    gap: 3.6%;
+    padding: 6% 8% 7%;
+    isolation: isolate;
+  }
+  .palco::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(72% 82% at 50% 34%, color-mix(in srgb, var(--accent, #7024c7) 46%, transparent), transparent 72%);
+    z-index: -1;
+  }
+
+  /* Só o wordmark: ele já traz o monograma N à esquerda do nome, e repetir o
+     símbolo ao lado dele mostraria a marca duas vezes. Fundo transparente e
+     gradiente próprio — assenta direto na superfície escura.
+
+     A altura vai em vw, não em %: dentro de um flex de altura automática a
+     porcentagem não tem contra o que resolver e a imagem cai no tamanho
+     intrínseco do arquivo — que é pequeno, e é o que fazia a marca sumir. */
+  .marca { display: flex; align-items: center; }
+  .wordmark { height: clamp(15px, 11.6vw, 107px); width: auto; max-width: 100%; }
+
+  .nome {
+    margin: 0;
+    font-size: clamp(28px, 8.2vw, 108px);
+    font-weight: 680;
+    letter-spacing: -.045em;
+    line-height: .96;
+  }
+  /* Um degrau abaixo do nome do produto: em miniatura a hierarquia é o que
+     ainda se lê depois que as letras ficam pequenas. */
+  .nome span {
+    display: block;
+    margin-top: .12em;
+    font-size: .58em;
+    letter-spacing: -.03em;
+    color: color-mix(in srgb, #fff 62%, var(--accent, #7024c7));
+  }
+
+  /* Faixa de estado: o vocabulário de cor do sistema, legível mesmo em 100px. */
+  .faixa { display: flex; }
+  .faixa i { flex: 1; }
+  .faixa i:nth-child(1) { background: var(--accent, #7024c7); }
+  .faixa i:nth-child(2) { background: var(--success, #197054); }
+  .faixa i:nth-child(3) { background: var(--warning, #946310); }
+  .faixa i:nth-child(4) { background: var(--danger, #9c2943); }
+  .faixa i:nth-child(5) { background: var(--coral, #c85c75); }
+  .faixa i:nth-child(6) { background: var(--surface, #f2f0f3); }
+</style>
+
+<div class="palco">
+  <div class="marca">
+    <img class="wordmark" src="brand/logo-white.avif" alt="n-sights">
+  </div>
+
+  <h1 class="nome">Risk Ops<span>Design System</span></h1>
+</div>
+
+<div class="faixa" aria-hidden="true">
+  <i></i><i></i><i></i><i></i><i></i><i></i>
+</div>
