@@ -1,6 +1,6 @@
 # Etapa 4: API de domínio (relatório)
 
-- **Commit:** `PENDENTE`, no branch `main`
+- **Commit:** `1b98d69`, no branch `main`
 - **Data:** 2026-10-23
 - **Status:** concluída. Todos os critérios de aceite foram atendidos.
 
@@ -182,7 +182,7 @@ Para descartar as alterações feitas na demo: `docker compose down -v && docker
 
 ### 9. Revisar o código
 ```bash
-git show --stat PENDENTE
+git show --stat 1b98d69
 ```
 Os arquivos principais são:
 - `backend/app/cases.py`
