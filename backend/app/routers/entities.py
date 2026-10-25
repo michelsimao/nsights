@@ -1,6 +1,6 @@
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, Path, Query, status
 from sqlalchemy import func, or_, select
 from sqlalchemy.exc import IntegrityError
 
@@ -8,7 +8,15 @@ from app.deps import CurrentUser, DbSession
 from app.errors import AppError, error_responses
 from app.models import TERMINAL_STATUSES, Case, Entity
 from app.pagination import PageParams, count, like_pattern, page_params
-from app.schemas import CaseBrief, EntityCreate, EntityDetail, EntityKind, EntityOut, Page
+from app.schemas import (
+    PG_INT_MAX,
+    CaseBrief,
+    EntityCreate,
+    EntityDetail,
+    EntityKind,
+    EntityOut,
+    Page,
+)
 from app.validators import only_digits
 
 router = APIRouter(prefix="/api/entities", tags=["entities"])
@@ -127,7 +135,9 @@ def create_entity(body: EntityCreate, db: DbSession, _: CurrentUser) -> EntityOu
     description="Dados da entidade e seus casos (mais recentes primeiro).",
     responses=error_responses(401, 404),
 )
-def get_entity(entity_id: int, db: DbSession, _: CurrentUser) -> EntityDetail:
+def get_entity(
+    entity_id: Annotated[int, Path(ge=1, le=PG_INT_MAX)], db: DbSession, _: CurrentUser
+) -> EntityDetail:
     row = db.execute(_with_counts().where(Entity.id == entity_id)).one_or_none()
     if row is None:
         raise AppError(404, "not_found", "Entidade não encontrada.")

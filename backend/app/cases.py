@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.errors import AppError, field_error
 from app.models import SLA_DAYS, TERMINAL_STATUSES, Case, CaseEvent, Entity, User
+from app.schemas import PG_INT_MAX
 
 ANY_ROLE = frozenset({"analyst", "admin"})
 ADMIN = frozenset({"admin"})
@@ -87,10 +88,12 @@ def _active_user(db: Session, user_id: int, field: str) -> User:
 
 def get_case(db: Session, ref: str, *, for_update: bool = False) -> Case:
     """Busca por id numérico ou por código (`RK-2026-0001`). 404 se não existir."""
-    stmt = select(Case)
-    stmt = (
-        stmt.where(Case.id == int(ref)) if ref.isdigit() else stmt.where(Case.code == ref.upper())
-    )
+    if ref.isdigit():
+        if int(ref) > PG_INT_MAX:  # nenhum id chega lá; evita `integer out of range` no banco
+            raise AppError(404, "not_found", "Caso não encontrado.")
+        stmt = select(Case).where(Case.id == int(ref))
+    else:
+        stmt = select(Case).where(Case.code == ref.upper())
     if for_update:
         # Trava a linha: duas transições simultâneas não passam ambas pela validação.
         stmt = stmt.with_for_update()

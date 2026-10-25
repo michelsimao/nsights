@@ -1,21 +1,10 @@
 # Como usei o Claude Code
 
-- **Plano antes de código.** O primeiro prompt pediu um diagnóstico do repositório (que, no início, só tinha o Design System) e um plano em etapas, cada uma com riscos e critérios de aceite. O resultado é o `PLANO.md`. Revisei o plano e fechei as decisões antes de qualquer código: um commit por etapa, só o admin aprova e reprova, seed que nunca sobrescreve, uma migration `0002` com sentido de produto, `pg_trgm`.
-- **Uma etapa por vez, com portão de aprovação.** Prompt recorrente: "pode executar a etapa N". Cada etapa termina com commit e relatório em `docs/etapa-N.md`: verificações feitas, desvios do plano, pendências e uma seção "Como validar" com comandos copiáveis. Eu rodava o roteiro antes de liberar a próxima etapa.
-- **Pendências em lote.** Pedi que os itens menores fossem para `docs/pendencias.md` e resolvidos no fim, a não ser que bloqueassem a etapa seguinte. Assim o fluxo não parava a cada detalhe.
-- **Onde mais ajudou:**
-  - ler o bundle IIFE do DS e descobrir que ele lê `window.React` ao ser avaliado; daí veio a ponte `src/ds/`;
-  - testes em Postgres real (migrations, N+1, matriz de papéis);
-  - roteiros Playwright e axe-core para validar o front em 375px e no desktop.
-- **Erros que ela mesma pegou, verificando em vez de supor:**
-  - o `@import` das fontes do DS sumia no build do Vite;
-  - o `pytest` não achava o pacote `app`;
-  - o `Panel` do DS tem altura mínima de 18rem;
-  - um `.sr-only` dentro da tabela escapava do `TableScroll` e criava rolagem horizontal no celular.
-- **Onde precisei corrigir ou desconfiar:**
-  - falhas de testes de navegador que eram do roteiro (tempo de espera, seletor ambíguo), não do app: a regra foi achar a causa antes de mexer no código, para não "consertar" o app para passar num teste errado;
-  - o `DataTable` do DS parecia servir, mas pagina no cliente: troquei por `Table` + `Pagination` com paginação no servidor.
-- **Como revisei:**
-  - um teste de mutação (liberar "aprovar" para analista precisa quebrar o teste do fluxo);
-  - validação do README e do compose num clone limpo, em outras portas;
-  - o roteiro "Como validar" de cada relatório, rodado por mim antes de aprovar a etapa seguinte.
+1. **Plano antes de código.** O primeiro prompt pediu um diagnóstico do repo (só o Design System, no início) e um plano em etapas com riscos e critérios de aceite: é o `PLANO.md`. Fechei as decisões antes de qualquer código: um commit por etapa, só admin aprova/reprova, seed que nunca sobrescreve, uma migration `0002` com sentido de produto, `pg_trgm`.
+2. **Uma etapa por vez, com portão de aprovação.** Prompt recorrente: "pode executar a etapa N". Cada etapa termina com commit e relatório em `docs/etapa-N.md` (verificações, desvios, pendências e um roteiro "Como validar"), que eu rodava antes de liberar a próxima.
+3. **Pendências em lote** em `docs/pendencias.md`, resolvidas no fim, a não ser que bloqueassem a etapa seguinte.
+4. **Onde mais ajudou:** ler o bundle IIFE do DS e descobrir que ele lê `window.React` ao ser avaliado (daí a ponte `src/ds/`); testes em Postgres real (migrations, N+1, matriz de papéis); roteiros Playwright e axe-core em 375px e desktop.
+5. **Erros que ela pegou verificando, em vez de supor:** o `@import` das fontes do DS sumia no build do Vite; o `pytest` não achava o pacote `app`; um `.sr-only` dentro da tabela criava rolagem horizontal no celular.
+6. **Onde precisei desconfiar:** falhas de testes de navegador que eram do roteiro (espera, seletor ambíguo), não do app; a regra foi achar a causa antes de mexer no código. O `DataTable` do DS parecia servir, mas pagina no cliente: troquei por `Table` + `Pagination` com paginação no servidor.
+7. **Como revisei:** teste de mutação (liberar "aprovar" para analista precisa quebrar o teste do fluxo); README e compose validados num clone limpo, em outras portas; o roteiro "Como validar" de cada etapa, rodado por mim.
+8. **Revisão final contra o SPEC:** pedi uma auditoria requisito a requisito. Ela achou um 500 com ids acima do `integer` do Postgres (`/api/cases/2147483648`); corrigimos com limites nos parâmetros, 404/422 e teste de regressão.

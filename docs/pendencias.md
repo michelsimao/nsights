@@ -10,7 +10,12 @@ Itens deixados para resolver no fim, depois da Etapa 7. Nenhum bloqueia uma etap
 - **Analista age em qualquer caso** (Etapa 4), não só nos atribuídos a ele. O plano não restringe.
 
 - **CI nunca rodou no GitHub** (Etapa 7): o repo não tem remoto. O workflow passou no `actionlint` e os passos foram reproduzidos em containers limpos, mas a primeira execução real depende de publicar o repositório (decisão sua: onde e quando).
-- **`NOTES.md` é um rascunho na sua voz** (Etapa 7): escrito a partir do que está registrado nos relatórios e nesta sessão. Revise, principalmente o que descreve a sua revisão, antes de entregar.
+- **`NOTES.md` é um rascunho na sua voz** (Etapa 7): escrito a partir do que está registrado nos relatórios e nesta sessão. Revise, principalmente o que descreve a sua revisão, antes de entregar. Condensado para 8 itens na revisão final (o SPEC pede 5 a 10 linhas).
+
+## Resolvidas na revisão final contra o SPEC
+
+- **Ids e páginas acima do `integer` do Postgres geravam 500** (`/api/cases/2147483648`, `/api/entities/{id}`, `entity_id`, `assignee`, `page`, `assignee_id` no corpo). Agora: limite `PG_INT_MAX` nos parâmetros (422), id numérico inexistente no caso vira 404, e `DataError` do SQLAlchemy cai em 422 como rede de segurança. Dez testes de regressão em `tests/test_infra.py`.
+- README: default de `CORS_ORIGINS` descrito como está em `config.py` (o compose é quem acrescenta `127.0.0.1`).
 
 ## Registradas no README (resolvidas na Etapa 7)
 

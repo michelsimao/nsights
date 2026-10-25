@@ -131,7 +131,7 @@ uv run alembic check                             # modelos e migrations em sincr
 
 ## 4. Testes, lint e CI
 
-Os testes do backend rodam em **Postgres real**, no banco `riskops_test`. O schema é recriado do zero pelas próprias migrations a cada sessão. Hoje são 114 testes:
+Os testes do backend rodam em **Postgres real**, no banco `riskops_test`. O schema é recriado do zero pelas próprias migrations a cada sessão. Hoje são 124 testes:
 - autenticação e papéis;
 - fluxo principal e matriz de transições;
 - filtros, paginação e N+1;
@@ -139,6 +139,7 @@ Os testes do backend rodam em **Postgres real**, no banco `riskops_test`. O sche
 - migrations (ciclo completo e `alembic check`);
 - idempotência do seed;
 - envelope de erro, request-id e logs;
+- números fora do intervalo do Postgres (404/422, nunca 500);
 - OpenAPI.
 
 ```bash
@@ -173,7 +174,7 @@ Veja [`.env.example`](.env.example). Copie para `.env` na raiz se quiser trocar 
 | `APP_ENV` | `development` | fora de `development`, a API **não sobe** com o `JWT_SECRET` padrão ou com menos de 32 caracteres |
 | `JWT_SECRET` | valor de dev, público | assinatura HS256 dos tokens. Gere um próprio: `python -c "import secrets; print(secrets.token_urlsafe(48))"` |
 | `JWT_EXPIRE_MINUTES` | `480` | validade do token (8 h) |
-| `CORS_ORIGINS` | `http://localhost:5173,http://127.0.0.1:5173` | origens liberadas (lista separada por vírgula) |
+| `CORS_ORIGINS` | `http://localhost:5173` (o compose acrescenta `http://127.0.0.1:5173`) | origens liberadas (lista separada por vírgula) |
 | `LOG_LEVEL` | `INFO` | nível dos logs JSON |
 | `SEED_DEMO` | `true` | roda o seed no start do container |
 | `SEED_DEMO_PASSWORD` | `riskops123` | senha dos usuários demo (só na criação) |

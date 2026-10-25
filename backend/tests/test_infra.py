@@ -150,3 +150,49 @@ def test_openapi_documenta_dominio(client):
     # erros documentados com o envelope
     status_op = spec["paths"]["/api/cases/{ref}/status"]["post"]
     assert {"401", "403", "404", "409", "422"} <= set(status_op["responses"])
+
+
+# --- números fora do intervalo do Postgres --------------------------------------------
+
+BIG = 2**31  # um acima do maior `integer` do Postgres
+
+
+@pytest.mark.parametrize(
+    ("method", "path", "json", "expected"),
+    [
+        ("GET", f"/api/cases/{BIG}", None, 404),
+        ("GET", f"/api/cases/{BIG * 10**12}", None, 404),
+        ("GET", f"/api/entities/{BIG}", None, 422),
+        ("GET", f"/api/cases?entity_id={BIG}", None, 422),
+        ("GET", f"/api/cases?assignee={BIG}", None, 422),
+        ("GET", f"/api/cases?assignee={BIG * 10**12}", None, 422),
+        ("GET", f"/api/cases?page={BIG * 10**6}", None, 422),
+        ("POST", "/api/cases", {"entity_id": BIG, "title": "Alerta", "risk_score": 1}, 422),
+        ("POST", "/api/cases/1/assignee", {"assignee_id": BIG}, 422),
+    ],
+)
+def test_inteiro_fora_do_intervalo_nao_vira_500(client, admin_h, method, path, json, expected):
+    res = client.request(method, path, json=json, headers=admin_h)
+    assert res.status_code == expected, res.text
+    body = res.json()["error"]
+    assert body["code"] in {"not_found", "validation_error"}
+    assert body["request_id"] == res.headers["X-Request-ID"]
+
+
+def test_data_error_do_banco_vira_422(caplog):
+    from sqlalchemy.exc import DataError
+
+    app = FastAPI()
+    register_error_handlers(app)
+    app.add_middleware(RequestIdMiddleware)
+
+    @app.get("/estoura")
+    def estoura():
+        raise DataError("SELECT 1", {}, Exception("integer out of range"))
+
+    with TestClient(app) as c, caplog.at_level(logging.WARNING):
+        res = c.get("/estoura")
+    assert res.status_code == 422
+    assert res.json()["error"]["code"] == "validation_error"
+    assert "integer out of range" not in res.text
+    assert any("integer out of range" in r.getMessage() for r in caplog.records)

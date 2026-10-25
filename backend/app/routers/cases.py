@@ -7,10 +7,11 @@ from sqlalchemy.orm import contains_eager, selectinload
 
 from app import cases as svc
 from app.deps import CurrentUser, DbSession
-from app.errors import AppError, error_responses
+from app.errors import AppError, error_responses, field_error
 from app.models import TERMINAL_STATUSES, Case, Entity, User
 from app.pagination import PageParams, count, like_pattern, page_params
 from app.schemas import (
+    PG_INT_MAX,
     AssignmentIn,
     CaseCreate,
     CaseDetail,
@@ -84,9 +85,10 @@ def list_cases(
     status_: Annotated[list[CaseStatus] | None, Query(alias="status")] = None,
     risk_level: Annotated[list[RiskLevel] | None, Query()] = None,
     assignee: Annotated[
-        str | None, Query(pattern=r"^(\d+|me|none)$", description="Id, `me` ou `none`.")
+        str | None,
+        Query(pattern=r"^(\d{1,10}|me|none)$", description="Id, `me` ou `none`."),
     ] = None,
-    entity_id: int | None = None,
+    entity_id: Annotated[int | None, Query(ge=1, le=PG_INT_MAX)] = None,
     overdue: Annotated[
         bool | None, Query(description="`true`: só ativos com prazo vencido.")
     ] = None,
@@ -114,6 +116,8 @@ def list_cases(
     elif assignee == "me":
         stmt = stmt.where(Case.assignee_id == user.id)
     elif assignee is not None:
+        if int(assignee) > PG_INT_MAX:
+            raise field_error("assignee", f"Deve ser menor ou igual a {PG_INT_MAX}.", "query")
         stmt = stmt.where(Case.assignee_id == int(assignee))
     if entity_id is not None:
         stmt = stmt.where(Case.entity_id == entity_id)

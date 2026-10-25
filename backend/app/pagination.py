@@ -7,7 +7,11 @@ from pydantic import BaseModel
 from sqlalchemy import Select, func, select
 from sqlalchemy.orm import Session
 
+from app.schemas import PG_INT_MAX
+
 MAX_PAGE_SIZE = 100
+# `page * page_size` precisa caber num bigint no OFFSET; o limite do int4 dá folga de sobra.
+MAX_PAGE = PG_INT_MAX
 
 
 class PageParams(BaseModel):
@@ -20,7 +24,7 @@ class PageParams(BaseModel):
 
 
 def page_params(
-    page: Annotated[int, Query(ge=1, description="Página, a partir de 1.")] = 1,
+    page: Annotated[int, Query(ge=1, le=MAX_PAGE, description="Página, a partir de 1.")] = 1,
     page_size: Annotated[
         int, Query(ge=1, le=MAX_PAGE_SIZE, description="Itens por página (máx. 100).")
     ] = 20,

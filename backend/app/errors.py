@@ -4,6 +4,7 @@ Todo erro sai nesse formato: exceções de domínio (`AppError`), `HTTPException
 (inclusive 404/405 do roteamento), validação do FastAPI e falhas inesperadas.
 """
 
+import logging
 from http import HTTPStatus
 from typing import Any
 
@@ -11,6 +12,7 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
+from sqlalchemy.exc import DataError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.observability import request_id_var
@@ -174,10 +176,18 @@ async def _validation_error(_: Request, exc: RequestValidationError) -> JSONResp
     return error_response(422, "validation_error", "Dados inválidos.", _field_errors(exc))
 
 
+async def _data_error(_: Request, exc: DataError) -> JSONResponse:
+    # Rede de segurança: valor que passou pela validação mas o banco recusou (ex.: número
+    # fora do intervalo da coluna). É erro do cliente, não do servidor; o detalhe fica no log.
+    logging.getLogger("riskops.errors").warning("valor recusado pelo banco: %s", exc.orig)
+    return error_response(422, "validation_error", "Dados inválidos.")
+
+
 def register_error_handlers(app: FastAPI) -> None:
     app.add_exception_handler(AppError, _app_error)
     app.add_exception_handler(StarletteHTTPException, _http_error)
     app.add_exception_handler(RequestValidationError, _validation_error)
+    app.add_exception_handler(DataError, _data_error)
 
 
 def error_responses(*status_codes: int) -> dict[int | str, dict[str, Any]]:

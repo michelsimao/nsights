@@ -16,6 +16,11 @@ from pydantic import (
 
 from app.validators import is_valid_cnpj, is_valid_cpf, only_digits
 
+# Maior valor de uma coluna `integer` do Postgres. Ids acima disso não existem;
+# sem o limite, a consulta estoura no banco (`integer out of range`) e vira 500.
+PG_INT_MAX = 2**31 - 1
+DbId = Annotated[int, Field(ge=1, le=PG_INT_MAX)]
+
 
 class UserOut(BaseModel):
     model_config = ConfigDict(
@@ -220,11 +225,11 @@ class CaseCreate(BaseModel):
         }
     )
 
-    entity_id: int
+    entity_id: DbId
     title: Title
     description: LongText | None = None
     risk_score: int = Field(ge=0, le=100)
-    assignee_id: int | None = Field(
+    assignee_id: DbId | None = Field(
         None, description="Analista só pode deixar vazio ou indicar a si mesmo."
     )
     due_at: AwareDatetime | None = Field(
@@ -271,7 +276,7 @@ class StatusChange(BaseModel):
 class AssignmentIn(BaseModel):
     model_config = ConfigDict(json_schema_extra={"examples": [{"assignee_id": 3}]})
 
-    assignee_id: int | None = Field(description="`null` remove o responsável.")
+    assignee_id: DbId | None = Field(description="`null` remove o responsável.")
 
 
 class NoteCreate(BaseModel):
