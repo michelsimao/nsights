@@ -14,7 +14,7 @@ concurrency:
 jobs:
   backend:
     name: Backend (ruff + pytest)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: backend
@@ -35,8 +35,8 @@ jobs:
     env:
       TEST_DATABASE_URL: postgresql+psycopg://riskops:riskops@localhost:5432/riskops_test
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
         with:
           version: "0.8.2"
           enable-cache: true
@@ -52,13 +52,13 @@ jobs:
 
   frontend:
     name: Frontend (build)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
